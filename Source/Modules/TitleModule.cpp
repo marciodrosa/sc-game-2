@@ -10,34 +10,34 @@ using namespace sc;
 
 TitleModule::TitleModule()
 {
-	logoImage = nullptr;
-	logoTexture = nullptr;
+	backgroundX = 0;
 }
 
 TitleModule::~TitleModule()
 {
-	SDL_FreeSurface(logoImage);
-	SDL_DestroyTexture(logoTexture);
 }
 
 void TitleModule::Start(GameState& state)
 {
-	logoImage = IMG_Load("Images/Logo.png");
-	text.SetText("Comandos: teclas para esquerda, direita e Enter", 11, 300);
+	logo.LoadContentFromFile("Images/LogoText.png");
+	background.LoadContentFromFile("Images/LogoBG.png");
+	text.SetText("Comandos: teclas directionais e Enter", 11, 300);
 	MusicPlayer::Get()->PlayTitleMusic();
 }
 
-void TitleModule::Update(GameState& state, SDL_Renderer* render, ModuleResult& result)
+void TitleModule::Update(GameState& state, ModuleResult& result)
 {
-	if (logoTexture == nullptr)
-		logoTexture = SDL_CreateTextureFromSurface(render, logoImage);
-	SDL_Rect destRect;
-	destRect.x = 0;
-	destRect.y = 0;
-	destRect.w = SC_SCREEN_WIDTH;
-	destRect.h = SC_SCREEN_HEIGHT;
-	SDL_RenderCopy(render, logoTexture, nullptr, &destRect);
-	text.Render(render, (SC_SCREEN_WIDTH - text.GetWidth()) / 2, 200);
+}
+
+void TitleModule::Render(GameState& state, SDL_Renderer* renderer)
+{
+	background.RenderAt(renderer, backgroundX, 0);
+	background.RenderAt(renderer, backgroundX + background.Width, 0);
+	backgroundX--;
+	if (backgroundX < -background.Width)
+		backgroundX = 0;
+	logo.RenderAt(renderer, 0, 0);
+	text.Render(renderer, (SC_SCREEN_WIDTH - text.GetWidth()) / 2, 200);
 }
 
 void TitleModule::Finish(GameState& state)

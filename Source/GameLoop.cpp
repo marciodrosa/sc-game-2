@@ -26,7 +26,7 @@ GameLoop::~GameLoop()
 void GameLoop::Run()
 {
 	InitSDLAndResources();
-	SDL_Window* window = SDL_CreateWindow("Segunda Cinefila", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SC_SCREEN_WIDTH, SC_SCREEN_HEIGHT, SDL_WINDOW_FULLSCREEN);
+	SDL_Window* window = SDL_CreateWindow("Segunda Cinefila", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SC_SCREEN_WIDTH, SC_SCREEN_HEIGHT, 0);// SDL_WINDOW_FULLSCREEN);
 	SDL_ShowCursor(0);
 	render = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	running = true;
@@ -39,7 +39,8 @@ void GameLoop::Run()
 		if (gameModule != nullptr)
 		{
 			ModuleResult moduleResult;
-			gameModule->Update(*gameState, render, moduleResult);
+			gameModule->Update(*gameState, moduleResult);
+			gameModule->Render(*gameState, render);
 			HandleModuleResult(moduleResult);
 		}
 		RenderMargin();

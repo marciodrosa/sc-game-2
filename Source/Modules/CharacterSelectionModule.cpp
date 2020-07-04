@@ -33,7 +33,13 @@ void CharacterSelectionModule::Start(GameState& state)
 	hands.Ok = true;
 }
 
-void CharacterSelectionModule::Update(GameState& state, SDL_Renderer* render, ModuleResult& result)
+void CharacterSelectionModule::Update(GameState& state, ModuleResult& result)
+{
+	if (selectionFinished)
+		result.NextGameModule = new IntroModule;
+}
+
+void CharacterSelectionModule::Render(GameState& state, SDL_Renderer* render)
 {
 	mainLabelText.Render(render, (SC_SCREEN_WIDTH - mainLabelText.GetWidth()) / 2, 10);
 	int totalCharactersWidth = (characterIcons.size() * 42) - 10;
@@ -46,8 +52,6 @@ void CharacterSelectionModule::Update(GameState& state, SDL_Renderer* render, Mo
 	}
 	DrawCharacterName(state, render);
 	hands.Render(render, (SC_SCREEN_WIDTH - hands.GetWidth()) / 2, SC_SCREEN_HEIGHT - hands.GetHeight());
-	if (selectionFinished)
-		result.NextGameModule = new IntroModule;
 }
 
 void CharacterSelectionModule::DrawCharacterName(GameState& state, SDL_Renderer* render)

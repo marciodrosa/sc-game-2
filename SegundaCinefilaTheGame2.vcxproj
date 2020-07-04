@@ -38,6 +38,8 @@
     <ClInclude Include="Source\RenderElements\BlinkingBackground.h" />
     <ClInclude Include="Source\RenderElements\CharacterSelectionIcon.h" />
     <ClInclude Include="Source\RenderElements\Hands.h" />
+    <ClInclude Include="Source\RenderElements\RenderElement.h" />
+    <ClInclude Include="Source\RenderElements\Sprite.h" />
     <ClInclude Include="Source\ResourcesManager.h" />
   </ItemGroup>
   <ItemGroup>
@@ -58,6 +60,8 @@
     <ClCompile Include="Source\RenderElements\BlinkingBackground.cpp" />
     <ClCompile Include="Source\RenderElements\CharacterSelectionIcon.cpp" />
     <ClCompile Include="Source\RenderElements\Hands.cpp" />
+    <ClCompile Include="Source\RenderElements\RenderElement.cpp" />
+    <ClCompile Include="Source\RenderElements\Sprite.cpp" />
     <ClCompile Include="Source\ResourcesManager.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

@@ -25,11 +25,15 @@ void ExtraModule::Start(GameState& state)
 	MusicPlayer::Get()->PlayExtraMusic();
 }
 
-void ExtraModule::Update(GameState& state, SDL_Renderer* render, ModuleResult& result)
+void ExtraModule::Update(GameState& state, ModuleResult& result)
 {
-	blinkingBackground.Render(render);
-	text.Render(render, (SC_SCREEN_WIDTH - text.GetWidth()) / 2, (SC_SCREEN_HEIGHT - text.GetHeight()) / 2);
-	hands.Render(render, (SC_SCREEN_WIDTH - hands.GetWidth()) / 2, SC_SCREEN_HEIGHT - hands.GetHeight());
+}
+
+void ExtraModule::Render(GameState& state, SDL_Renderer* renderer)
+{
+	blinkingBackground.Render(renderer);
+	text.Render(renderer, (SC_SCREEN_WIDTH - text.GetWidth()) / 2, (SC_SCREEN_HEIGHT - text.GetHeight()) / 2);
+	hands.Render(renderer, (SC_SCREEN_WIDTH - hands.GetWidth()) / 2, SC_SCREEN_HEIGHT - hands.GetHeight());
 }
 
 void ExtraModule::Finish(GameState& state)

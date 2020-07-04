@@ -15,6 +15,9 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\RenderElements\RenderElement.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="Source\Constants.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -33,13 +36,19 @@
     <ClInclude Include="Source\ResourcesManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Models\Character.h">
+    <ClInclude Include="Source\RenderElements\AnimatedText.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Models\GameState.h">
+    <ClInclude Include="Source\RenderElements\AnimationListener.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Models\Movie.h">
+    <ClInclude Include="Source\RenderElements\BlinkingBackground.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RenderElements\CharacterSelectionIcon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RenderElements\Hands.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Modules\CharacterSelectionModule.h">
@@ -60,23 +69,23 @@
     <ClInclude Include="Source\Modules\TitleModule.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\RenderElements\AnimatedText.h">
+    <ClInclude Include="Source\Models\Character.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\RenderElements\AnimationListener.h">
+    <ClInclude Include="Source\Models\GameState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\RenderElements\BlinkingBackground.h">
+    <ClInclude Include="Source\Models\Movie.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\RenderElements\CharacterSelectionIcon.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\RenderElements\Hands.h">
+    <ClInclude Include="Source\RenderElements\Sprite.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\RenderElements\RenderElement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="Source\GameLoop.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -92,13 +101,16 @@
     <ClCompile Include="Source\ResourcesManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Models\Character.cpp">
+    <ClCompile Include="Source\RenderElements\AnimatedText.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Models\GameState.cpp">
+    <ClCompile Include="Source\RenderElements\BlinkingBackground.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Models\Movie.cpp">
+    <ClCompile Include="Source\RenderElements\CharacterSelectionIcon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RenderElements\Hands.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Modules\CharacterSelectionModule.cpp">
@@ -119,16 +131,16 @@
     <ClCompile Include="Source\Modules\TitleModule.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\RenderElements\AnimatedText.cpp">
+    <ClCompile Include="Source\Models\Character.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\RenderElements\BlinkingBackground.cpp">
+    <ClCompile Include="Source\Models\GameState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\RenderElements\CharacterSelectionIcon.cpp">
+    <ClCompile Include="Source\Models\Movie.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\RenderElements\Hands.cpp">
+    <ClCompile Include="Source\RenderElements\Sprite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

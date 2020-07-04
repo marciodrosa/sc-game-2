@@ -33,22 +33,26 @@ void MovieModule::Start(GameState& state)
 		MusicPlayer::Get()->PlayGameMusic();
 }
 
-void MovieModule::Update(GameState& state, SDL_Renderer* render, ModuleResult& result)
+void MovieModule::Update(GameState& state, ModuleResult& result)
+{
+}
+
+void MovieModule::Render(GameState& state, SDL_Renderer* renderer)
 {
 	Movie& movie = state.Movies[state.CurrentMovieIndex];
 	if (movie.IsExtra)
-		blinkingBackground.Render(render);
+		blinkingBackground.Render(renderer);
 	SDL_Surface* movieImage = ResourcesManager::Get()->GetMovieImage(movie.Id);
 	if (movieTexture == nullptr)
-		movieTexture = SDL_CreateTextureFromSurface(render, movieImage);
+		movieTexture = SDL_CreateTextureFromSurface(renderer, movieImage);
 	SDL_Rect destRect;
 	destRect.x = 10;
 	destRect.y = (SC_SCREEN_HEIGHT - movieImage->h) / 2;
 	destRect.w = movieImage->w;
 	destRect.h = movieImage->h;
-	SDL_RenderCopy(render, movieTexture, nullptr, &destRect);
-	text.Render(render, destRect.x + destRect.w + 10, (SC_SCREEN_HEIGHT - text.GetHeight()) / 2);
-	hands.Render(render, 20, SC_SCREEN_HEIGHT - hands.GetHeight() - 20);
+	SDL_RenderCopy(renderer, movieTexture, nullptr, &destRect);
+	text.Render(renderer, destRect.x + destRect.w + 10, (SC_SCREEN_HEIGHT - text.GetHeight()) / 2);
+	hands.Render(renderer, 20, SC_SCREEN_HEIGHT - hands.GetHeight() - 20);
 }
 
 void MovieModule::Finish(GameState& state)

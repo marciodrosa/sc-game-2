@@ -16,7 +16,8 @@ namespace sc
 		IntroModule();
 		virtual ~IntroModule();
 		void Start(GameState& state) override;
-		void Update(GameState& state, SDL_Renderer* render, ModuleResult& result) override;
+		void Update(GameState& state, ModuleResult& result) override;
+		void Render(GameState& state, SDL_Renderer* renderer) override;
 		void Finish(GameState& state) override;
 		void HandleInput(GameState& state, SDL_KeyboardEvent& inputEvent, ModuleResult& result) override;
 

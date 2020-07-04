@@ -31,10 +31,14 @@ void IntroModule::Start(GameState& state)
 	MusicPlayer::Get()->PlayGameMusic();
 }
 
-void IntroModule::Update(GameState& state, SDL_Renderer* render, ModuleResult& result)
+void IntroModule::Update(GameState& state, ModuleResult& result)
 {
-	text.Render(render, (SC_SCREEN_WIDTH - text.GetWidth()) / 2, (SC_SCREEN_HEIGHT - text.GetHeight()) / 2);
-	hands.Render(render, (SC_SCREEN_WIDTH - hands.GetWidth()) / 2, SC_SCREEN_HEIGHT - hands.GetHeight());
+}
+
+void IntroModule::Render(GameState& state, SDL_Renderer* renderer)
+{
+	text.Render(renderer, (SC_SCREEN_WIDTH - text.GetWidth()) / 2, (SC_SCREEN_HEIGHT - text.GetHeight()) / 2);
+	hands.Render(renderer, (SC_SCREEN_WIDTH - hands.GetWidth()) / 2, SC_SCREEN_HEIGHT - hands.GetHeight());
 }
 
 void IntroModule::Finish(GameState& state)
