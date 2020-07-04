@@ -26,30 +26,11 @@ GameLoop::~GameLoop()
 void GameLoop::Run()
 {
 	InitSDLAndResources();
-	SDL_Window* window = SDL_CreateWindow("Segunda Cinefila", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SC_SCREEN_WIDTH, SC_SCREEN_HEIGHT, 0);// SDL_WINDOW_FULLSCREEN);
+	SDL_Window* window = SDL_CreateWindow("Segunda Cinefila", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SC_SCREEN_WIDTH, SC_SCREEN_HEIGHT, SDL_WINDOW_FULLSCREEN);
 	SDL_ShowCursor(0);
 	render = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-	running = true;
-	while (running)
-	{
-		unsigned int timeStart = SDL_GetTicks();
-		SDL_SetRenderDrawColor(render, 0, 0, 0, 255);
-		SDL_RenderClear(render);
-		PoolEvents();
-		if (gameModule != nullptr)
-		{
-			ModuleResult moduleResult;
-			gameModule->Update(*gameState, moduleResult);
-			gameModule->Render(*gameState, render);
-			HandleModuleResult(moduleResult);
-		}
-		RenderMargin();
-		SDL_RenderPresent(render);
-		unsigned int timeEnd = SDL_GetTicks();
-		unsigned int frameTime = timeEnd < timeStart;
-		if (frameTime < 33)
-			SDL_Delay(33 - frameTime);
-	}
+	ConfigureViewport(window);
+	Loop();
 	SDL_DestroyRenderer(render);
 	SDL_DestroyWindow(window);
 	render = nullptr;
@@ -70,6 +51,48 @@ void GameLoop::SetModule(GameModule* gameModule)
 		if (this->gameModule != nullptr)
 			this->gameModule->Start(*gameState);
 	}
+}
+
+void GameLoop::ConfigureViewport(SDL_Window* window)
+{
+	SDL_Rect viewport;
+	int windowWidth, windowHeight;
+	SDL_GetWindowSize(window, &windowWidth, &windowHeight);
+	viewport.x = (windowWidth - SC_SCREEN_WIDTH) / 2;
+	viewport.y = (windowHeight - SC_SCREEN_HEIGHT) / 2;
+	viewport.w = SC_SCREEN_WIDTH;
+	viewport.h = SC_SCREEN_HEIGHT;
+	SDL_RenderSetViewport(render, &viewport);
+}
+
+void GameLoop::Loop()
+{
+	running = true;
+	while (running)
+	{
+		LoopUpdate();
+	}
+}
+
+void GameLoop::LoopUpdate()
+{
+	unsigned int timeStart = SDL_GetTicks();
+	SDL_SetRenderDrawColor(render, 0, 0, 0, 255);
+	SDL_RenderClear(render);
+	PoolEvents();
+	if (gameModule != nullptr)
+	{
+		ModuleResult moduleResult;
+		gameModule->Update(*gameState, moduleResult);
+		gameModule->Render(*gameState, render);
+		HandleModuleResult(moduleResult);
+	}
+	RenderMargin();
+	SDL_RenderPresent(render);
+	unsigned int timeEnd = SDL_GetTicks();
+	unsigned int frameTime = timeEnd < timeStart;
+	if (frameTime < 33)
+		SDL_Delay(33 - frameTime);
 }
 
 void GameLoop::RenderMargin()

@@ -24,6 +24,9 @@ namespace sc
 		bool running;
 		bool sdlInitiated;
 		bool moduleInputEnabled;
+		void ConfigureViewport(SDL_Window* window);
+		void Loop();
+		void LoopUpdate();
 		void RenderMargin();
 		void HandleModuleResult(ModuleResult& moduleResult);
 		void PoolEvents();
