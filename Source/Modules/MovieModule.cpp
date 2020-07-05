@@ -93,7 +93,7 @@ void MovieModule::HandleInput(GameState& state, SDL_KeyboardEvent& inputEvent, M
 	}
 }
 
-void MovieModule::OnAnimationEnded()
+void MovieModule::OnAnimationEnded(RenderElement* renderElement)
 {
 
 }

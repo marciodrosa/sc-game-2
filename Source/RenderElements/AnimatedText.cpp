@@ -85,7 +85,7 @@ void AnimatedText::Render(SDL_Renderer* render, int x, int y)
 			destRect.h = animTextSurface->h;
 			SDL_RenderCopy(render, textTexture, nullptr, &destRect);
 			if (wasAnimating && !IsAnimating() && animationListener != nullptr)
-				animationListener->OnAnimationEnded();
+				animationListener->OnAnimationEnded(nullptr);
 		}
 		else
 		{

@@ -22,7 +22,7 @@ namespace sc
 		void Render(GameState& state, SDL_Renderer* renderer) override;
 		void Finish(GameState& state) override;
 		void HandleInput(GameState& state, SDL_KeyboardEvent& inputEvent, ModuleResult& result) override;
-		void OnAnimationEnded() override;
+		void OnAnimationEnded(RenderElement* renderElement) override;
 
 	private:
 		void DrawCharacterName(GameState& state, SDL_Renderer* render);

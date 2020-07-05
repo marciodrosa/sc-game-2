@@ -110,9 +110,11 @@ void GameLoop::HandleModuleResult(ModuleResult& moduleResult)
 {
 	if (moduleResult.DisableInput)
 		moduleInputEnabled = false;
+	if (moduleResult.EnableInput)
+		moduleInputEnabled = true;
 	if (moduleResult.NextGameModule != nullptr)
 		SetModule(moduleResult.NextGameModule);
-	if (moduleResult.FinishGame)
+	if (moduleResult.FinishModule)
 		running = false;
 }
 

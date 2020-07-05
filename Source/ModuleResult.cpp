@@ -5,6 +5,7 @@ using namespace sc;
 ModuleResult::ModuleResult()
 {
 	NextGameModule = nullptr;
-	FinishGame = false;
+	FinishModule = false;
 	DisableInput = false;
+	EnableInput = false;
 }

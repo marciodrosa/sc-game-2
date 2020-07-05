@@ -10,7 +10,8 @@ namespace sc
 	public:
 		ModuleResult();
 		GameModule* NextGameModule;
-		bool FinishGame;
+		bool FinishModule;
 		bool DisableInput;
+		bool EnableInput;
 	};
 }

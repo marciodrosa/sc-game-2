@@ -64,7 +64,7 @@ void EndingModule::Finish(GameState& state)
 void EndingModule::HandleInput(GameState& state, SDL_KeyboardEvent& inputEvent, ModuleResult& result)
 {
 	if (inputEvent.keysym.sym == SDLK_RETURN || inputEvent.keysym.sym == SDLK_KP_ENTER)
-		result.FinishGame = true;
+		result.FinishModule = true;
 	else if (inputEvent.keysym.sym == SDLK_LEFT)
 		result.NextGameModule = new MovieModule;
 }

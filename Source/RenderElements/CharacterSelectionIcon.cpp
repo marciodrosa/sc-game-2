@@ -46,7 +46,7 @@ void CharacterSelectionIcon::Render(GameState& state, SDL_Renderer* render, int 
 		{
 			blinking = false;
 			if (blinkAnimationListener != nullptr)
-				blinkAnimationListener->OnAnimationEnded();
+				blinkAnimationListener->OnAnimationEnded(nullptr);
 		}
 	}
 }

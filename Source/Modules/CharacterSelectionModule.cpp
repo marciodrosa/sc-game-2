@@ -88,7 +88,7 @@ void CharacterSelectionModule::HandleInput(GameState& state, SDL_KeyboardEvent& 
 	}
 }
 
-void CharacterSelectionModule::OnAnimationEnded()
+void CharacterSelectionModule::OnAnimationEnded(RenderElement* renderElement)
 {
 	selectionFinished = true;
 }
