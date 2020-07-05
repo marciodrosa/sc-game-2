@@ -14,13 +14,15 @@ namespace sc
 	public:
 		AnimatedText();
 		virtual ~AnimatedText();
-		void SetText(std::string text, int fontSize, int width = 0, bool animated = false, int animationSpeed = 1);
+		void SetText(std::string text, int fontSize, int width = 0, int r = 255, int g = 255, int b = 255);
+		void SetAnimated(bool animated = true, int animationSpeed = 1);
 		void ForceFinishAnimation();
 		bool IsAnimating();
 		void Render(SDL_Renderer* renderer, SDL_Rect& rect) override;
 		AnimationListener* Listener;
 	private:
 		void AnimateText();
+		void RefreshText();
 		SDL_Surface* textSurface;
 		SDL_Surface* animTextSurface;
 		SDL_Texture* textTexture;
@@ -29,7 +31,7 @@ namespace sc
 		std::string currentText;
 		int animationSpeed;
 		int animated;
-		int width;
+		int maxWidth;
 		SDL_Color color;
 	};
 }

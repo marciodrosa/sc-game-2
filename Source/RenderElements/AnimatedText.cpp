@@ -22,28 +22,38 @@ AnimatedText::~AnimatedText()
 	TTF_CloseFont(font);
 }
 
-void AnimatedText::SetText(std::string text, int fontSize, int width, bool animated, int animationSpeed)
+void AnimatedText::SetText(std::string text, int fontSize, int width, int r, int g, int b)
 {
-	if (text != targetText)
+	TTF_CloseFont(font);
+	this->color.r = r;
+	this->color.g = g;
+	this->color.b = b;
+	this->targetText = text;
+	this->font = TTF_OpenFont("Fonts/CrimsonText-Bold.ttf", fontSize);
+	this->maxWidth = width;
+	if (animated)
+		currentText = "";
+	else
+		currentText = targetText;
+	textSurface = width > 0 ? TTF_RenderText_Blended_Wrapped(font, targetText.c_str(), color, width) : TTF_RenderText_Blended(font, targetText.c_str(), color);
+	Width = textSurface->w;
+	Height = textSurface->h;
+	animTextSurface = nullptr;
+	textTexture = nullptr;
+	RefreshText();
+}
+
+void AnimatedText::SetAnimated(bool animated, int animationSpeed)
+{
+	this->animationSpeed = animationSpeed;
+	if (this->animated != animated)
 	{
-		SDL_FreeSurface(textSurface);
-		SDL_FreeSurface(animTextSurface);
-		SDL_DestroyTexture(textTexture);
-		TTF_CloseFont(font);
-		this->targetText = text;
-		this->animationSpeed = animationSpeed;
 		this->animated = animated;
-		this->font = TTF_OpenFont("Fonts/CrimsonText-Bold.ttf", fontSize);
-		this->width = width;
 		if (animated)
 			currentText = "";
 		else
 			currentText = targetText;
-		textSurface = width > 0 ? TTF_RenderText_Blended_Wrapped(font, targetText.c_str(), color, width) : TTF_RenderText_Blended(font, targetText.c_str(), color);
-		Width = textSurface->w;
-		Height = textSurface->h;
-		animTextSurface = nullptr;
-		textTexture = nullptr;
+		RefreshText();
 	}
 }
 
@@ -67,7 +77,7 @@ void AnimatedText::Render(SDL_Renderer* renderer, SDL_Rect& rect)
 			AnimateText();
 			SDL_FreeSurface(animTextSurface);
 			SDL_DestroyTexture(textTexture);
-			animTextSurface = width > 0 ? TTF_RenderText_Blended_Wrapped(font, currentText.c_str(), color, width) : TTF_RenderText_Blended(font, currentText.c_str(), color);
+			animTextSurface = maxWidth > 0 ? TTF_RenderText_Blended_Wrapped(font, currentText.c_str(), color, maxWidth) : TTF_RenderText_Blended(font, currentText.c_str(), color);
 			textTexture = SDL_CreateTextureFromSurface(renderer, animTextSurface);
 			SDL_Rect destRect;
 			destRect.x = rect.x;
@@ -94,4 +104,16 @@ void AnimatedText::AnimateText()
 		currentText = targetText;
 	else
 		currentText = targetText.substr(0, newSize);
+}
+
+void AnimatedText::RefreshText()
+{
+	SDL_FreeSurface(textSurface);
+	SDL_FreeSurface(animTextSurface);
+	SDL_DestroyTexture(textTexture);
+	textSurface = maxWidth > 0 ? TTF_RenderText_Blended_Wrapped(font, targetText.c_str(), color, maxWidth) : TTF_RenderText_Blended(font, targetText.c_str(), color);
+	Width = textSurface->w;
+	Height = textSurface->h;
+	animTextSurface = nullptr;
+	textTexture = nullptr;
 }
