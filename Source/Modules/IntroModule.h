@@ -22,5 +22,6 @@ namespace sc
 
 	private:
 		AnimatedText text;
+		AnimatedText textShadow;
 	};
 }

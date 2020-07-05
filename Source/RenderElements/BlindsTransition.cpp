@@ -5,7 +5,7 @@ using namespace sc;
 
 BlindsTransition::BlindsTransition()
 {
-	BlindsAmount = 10;
+	BlindsAmount = 8;
 	animating = false;
 	animationPosition = 0;
 	direction = 0;

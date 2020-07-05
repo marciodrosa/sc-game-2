@@ -2,6 +2,7 @@
 #include "Constants.h"
 #include "RenderElements/StripesTransition.h"
 #include "LukaModule.h"
+#include "MusicPlayer.h"
 #include <sstream>
 
 using namespace sc;
@@ -24,6 +25,7 @@ void WildCinemaModule::Start(GameState& state, ModuleResult& result)
 	text.CenterPivot();
 	text.TopPivot();
 	x = SC_SCREEN_WIDTH + cinema.PivotX;
+	MusicPlayer::Get()->PlayGameMusic();
 }
 
 void WildCinemaModule::Update(GameState& state, ModuleResult& result)
