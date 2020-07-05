@@ -1,5 +1,6 @@
 #include "LukaModule.h"
 #include "Constants.h"
+#include "RenderElements/StripesTransition.h"
 #include <sstream>
 
 using namespace sc;
@@ -27,32 +28,31 @@ void LukaModule::Start(GameState& state, ModuleResult& result)
 {
 	stringstream ss;
 	ss << "Luka: \"" << dialogue << "\"";
-	text.SetText(ss.str(), 10, 320);
+	text.SetText(ss.str(), 10, 280);
 	text.SetAnimated();
 	luka.LoadContentFromFile("Images/Luka.png");
 	luka.CenterPivot();
 	luka.TopPivot();
 	text.CenterPivot();
 	text.TopPivot();
+	result.Transition = new StripesTransition;
 }
 
 void LukaModule::Update(GameState& state, ModuleResult& result)
 {
-
 }
 
 void LukaModule::Render(GameState& state, SDL_Renderer* renderer)
 {
 	luka.RenderAt(renderer, SC_SCREEN_WIDTH / 2, 10);
-	text.RenderAt(renderer, SC_SCREEN_WIDTH / 2, luka.Height + 20);
+	if (!state.IsInModuleInTransition)
+		text.RenderAt(renderer, SC_SCREEN_WIDTH / 2, luka.Height + 20);
 }
 
 void LukaModule::Finish(GameState& state)
 {
-
 }
 
 void LukaModule::HandleInput(GameState& state, SDL_KeyboardEvent& inputEvent, ModuleResult& result)
 {
-
 }

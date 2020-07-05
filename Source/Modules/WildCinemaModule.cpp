@@ -1,5 +1,7 @@
 #include "WildCinemaModule.h"
 #include "Constants.h"
+#include "RenderElements/StripesTransition.h"
+#include "LukaModule.h"
 #include <sstream>
 
 using namespace sc;
@@ -44,4 +46,9 @@ void WildCinemaModule::Finish(GameState& state)
 
 void WildCinemaModule::HandleInput(GameState& state, SDL_KeyboardEvent& inputEvent, ModuleResult& result)
 {
+	if (inputEvent.keysym.sym == SDLK_RETURN || inputEvent.keysym.sym == SDLK_KP_ENTER)
+	{
+		result.NextGameModule = new LukaModule("Miau. Seja bem vindo ao CINELUKA. O meu nome é Luka e eu sou uma gata. Qual é o seu nome, forasteiro?");
+		result.Transition = new StripesTransition;
+	}
 }

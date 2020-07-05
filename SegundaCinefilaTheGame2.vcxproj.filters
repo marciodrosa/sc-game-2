@@ -93,6 +93,9 @@
     <ClInclude Include="Source\RenderElements\CautionBackground.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\RenderElements\StripesTransition.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\RenderElements\RenderElement.cpp">
@@ -165,6 +168,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\RenderElements\CautionBackground.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RenderElements\StripesTransition.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

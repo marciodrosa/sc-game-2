@@ -44,6 +44,7 @@
     <ClInclude Include="Source\RenderElements\RenderElement.h" />
     <ClInclude Include="Source\RenderElements\ShutterTransition.h" />
     <ClInclude Include="Source\RenderElements\Sprite.h" />
+    <ClInclude Include="Source\RenderElements\StripesTransition.h" />
     <ClInclude Include="Source\ResourcesManager.h" />
   </ItemGroup>
   <ItemGroup>
@@ -70,6 +71,7 @@
     <ClCompile Include="Source\RenderElements\RenderElement.cpp" />
     <ClCompile Include="Source\RenderElements\ShutterTransition.cpp" />
     <ClCompile Include="Source\RenderElements\Sprite.cpp" />
+    <ClCompile Include="Source\RenderElements\StripesTransition.cpp" />
     <ClCompile Include="Source\ResourcesManager.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
