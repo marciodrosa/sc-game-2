@@ -12,6 +12,8 @@ ShutterTransition::ShutterTransition()
 	Width = SC_SCREEN_WIDTH;
 	Height = SC_SCREEN_HEIGHT;
 	Speed = 10;
+	EnableHorizontalAnimation = true;
+	EnableVerticalAnimation = true;
 }
 
 ShutterTransition::~ShutterTransition()
@@ -60,10 +62,16 @@ void ShutterTransition::Render(SDL_Renderer* renderer, SDL_Rect& rect)
 	int x2 = -horizontalAnimationPosition;
 	int y1 = h + verticalAnimationPosition;
 	int y2 = -verticalAnimationPosition;
-	DrawBlackRect(renderer, x1, 0, w, Height);
-	DrawBlackRect(renderer, x2, 0, w, Height);
-	DrawBlackRect(renderer, 0, y1, Width, h);
-	DrawBlackRect(renderer, 0, y2, Width, h);
+	if (EnableHorizontalAnimation)
+	{
+		DrawBlackRect(renderer, x1, 0, w, Height);
+		DrawBlackRect(renderer, x2, 0, w, Height);
+	}
+	if (EnableVerticalAnimation)
+	{
+		DrawBlackRect(renderer, 0, y1, Width, h);
+		DrawBlackRect(renderer, 0, y2, Width, h);
+	}
 }
 
 void ShutterTransition::Open()

@@ -19,6 +19,8 @@ namespace sc
 		void Close();
 		AnimationListener* Listener;
 		int Speed;
+		bool EnableHorizontalAnimation;
+		bool EnableVerticalAnimation;
 	private:
 		void DrawBlackRect(SDL_Renderer* renderer, int x, int y, int w, int h);
 		bool animating;

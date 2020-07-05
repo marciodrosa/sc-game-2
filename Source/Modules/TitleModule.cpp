@@ -25,7 +25,9 @@ void TitleModule::Start(GameState& state, ModuleResult& result)
 	background.LoadContentFromFile("Images/LogoBG.png");
 	text.SetText("Comandos: teclas directionais e Enter", 11, 300);
 	MusicPlayer::Get()->PlayTitleMusic();
-	result.Transition = new ShutterTransition;
+	ShutterTransition* shutterTransition = new ShutterTransition;
+	shutterTransition->EnableVerticalAnimation = false;
+	result.Transition = shutterTransition;
 }
 
 void TitleModule::Update(GameState& state, ModuleResult& result)
