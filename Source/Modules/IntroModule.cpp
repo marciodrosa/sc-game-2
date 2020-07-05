@@ -1,10 +1,10 @@
 #include "IntroModule.h"
 #include "Constants.h"
-#include "MovieModule.h"
 #include "MusicPlayer.h"
 #include "ResourcesManager.h"
 #include "RenderElements/BlindsTransition.h"
 #include "RenderElements/ShutterTransition.h"
+#include "WildCinemaModule.h"
 #include <SDL_image.h>
 #include <SDL_mixer.h>
 #include <sstream>
@@ -54,7 +54,7 @@ void IntroModule::HandleInput(GameState& state, SDL_KeyboardEvent& inputEvent, M
 {
 	if (inputEvent.keysym.sym == SDLK_RETURN || inputEvent.keysym.sym == SDLK_KP_ENTER)
 	{
-		result.NextGameModule = new MovieModule;
+		result.NextGameModule = new WildCinemaModule;
 		ShutterTransition* transition = new ShutterTransition;
 		transition->EnableHorizontalAnimation = false;
 		result.Transition = transition;

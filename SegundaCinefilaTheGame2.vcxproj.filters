@@ -84,6 +84,15 @@
     <ClInclude Include="Source\RenderElements\BlindsTransition.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Modules\LukaModule.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Modules\WildCinemaModule.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RenderElements\CautionBackground.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\RenderElements\RenderElement.cpp">
@@ -147,6 +156,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\RenderElements\BlindsTransition.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Modules\LukaModule.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Modules\WildCinemaModule.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RenderElements\CautionBackground.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
