@@ -44,7 +44,7 @@ void EndingModule::Render(GameState& state, SDL_Renderer* renderer)
 	SDL_Surface* characterImage = ResourcesManager::Get()->GetCharacterImage(Character.Id);
 	if (characterTexture == nullptr)
 		characterTexture = SDL_CreateTextureFromSurface(renderer, characterImage);
-	mainLabelText.Render(renderer, (SC_SCREEN_WIDTH - mainLabelText.GetWidth()) / 2, 10);
+	mainLabelText.RenderAt(renderer, (SC_SCREEN_WIDTH - mainLabelText.Width) / 2, 10);
 	SDL_Rect destRect;
 	destRect.x = (SC_SCREEN_WIDTH / 2) - (characterImage->w / 2);
 	destRect.y = (SC_SCREEN_HEIGHT / 2) - (characterImage->h / 2);
@@ -52,8 +52,8 @@ void EndingModule::Render(GameState& state, SDL_Renderer* renderer)
 	destRect.h = characterImage->h;
 	SDL_RenderCopy(renderer, characterTexture, nullptr, &destRect);
 	int y = destRect.y + destRect.h + 10;
-	characterLabelText.Render(renderer, (SC_SCREEN_WIDTH - characterLabelText.GetWidth()) / 2, y);
-	theEndLabelText.Render(renderer, (SC_SCREEN_WIDTH - theEndLabelText.GetWidth()) / 2, y + characterLabelText.GetHeight() + 10);
+	characterLabelText.RenderAt(renderer, (SC_SCREEN_WIDTH - characterLabelText.Width) / 2, y);
+	theEndLabelText.RenderAt(renderer, (SC_SCREEN_WIDTH - theEndLabelText.Width) / 2, y + characterLabelText.Height + 10);
 	hands.Render(renderer, (SC_SCREEN_WIDTH - hands.GetWidth()) -10, SC_SCREEN_HEIGHT - hands.GetHeight());
 }
 

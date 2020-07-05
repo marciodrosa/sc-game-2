@@ -26,7 +26,6 @@
     <ClInclude Include="Source\Models\GameState.h" />
     <ClInclude Include="Source\Models\Movie.h" />
     <ClInclude Include="Source\ModuleResult.h" />
-    <ClInclude Include="Source\Modules\CharacterSelectionModule.h" />
     <ClInclude Include="Source\Modules\EndingModule.h" />
     <ClInclude Include="Source\Modules\ExtraModule.h" />
     <ClInclude Include="Source\Modules\IntroModule.h" />
@@ -52,7 +51,6 @@
     <ClCompile Include="Source\Models\GameState.cpp" />
     <ClCompile Include="Source\Models\Movie.cpp" />
     <ClCompile Include="Source\ModuleResult.cpp" />
-    <ClCompile Include="Source\Modules\CharacterSelectionModule.cpp" />
     <ClCompile Include="Source\Modules\EndingModule.cpp" />
     <ClCompile Include="Source\Modules\ExtraModule.cpp" />
     <ClCompile Include="Source\Modules\IntroModule.cpp" />

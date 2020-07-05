@@ -32,7 +32,7 @@ void ExtraModule::Update(GameState& state, ModuleResult& result)
 void ExtraModule::Render(GameState& state, SDL_Renderer* renderer)
 {
 	blinkingBackground.Render(renderer);
-	text.Render(renderer, (SC_SCREEN_WIDTH - text.GetWidth()) / 2, (SC_SCREEN_HEIGHT - text.GetHeight()) / 2);
+	text.RenderAt(renderer, (SC_SCREEN_WIDTH - text.Width) / 2, (SC_SCREEN_HEIGHT - text.Height) / 2);
 	hands.Render(renderer, (SC_SCREEN_WIDTH - hands.GetWidth()) / 2, SC_SCREEN_HEIGHT - hands.GetHeight());
 }
 

@@ -1,5 +1,5 @@
 #include "TitleModule.h"
-#include "CharacterSelectionModule.h"
+#include "IntroModule.h"
 #include "Constants.h"
 #include "MusicPlayer.h"
 #include "ResourcesManager.h"
@@ -42,7 +42,7 @@ void TitleModule::Render(GameState& state, SDL_Renderer* renderer)
 	if (backgroundX < -background.Width)
 		backgroundX = 0;
 	logo.RenderAt(renderer, 0, 0);
-	text.Render(renderer, (SC_SCREEN_WIDTH - text.GetWidth()) / 2, 200);
+	text.RenderAt(renderer, (SC_SCREEN_WIDTH - text.Width) / 2, 200);
 }
 
 void TitleModule::Finish(GameState& state)
@@ -54,7 +54,7 @@ void TitleModule::HandleInput(GameState& state, SDL_KeyboardEvent& inputEvent, M
 	if (inputEvent.keysym.sym == SDLK_RETURN || inputEvent.keysym.sym == SDLK_KP_ENTER)
 	{
 		Mix_PlayChannel(1, ResourcesManager::Get()->StartSound, 0);
-		result.NextGameModule = new CharacterSelectionModule;
+		result.NextGameModule = new IntroModule;
 		result.Transition = new BlindsTransition;
 	}
 }

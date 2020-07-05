@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AnimationListener.h"
+#include "RenderElement.h"
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <string>
@@ -8,17 +9,16 @@
 namespace sc
 {
 	/** Text that can be render in the screen and animated to show one character each frame. */
-	class AnimatedText
+	class AnimatedText: public RenderElement
 	{
 	public:
 		AnimatedText();
 		virtual ~AnimatedText();
-		void SetText(std::string text, int fontSize, int width = 0, bool animated = false, int animationSpeed = 1, AnimationListener* animationListener = nullptr);
+		void SetText(std::string text, int fontSize, int width = 0, bool animated = false, int animationSpeed = 1);
 		void ForceFinishAnimation();
 		bool IsAnimating();
-		int GetWidth();
-		int GetHeight();
-		void Render(SDL_Renderer* render, int x, int y);
+		void Render(SDL_Renderer* renderer, SDL_Rect& rect) override;
+		AnimationListener* Listener;
 	private:
 		void AnimateText();
 		SDL_Surface* textSurface;
@@ -31,6 +31,5 @@ namespace sc
 		int animated;
 		int width;
 		SDL_Color color;
-		AnimationListener* animationListener;
 	};
 }

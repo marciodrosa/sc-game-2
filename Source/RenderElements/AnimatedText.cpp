@@ -22,7 +22,7 @@ AnimatedText::~AnimatedText()
 	TTF_CloseFont(font);
 }
 
-void AnimatedText::SetText(std::string text, int fontSize, int width, bool animated, int animationSpeed, AnimationListener* animationListener)
+void AnimatedText::SetText(std::string text, int fontSize, int width, bool animated, int animationSpeed)
 {
 	if (text != targetText)
 	{
@@ -33,7 +33,6 @@ void AnimatedText::SetText(std::string text, int fontSize, int width, bool anima
 		this->targetText = text;
 		this->animationSpeed = animationSpeed;
 		this->animated = animated;
-		this->animationListener = animationListener;
 		this->font = TTF_OpenFont("Fonts/CrimsonText-Bold.ttf", fontSize);
 		this->width = width;
 		if (animated)
@@ -41,6 +40,8 @@ void AnimatedText::SetText(std::string text, int fontSize, int width, bool anima
 		else
 			currentText = targetText;
 		textSurface = width > 0 ? TTF_RenderText_Blended_Wrapped(font, targetText.c_str(), color, width) : TTF_RenderText_Blended(font, targetText.c_str(), color);
+		Width = textSurface->w;
+		Height = textSurface->h;
 		animTextSurface = nullptr;
 		textTexture = nullptr;
 	}
@@ -56,17 +57,7 @@ bool AnimatedText::IsAnimating()
 	return targetText != currentText;
 }
 
-int AnimatedText::GetWidth()
-{
-	return textSurface != nullptr ? textSurface->w : 0;
-}
-
-int AnimatedText::GetHeight()
-{
-	return textSurface != nullptr ? textSurface->h : 0;
-}
-
-void AnimatedText::Render(SDL_Renderer* render, int x, int y)
+void AnimatedText::Render(SDL_Renderer* renderer, SDL_Rect& rect)
 {
 	if (targetText != "")
 	{
@@ -77,26 +68,21 @@ void AnimatedText::Render(SDL_Renderer* render, int x, int y)
 			SDL_FreeSurface(animTextSurface);
 			SDL_DestroyTexture(textTexture);
 			animTextSurface = width > 0 ? TTF_RenderText_Blended_Wrapped(font, currentText.c_str(), color, width) : TTF_RenderText_Blended(font, currentText.c_str(), color);
-			textTexture = SDL_CreateTextureFromSurface(render, animTextSurface);
+			textTexture = SDL_CreateTextureFromSurface(renderer, animTextSurface);
 			SDL_Rect destRect;
-			destRect.x = x;
-			destRect.y = y;
+			destRect.x = rect.x;
+			destRect.y = rect.y;
 			destRect.w = animTextSurface->w;
 			destRect.h = animTextSurface->h;
-			SDL_RenderCopy(render, textTexture, nullptr, &destRect);
-			if (wasAnimating && !IsAnimating() && animationListener != nullptr)
-				animationListener->OnAnimationEnded(nullptr);
+			SDL_RenderCopy(renderer, textTexture, nullptr, &destRect);
+			if (wasAnimating && !IsAnimating() && Listener != nullptr)
+				Listener->OnAnimationEnded(nullptr);
 		}
 		else
 		{
 			if (textTexture == nullptr)
-				textTexture = SDL_CreateTextureFromSurface(render, textSurface);
-			SDL_Rect destRect;
-			destRect.x = x;
-			destRect.y = y;
-			destRect.w = textSurface->w;
-			destRect.h = textSurface->h;
-			SDL_RenderCopy(render, textTexture, nullptr, &destRect);
+				textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
+			SDL_RenderCopy(renderer, textTexture, nullptr, &rect);
 		}
 	}
 }

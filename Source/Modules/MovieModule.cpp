@@ -26,7 +26,8 @@ void MovieModule::Start(GameState& state, ModuleResult& result)
 	hands.Left = state.CurrentMovieIndex > 0;
 	hands.Right = state.CurrentMovieIndex < state.Movies.size() - 1;
 	hands.Ok = state.CurrentMovieIndex == state.Movies.size() - 1;
-	text.SetText(movie.GetFullDescription(), 11, 160, true, 1, this);
+	text.SetText(movie.GetFullDescription(), 11, 160, true, 1);
+	text.Listener = this;
 	if (movie.IsExtra)
 		MusicPlayer::Get()->PlayExtraMusic();
 	else
@@ -51,7 +52,7 @@ void MovieModule::Render(GameState& state, SDL_Renderer* renderer)
 	destRect.w = movieImage->w;
 	destRect.h = movieImage->h;
 	SDL_RenderCopy(renderer, movieTexture, nullptr, &destRect);
-	text.Render(renderer, destRect.x + destRect.w + 10, (SC_SCREEN_HEIGHT - text.GetHeight()) / 2);
+	text.RenderAt(renderer, destRect.x + destRect.w + 10, (SC_SCREEN_HEIGHT - text.Height) / 2);
 	hands.Render(renderer, 20, SC_SCREEN_HEIGHT - hands.GetHeight() - 20);
 }
 
