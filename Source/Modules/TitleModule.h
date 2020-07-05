@@ -3,7 +3,6 @@
 #include "GameModule.h"
 #include "RenderElements/AnimatedText.h"
 #include "RenderElements/Sprite.h"
-#include "RenderElements/ShutterTransition.h"
 #include <SDL.h>
 #include <SDL_ttf.h>
 

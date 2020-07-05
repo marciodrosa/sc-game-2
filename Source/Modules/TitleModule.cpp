@@ -3,6 +3,8 @@
 #include "Constants.h"
 #include "MusicPlayer.h"
 #include "ResourcesManager.h"
+#include "RenderElements/BlindsTransition.h"
+#include "RenderElements/ShutterTransition.h"
 #include <SDL_image.h>
 #include <SDL_mixer.h>
 
@@ -23,7 +25,7 @@ void TitleModule::Start(GameState& state, ModuleResult& result)
 	background.LoadContentFromFile("Images/LogoBG.png");
 	text.SetText("Comandos: teclas directionais e Enter", 11, 300);
 	MusicPlayer::Get()->PlayTitleMusic();
-	result.Transition = new ShutterTransition();
+	result.Transition = new ShutterTransition;
 }
 
 void TitleModule::Update(GameState& state, ModuleResult& result)
@@ -51,7 +53,7 @@ void TitleModule::HandleInput(GameState& state, SDL_KeyboardEvent& inputEvent, M
 	{
 		Mix_PlayChannel(1, ResourcesManager::Get()->StartSound, 0);
 		result.NextGameModule = new CharacterSelectionModule;
-		result.Transition = new ShutterTransition();
+		result.Transition = new BlindsTransition;
 	}
 }
 

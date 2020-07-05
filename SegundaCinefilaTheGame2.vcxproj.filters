@@ -87,6 +87,9 @@
     <ClInclude Include="Source\RenderElements\ModuleTransition.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\RenderElements\BlindsTransition.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\RenderElements\RenderElement.cpp">
@@ -153,6 +156,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\RenderElements\ModuleTransition.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RenderElements\BlindsTransition.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
