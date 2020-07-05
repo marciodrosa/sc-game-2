@@ -39,6 +39,7 @@ bool BlindsTransition::TransitionAnimationEnded()
 
 void BlindsTransition::Render(SDL_Renderer* renderer, SDL_Rect& rect)
 {
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 	int blindSize = CalculateBlindSize();
 	for (int i = 0; i < BlindsAmount; i++)
 	{

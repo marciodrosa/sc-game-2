@@ -19,9 +19,6 @@ ExtraModule::~ExtraModule()
 void ExtraModule::Start(GameState& state, ModuleResult& result)
 {
 	text.SetText("EXTRA x1", 20);
-	hands.Left = true;
-	hands.Right = true;
-	hands.Ok = true;
 	MusicPlayer::Get()->PlayExtraMusic();
 }
 
@@ -33,7 +30,6 @@ void ExtraModule::Render(GameState& state, SDL_Renderer* renderer)
 {
 	blinkingBackground.Render(renderer);
 	text.RenderAt(renderer, (SC_SCREEN_WIDTH - text.Width) / 2, (SC_SCREEN_HEIGHT - text.Height) / 2);
-	hands.Render(renderer, (SC_SCREEN_WIDTH - hands.GetWidth()) / 2, SC_SCREEN_HEIGHT - hands.GetHeight());
 }
 
 void ExtraModule::Finish(GameState& state)

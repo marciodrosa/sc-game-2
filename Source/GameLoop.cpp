@@ -32,7 +32,7 @@ GameLoop::~GameLoop()
 void GameLoop::Run()
 {
 	InitSDLAndResources();
-	SDL_Window* window = SDL_CreateWindow("Segunda Cinefila", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SC_SCREEN_WIDTH, SC_SCREEN_HEIGHT, 0);// SDL_WINDOW_FULLSCREEN);
+	SDL_Window* window = SDL_CreateWindow("Segunda Cinefila", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SC_SCREEN_WIDTH, SC_SCREEN_HEIGHT, 0); // SDL_WINDOW_FULLSCREEN);
 	SDL_ShowCursor(0);
 	render = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	ConfigureViewport(window);
@@ -65,16 +65,24 @@ void GameLoop::SetModule(GameModule* gameModule)
 
 void GameLoop::SetTransition(ModuleTransition* transition, bool in, GameModule* pendingModuleAfterTransition)
 {
+	gameState->IsInModuleInTransition = false;
+	gameState->IsInModuleOutTransition = false;
 	if (this->transition != nullptr)
 		delete transition;
 	this->transition = transition;
+	this->pendingModuleAfterTransition = pendingModuleAfterTransition;
 	if (transition != nullptr)
 	{
-		this->pendingModuleAfterTransition = pendingModuleAfterTransition;
 		if (in)
+		{
+			gameState->IsInModuleInTransition = true;
 			transition->TransitionIn();
+		}
 		else
+		{
+			gameState->IsInModuleOutTransition = true;
 			transition->TransitionOut();
+		}
 	}
 }
 
@@ -128,13 +136,10 @@ void GameLoop::UpdateTransition()
 		transition->RenderAt(render, 0, 0);
 		if (transition->TransitionAnimationEnded())
 		{
-			transition = nullptr;
-			if (pendingModuleAfterTransition != nullptr)
-			{
-				GameModule* NextModule = pendingModuleAfterTransition;
-				pendingModuleAfterTransition = nullptr;
+			GameModule* NextModule = pendingModuleAfterTransition;
+			SetTransition(nullptr, false, nullptr);
+			if (NextModule != nullptr)
 				SetModule(NextModule);
-			}
 		}
 	}
 }

@@ -29,8 +29,6 @@ void EndingModule::Start(GameState& state, ModuleResult& result)
 	mainLabelText.SetText(endingLabel.str(), 11, SC_SCREEN_WIDTH - 20);
 	characterLabelText.SetText(characterLabel.str(), 11, SC_SCREEN_WIDTH - 20);
 	theEndLabelText.SetText("FIM", 11, 0);
-	hands.Left = true;
-	hands.Ok = true;
 	MusicPlayer::Get()->PlayTitleMusic();
 }
 
@@ -54,7 +52,6 @@ void EndingModule::Render(GameState& state, SDL_Renderer* renderer)
 	int y = destRect.y + destRect.h + 10;
 	characterLabelText.RenderAt(renderer, (SC_SCREEN_WIDTH - characterLabelText.Width) / 2, y);
 	theEndLabelText.RenderAt(renderer, (SC_SCREEN_WIDTH - theEndLabelText.Width) / 2, y + characterLabelText.Height + 10);
-	hands.Render(renderer, (SC_SCREEN_WIDTH - hands.GetWidth()) -10, SC_SCREEN_HEIGHT - hands.GetHeight());
 }
 
 void EndingModule::Finish(GameState& state)

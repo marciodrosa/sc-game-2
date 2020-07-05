@@ -1,7 +1,6 @@
 #pragma once
 
 #include "GameModule.h"
-#include "RenderElements/Hands.h"
 #include "RenderElements/BlinkingBackground.h"
 #include "RenderElements/AnimatedText.h"
 #include "RenderElements/AnimationListener.h"
@@ -26,7 +25,6 @@ namespace sc
 
 	private:
 		SDL_Texture* movieTexture;
-		Hands hands;
 		BlinkingBackground blinkingBackground;
 		AnimatedText text;
 	};

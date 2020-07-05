@@ -37,6 +37,7 @@ bool ShutterTransition::TransitionAnimationEnded()
 
 void ShutterTransition::Render(SDL_Renderer* renderer, SDL_Rect& rect)
 {
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 	if (animating)
 		animationPosition += animationDirection;
 	int horizontalAnimationPosition = animationPosition * Speed;

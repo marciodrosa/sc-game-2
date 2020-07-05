@@ -16,5 +16,7 @@ namespace sc
 		std::vector<Movie> Movies;
 		int SelectedCharacterIndex;
 		int CurrentMovieIndex;
+		bool IsInModuleInTransition;
+		bool IsInModuleOutTransition;
 	};
 }

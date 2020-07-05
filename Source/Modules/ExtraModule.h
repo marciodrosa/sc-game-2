@@ -1,7 +1,6 @@
 #pragma once
 
 #include "GameModule.h"
-#include "RenderElements/Hands.h"
 #include "RenderElements/BlinkingBackground.h"
 #include "RenderElements/AnimatedText.h"
 #include <SDL.h>
@@ -24,7 +23,6 @@ namespace sc
 
 	private:
 		AnimatedText text;
-		Hands hands;
 		BlinkingBackground blinkingBackground;
 	};
 }

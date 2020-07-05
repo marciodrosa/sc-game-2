@@ -23,9 +23,6 @@ MovieModule::~MovieModule()
 void MovieModule::Start(GameState& state, ModuleResult& result)
 {
 	Movie& movie = state.Movies[state.CurrentMovieIndex];
-	hands.Left = state.CurrentMovieIndex > 0;
-	hands.Right = state.CurrentMovieIndex < state.Movies.size() - 1;
-	hands.Ok = state.CurrentMovieIndex == state.Movies.size() - 1;
 	text.SetText(movie.GetFullDescription(), 11, 160, true, 1);
 	text.Listener = this;
 	if (movie.IsExtra)
@@ -53,7 +50,6 @@ void MovieModule::Render(GameState& state, SDL_Renderer* renderer)
 	destRect.h = movieImage->h;
 	SDL_RenderCopy(renderer, movieTexture, nullptr, &destRect);
 	text.RenderAt(renderer, destRect.x + destRect.w + 10, (SC_SCREEN_HEIGHT - text.Height) / 2);
-	hands.Render(renderer, 20, SC_SCREEN_HEIGHT - hands.GetHeight() - 20);
 }
 
 void MovieModule::Finish(GameState& state)
