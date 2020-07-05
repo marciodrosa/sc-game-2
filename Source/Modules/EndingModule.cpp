@@ -19,7 +19,7 @@ EndingModule::~EndingModule()
 	SDL_DestroyTexture(characterTexture);
 }
 
-void EndingModule::Start(GameState& state)
+void EndingModule::Start(GameState& state, ModuleResult& result)
 {
 	Character& character = state.Characters[state.SelectedCharacterIndex];
 	stringstream endingLabel;

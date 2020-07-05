@@ -20,7 +20,7 @@ MovieModule::~MovieModule()
 	SDL_DestroyTexture(movieTexture);
 }
 
-void MovieModule::Start(GameState& state)
+void MovieModule::Start(GameState& state, ModuleResult& result)
 {
 	Movie& movie = state.Movies[state.CurrentMovieIndex];
 	hands.Left = state.CurrentMovieIndex > 0;

@@ -3,6 +3,7 @@
 namespace sc
 {
 	class GameModule;
+	class ModuleTransition;
 
 	/** Object to be changed by the implementation of a module. */
 	class ModuleResult
@@ -10,6 +11,7 @@ namespace sc
 	public:
 		ModuleResult();
 		GameModule* NextGameModule;
+		ModuleTransition* Transition;
 		bool FinishModule;
 		bool DisableInput;
 		bool EnableInput;

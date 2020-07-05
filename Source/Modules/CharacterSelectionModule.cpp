@@ -21,7 +21,7 @@ CharacterSelectionModule::~CharacterSelectionModule()
 	}
 }
 
-void CharacterSelectionModule::Start(GameState& state)
+void CharacterSelectionModule::Start(GameState& state, ModuleResult& result)
 {
 	for (Character& character : state.Characters)
 	{

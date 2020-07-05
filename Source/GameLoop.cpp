@@ -5,6 +5,7 @@
 #include "ResourcesManager.h"
 #include "MusicPlayer.h"
 #include "Constants.h"
+#include "RenderElements/ModuleTransition.h"
 
 using namespace sc;
 
@@ -15,18 +16,23 @@ GameLoop::GameLoop(GameState& state)
 	this->gameModule = nullptr;
 	this->running = false;
 	this->moduleInputEnabled = true;
+	this->transition = nullptr;
+	this->pendingModuleAfterTransition = nullptr;
 }
 
 GameLoop::~GameLoop()
 {
 	SetModule(nullptr);
+	SetTransition(nullptr, false, nullptr);
+	if (pendingModuleAfterTransition != nullptr)
+		delete pendingModuleAfterTransition;
 	QuitSDLAndResources();
 }
 
 void GameLoop::Run()
 {
 	InitSDLAndResources();
-	SDL_Window* window = SDL_CreateWindow("Segunda Cinefila", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SC_SCREEN_WIDTH, SC_SCREEN_HEIGHT, SDL_WINDOW_FULLSCREEN);
+	SDL_Window* window = SDL_CreateWindow("Segunda Cinefila", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SC_SCREEN_WIDTH, SC_SCREEN_HEIGHT, 0);// SDL_WINDOW_FULLSCREEN);
 	SDL_ShowCursor(0);
 	render = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	ConfigureViewport(window);
@@ -49,7 +55,26 @@ void GameLoop::SetModule(GameModule* gameModule)
 		this->gameModule = gameModule;
 		moduleInputEnabled = true;
 		if (this->gameModule != nullptr)
-			this->gameModule->Start(*gameState);
+		{
+			ModuleResult moduleResult;
+			this->gameModule->Start(*gameState, moduleResult);
+			HandleModuleResult(moduleResult);
+		}
+	}
+}
+
+void GameLoop::SetTransition(ModuleTransition* transition, bool in, GameModule* pendingModuleAfterTransition)
+{
+	if (this->transition != nullptr)
+		delete transition;
+	this->transition = transition;
+	if (transition != nullptr)
+	{
+		this->pendingModuleAfterTransition = pendingModuleAfterTransition;
+		if (in)
+			transition->TransitionIn();
+		else
+			transition->TransitionOut();
 	}
 }
 
@@ -86,6 +111,7 @@ void GameLoop::LoopUpdate()
 		gameModule->Update(*gameState, moduleResult);
 		gameModule->Render(*gameState, render);
 		HandleModuleResult(moduleResult);
+		UpdateTransition();
 	}
 	RenderMargin();
 	SDL_RenderPresent(render);
@@ -93,6 +119,24 @@ void GameLoop::LoopUpdate()
 	unsigned int frameTime = timeEnd < timeStart;
 	if (frameTime < 33)
 		SDL_Delay(33 - frameTime);
+}
+
+void GameLoop::UpdateTransition()
+{
+	if (transition != nullptr)
+	{
+		transition->RenderAt(render, 0, 0);
+		if (transition->TransitionAnimationEnded())
+		{
+			transition = nullptr;
+			if (pendingModuleAfterTransition != nullptr)
+			{
+				GameModule* NextModule = pendingModuleAfterTransition;
+				pendingModuleAfterTransition = nullptr;
+				SetModule(NextModule);
+			}
+		}
+	}
 }
 
 void GameLoop::RenderMargin()
@@ -113,7 +157,14 @@ void GameLoop::HandleModuleResult(ModuleResult& moduleResult)
 	if (moduleResult.EnableInput)
 		moduleInputEnabled = true;
 	if (moduleResult.NextGameModule != nullptr)
-		SetModule(moduleResult.NextGameModule);
+	{
+		if (moduleResult.Transition == nullptr)
+			SetModule(moduleResult.NextGameModule);
+		else
+			SetTransition(moduleResult.Transition, false, moduleResult.NextGameModule);
+	}
+	else if (moduleResult.Transition != nullptr)
+		SetTransition(moduleResult.Transition, true, nullptr);
 	if (moduleResult.FinishModule)
 		running = false;
 }
@@ -127,7 +178,7 @@ void GameLoop::PoolEvents()
 			running = false;
 		else if (event.type == SDL_KEYDOWN)
 		{
-			if (gameModule != nullptr && moduleInputEnabled)
+			if (gameModule != nullptr && moduleInputEnabled && transition == nullptr)
 			{
 				ModuleResult moduleResult;
 				gameModule->HandleInput(*gameState, event.key, moduleResult);

@@ -8,6 +8,8 @@
 
 namespace sc
 {
+	class ModuleTransition;
+
 	/** Main game loop, handles the window and events. */
 	class GameLoop
 	{
@@ -24,9 +26,13 @@ namespace sc
 		bool running;
 		bool sdlInitiated;
 		bool moduleInputEnabled;
+		ModuleTransition* transition;
+		GameModule* pendingModuleAfterTransition;
+		void SetTransition(ModuleTransition* transition, bool in, GameModule* pendingModuleAfterTransition);
 		void ConfigureViewport(SDL_Window* window);
 		void Loop();
 		void LoopUpdate();
+		void UpdateTransition();
 		void RenderMargin();
 		void HandleModuleResult(ModuleResult& moduleResult);
 		void PoolEvents();

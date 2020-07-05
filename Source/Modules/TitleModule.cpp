@@ -17,14 +17,13 @@ TitleModule::~TitleModule()
 {
 }
 
-void TitleModule::Start(GameState& state)
+void TitleModule::Start(GameState& state, ModuleResult& result)
 {
 	logo.LoadContentFromFile("Images/LogoText.png");
 	background.LoadContentFromFile("Images/LogoBG.png");
 	text.SetText("Comandos: teclas directionais e Enter", 11, 300);
-	shutterTransition.Open();
-	shutterTransition.Listener = this;
 	MusicPlayer::Get()->PlayTitleMusic();
+	result.Transition = new ShutterTransition();
 }
 
 void TitleModule::Update(GameState& state, ModuleResult& result)
@@ -40,7 +39,6 @@ void TitleModule::Render(GameState& state, SDL_Renderer* renderer)
 		backgroundX = 0;
 	logo.RenderAt(renderer, 0, 0);
 	text.Render(renderer, (SC_SCREEN_WIDTH - text.GetWidth()) / 2, 200);
-	shutterTransition.RenderAt(renderer, 0, 0);
 }
 
 void TitleModule::Finish(GameState& state)
@@ -53,6 +51,7 @@ void TitleModule::HandleInput(GameState& state, SDL_KeyboardEvent& inputEvent, M
 	{
 		Mix_PlayChannel(1, ResourcesManager::Get()->StartSound, 0);
 		result.NextGameModule = new CharacterSelectionModule;
+		result.Transition = new ShutterTransition();
 	}
 }
 

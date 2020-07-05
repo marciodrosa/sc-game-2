@@ -15,7 +15,7 @@ namespace sc
 	public:
 		EndingModule();
 		virtual ~EndingModule();
-		void Start(GameState& state) override;
+		void Start(GameState& state, ModuleResult& result) override;
 		void Update(GameState& state, ModuleResult& result) override;
 		void Render(GameState& state, SDL_Renderer* renderer) override;
 		void Finish(GameState& state) override;

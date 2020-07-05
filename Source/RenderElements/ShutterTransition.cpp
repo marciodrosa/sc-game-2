@@ -5,36 +5,61 @@ using namespace sc;
 
 ShutterTransition::ShutterTransition()
 {
-	opening = false;
+	animating = false;
 	Listener = nullptr;
-	location = 0;
+	animationPosition = 0;
+	animationDirection = 0;
 	Width = SC_SCREEN_WIDTH;
 	Height = SC_SCREEN_HEIGHT;
-	Speed = 5;
+	Speed = 10;
 }
 
 ShutterTransition::~ShutterTransition()
 {
 }
 
+void ShutterTransition::TransitionIn()
+{
+	Open();
+}
+
+void ShutterTransition::TransitionOut()
+{
+	Close();
+}
+
+bool ShutterTransition::TransitionAnimationEnded()
+{
+	return !animating;
+}
+
 void ShutterTransition::Render(SDL_Renderer* renderer, SDL_Rect& rect)
 {
-	if (opening)
+	if (animating)
+		animationPosition += animationDirection;
+	int horizontalAnimationPosition = animationPosition * Speed;
+	int verticalAnimationPosition = animationPosition * ((float)Speed / ((float)SC_SCREEN_WIDTH / (float)SC_SCREEN_HEIGHT));
+	if (horizontalAnimationPosition < 0)
+		horizontalAnimationPosition = 0;
+	if (verticalAnimationPosition < 0)
+		verticalAnimationPosition = 0;
+	bool animationFinished = false;
+	if (animationDirection > 0)
+		animationFinished = horizontalAnimationPosition > SC_SCREEN_WIDTH / 2 && verticalAnimationPosition > SC_SCREEN_HEIGHT / 2;
+	else
+		animationFinished = horizontalAnimationPosition == 0 && verticalAnimationPosition == 0;
+	if (animating && animationFinished)
 	{
-		location += Speed;
-		if (location > SC_SCREEN_WIDTH / 2)
-		{
-			if (Listener != nullptr)
-				Listener->OnAnimationEnded(this);
-			opening = false;
-		}
+		if (Listener != nullptr)
+			Listener->OnAnimationEnded(this);
+		animating = false;
 	}
 	int w = SC_SCREEN_WIDTH / 2;
 	int h = SC_SCREEN_HEIGHT / 2;
-	int x1 = w + location;
-	int x2 = -location;
-	int y1 = h + location;
-	int y2 = -location;
+	int x1 = w + horizontalAnimationPosition;
+	int x2 = -horizontalAnimationPosition;
+	int y1 = h + verticalAnimationPosition;
+	int y2 = -verticalAnimationPosition;
 	DrawBlackRect(renderer, x1, 0, w, SC_SCREEN_HEIGHT);
 	DrawBlackRect(renderer, x2, 0, w, SC_SCREEN_HEIGHT);
 	DrawBlackRect(renderer, 0, y1, SC_SCREEN_WIDTH, h);
@@ -43,8 +68,16 @@ void ShutterTransition::Render(SDL_Renderer* renderer, SDL_Rect& rect)
 
 void ShutterTransition::Open()
 {
-	location = 0;
-	opening = true;
+	animationPosition = 0;
+	animationDirection = 1;
+	animating = true;
+}
+
+void ShutterTransition::Close()
+{
+	animationPosition = (SC_SCREEN_WIDTH / 2) / Speed;
+	animationDirection = -1;
+	animating = true;
 }
 
 void ShutterTransition::DrawBlackRect(SDL_Renderer* renderer, int x, int y, int w, int h)

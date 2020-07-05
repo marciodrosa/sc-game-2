@@ -18,7 +18,7 @@ IntroModule::~IntroModule()
 {
 }
 
-void IntroModule::Start(GameState& state)
+void IntroModule::Start(GameState& state, ModuleResult& result)
 {
 	stringstream ss;
 	ss << "É chegado o momento em que a escolha mais "

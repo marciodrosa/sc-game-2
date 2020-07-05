@@ -10,7 +10,7 @@ namespace sc
 	class GameModule
 	{
 	public:
-		virtual void Start(GameState& state) = 0;
+		virtual void Start(GameState& state, ModuleResult& result) = 0;
 		virtual void Update(GameState& state, ModuleResult& result) = 0;
 		virtual void Render(GameState& state, SDL_Renderer* renderer) = 0;
 		virtual void Finish(GameState& state) = 0;

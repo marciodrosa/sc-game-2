@@ -16,7 +16,7 @@ ExtraModule::~ExtraModule()
 {
 }
 
-void ExtraModule::Start(GameState& state)
+void ExtraModule::Start(GameState& state, ModuleResult& result)
 {
 	text.SetText("EXTRA x1", 20);
 	hands.Left = true;
