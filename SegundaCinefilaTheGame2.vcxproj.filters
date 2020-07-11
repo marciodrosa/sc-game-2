@@ -99,6 +99,9 @@
     <ClInclude Include="Source\Models\DialogueTree.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Modules\DialogueOptionSelectorModule.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\RenderElements\RenderElement.cpp">
@@ -177,6 +180,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Models\DialogueTree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Modules\DialogueOptionSelectorModule.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

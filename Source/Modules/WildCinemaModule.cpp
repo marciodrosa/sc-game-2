@@ -50,7 +50,8 @@ void WildCinemaModule::HandleInput(GameState& state, SDL_KeyboardEvent& inputEve
 {
 	if (inputEvent.keysym.sym == SDLK_RETURN || inputEvent.keysym.sym == SDLK_KP_ENTER)
 	{
-		result.NextGameModule = new LukaModule("Miau. Seja bem vindo ao CINELUKA. O meu nome é Luka e eu sou uma gata. Qual é o seu nome, forasteiro?");
+		state.CurrentDialogue = DialogueTree::InitialDialogueTree();
+		result.NextGameModule = new LukaModule();
 		result.Transition = new StripesTransition;
 	}
 }

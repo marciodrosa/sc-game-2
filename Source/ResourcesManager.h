@@ -5,6 +5,7 @@
 #include <map>
 #include "Models/Character.h"
 #include "Models/Movie.h"
+#include "RenderElements/Sprite.h"
 
 namespace sc
 {
@@ -18,13 +19,11 @@ namespace sc
 		static ResourcesManager* Get();
 		static void Release();
 		void LoadResources();
+		Sprite HandSprite;
 		SDL_Surface* GetMovieImage(MovieId id);
 		SDL_Surface* GetCharacterImage(CharacterId id);
 		SDL_Surface* GetCharacterSmallImage(CharacterId id);
 		SDL_Surface* CharacterCursorImage;
-		SDL_Surface* HandRightImage;
-		SDL_Surface* HandLeftImage;
-		SDL_Surface* HandOkImage;
 		Mix_Chunk* NavigateSound;
 		Mix_Chunk* SelectSound;
 		Mix_Chunk* EnterSound;

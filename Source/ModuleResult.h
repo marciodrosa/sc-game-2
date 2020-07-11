@@ -11,6 +11,7 @@ namespace sc
 	public:
 		ModuleResult();
 		GameModule* NextGameModule;
+		GameModule* SubModule;
 		ModuleTransition* Transition;
 		bool FinishModule;
 		bool DisableInput;

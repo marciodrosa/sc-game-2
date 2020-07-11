@@ -21,7 +21,7 @@ DialogueLine::DialogueLine(CharacterId character, std::string text, std::string 
 	this->NextDialoguesKeys.push_back(next);
 }
 
-DialogueTree DialogueTree::CreateInitialDialogueTree()
+DialogueTree DialogueTree::InitialDialogueTree()
 {
 	DialogueTree Tree;
 	Tree.FirstLineKey = "luka.welcome";

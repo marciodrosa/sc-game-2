@@ -9,9 +9,6 @@ ResourcesManager* ResourcesManager::singleton = nullptr;
 ResourcesManager::ResourcesManager()
 {
 	CharacterCursorImage = nullptr;
-	HandRightImage = nullptr;
-	HandLeftImage = nullptr;
-	HandOkImage = nullptr;
 	NavigateSound = nullptr;
 	SelectSound = nullptr;
 }
@@ -31,9 +28,6 @@ ResourcesManager::~ResourcesManager()
 		SDL_FreeSurface(element.second);
 	}
 	SDL_FreeSurface(CharacterCursorImage);
-	SDL_FreeSurface(HandRightImage);
-	SDL_FreeSurface(HandLeftImage);
-	SDL_FreeSurface(HandOkImage);
 	Mix_FreeChunk(NavigateSound);
 	Mix_FreeChunk(SelectSound);
 	Mix_FreeChunk(EnterSound);
@@ -58,6 +52,9 @@ void ResourcesManager::Release()
 
 void ResourcesManager::LoadResources()
 {
+	HandSprite.LoadContentFromFile("Images/Hand.png");
+	HandSprite.CenterPivot();
+	HandSprite.RightPivot();
 	moviesImages[MovieId::DESTACAMENTO_BLOOD] = IMG_Load("Images/DestacamentoBlood.png");
 	moviesImages[MovieId::UM_PEQUENO_FAVOR] = IMG_Load("Images/UmPequenoFavor.png");
 	moviesImages[MovieId::NASCIDO_EM_4_DE_JULHO] = IMG_Load("Images/NascidoEm4DeJulho.png");
@@ -65,9 +62,6 @@ void ResourcesManager::LoadResources()
 	moviesImages[MovieId::PSICOPATA_AMERICANO] = IMG_Load("Images/PsicopataAmericano.png");
 	moviesImages[MovieId::EMBRIAGADO_DE_AMOR] = IMG_Load("Images/EmbriagadoDeAmor.png");
 	CharacterCursorImage = IMG_Load("Images/CharacterCursor.png");
-	HandRightImage = IMG_Load("Images/HandRight.png");
-	HandLeftImage = IMG_Load("Images/HandLeft.png");
-	HandOkImage = IMG_Load("Images/HandOk.png");
 	NavigateSound = Mix_LoadWAV("Audio/Navigate1.wav");
 	SelectSound = Mix_LoadWAV("Audio/Select.wav");
 	EnterSound = Mix_LoadWAV("Audio/Enter.wav");

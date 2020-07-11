@@ -22,12 +22,14 @@ namespace sc
 	private:
 		GameState* gameState;
 		GameModule* gameModule;
+		GameModule* subModule;
 		SDL_Renderer* render;
 		bool running;
 		bool sdlInitiated;
 		bool moduleInputEnabled;
 		ModuleTransition* transition;
 		GameModule* pendingModuleAfterTransition;
+		void SetSubModule(GameModule* subModule);
 		void SetTransition(ModuleTransition* transition, bool in, GameModule* pendingModuleAfterTransition);
 		void ConfigureViewport(SDL_Window* window);
 		void Loop();

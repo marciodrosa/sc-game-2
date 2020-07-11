@@ -4,6 +4,7 @@
 #include <vector>
 #include "Character.h"
 #include "Movie.h"
+#include "DialogueTree.h"
 
 namespace sc
 {
@@ -18,5 +19,8 @@ namespace sc
 		int CurrentMovieIndex;
 		bool IsInModuleInTransition;
 		bool IsInModuleOutTransition;
+		DialogueTree CurrentDialogue;
+		std::string CurrentDialogueLineKey;
+		std::vector<std::string> DialogueOptions;
 	};
 }

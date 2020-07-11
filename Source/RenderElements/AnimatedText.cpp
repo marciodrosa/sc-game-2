@@ -12,6 +12,7 @@ AnimatedText::AnimatedText()
 	this->color.g = 255;
 	this->color.b = 255;
 	this->color.a = 255;
+	Listener = nullptr;
 }
 
 AnimatedText::~AnimatedText()

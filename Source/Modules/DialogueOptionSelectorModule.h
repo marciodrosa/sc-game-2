@@ -4,23 +4,25 @@
 #include "RenderElements/AnimatedText.h"
 #include "RenderElements/Sprite.h"
 #include <string>
+#include <vector>
 
 namespace sc
 {
-	/** Module with Luka talking. */
-	class LukaModule: public GameModule
+	/** Module used to select a dialogue option. */
+	class DialogueOptionSelectorModule : public GameModule
 	{
 	public:
-		LukaModule();
-		virtual ~LukaModule();
+		DialogueOptionSelectorModule();
+		virtual ~DialogueOptionSelectorModule();
 		void Start(GameState& state, ModuleResult& result) override;
 		void Update(GameState& state, ModuleResult& result) override;
 		void Render(GameState& state, SDL_Renderer* renderer) override;
 		void Finish(GameState& state) override;
 		void HandleInput(GameState& state, SDL_KeyboardEvent& inputEvent, ModuleResult& result) override;
 	private:
-		Sprite luka;
-		AnimatedText text;
-		void RefreshDialogueLine(GameState& state);
+		std::vector<AnimatedText> options;
+		Sprite* handSprite;
+		int GetIndexOfCurrentSelectedOption(GameState& state);
+		void SetIndexOfCurrentSelectedOption(GameState& state, int newIndex);
 	};
 }

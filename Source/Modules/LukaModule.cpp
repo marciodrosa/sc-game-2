@@ -1,4 +1,5 @@
 #include "LukaModule.h"
+#include "DialogueOptionSelectorModule.h"
 #include "Constants.h"
 #include "RenderElements/StripesTransition.h"
 #include <sstream>
@@ -6,18 +7,8 @@
 using namespace sc;
 using namespace std;
 
-LukaModule::LukaModule(string dialogue)
+LukaModule::LukaModule()
 {
-	this->dialogue = dialogue;
-
-	// Miau. Seja bem vindo ao CINELUKA. O meu nome é Luka e eu sou uma gata. Qual é o seu nome, forasteiro?
-
-	// GASP! Você é um humano, <nome>? Humanos não podem entrar no cinema, vocês estão em meio a uma pandemia!
-
-	// (Talvez vocês não tenham notado, mas nós, gatos, aproveitamos sua ausência e tomamos o cinema para nós. Não pegamos COVID-19, então tá sussa.)
-
-	// Uhmm, então você está preocupado com a SEGUNDA CINÉFILA? Ora, mas não seja por isso. Vamos fazer o seguinte, vou mostrar a você os filmes em cartaz
-	// e você e seus amigos votam nos preferidos. Então vocês assistem o filme em casa.
 }
 
 LukaModule::~LukaModule()
@@ -26,20 +17,31 @@ LukaModule::~LukaModule()
 
 void LukaModule::Start(GameState& state, ModuleResult& result)
 {
-	stringstream ss;
-	ss << "Luka: \"" << dialogue << "\"";
-	text.SetText(ss.str(), 10, 280);
-	text.SetAnimated();
+	RefreshDialogueLine(state);
 	luka.LoadContentFromFile("Images/Luka.png");
 	luka.CenterPivot();
 	luka.TopPivot();
-	text.CenterPivot();
-	text.TopPivot();
 	result.Transition = new StripesTransition;
 }
 
 void LukaModule::Update(GameState& state, ModuleResult& result)
 {
+	DialogueLine& currentDialogueLine = state.CurrentDialogue.Lines[state.CurrentDialogueLineKey];
+	if (currentDialogueLine.Character == CharacterId::PLAYER)
+		RefreshDialogueLine(state);
+	else if (!text.IsAnimating())
+	{
+		if (currentDialogueLine.NextDialoguesKeys.size() > 0)
+		{
+			bool isNextDialogueLineFromPlayer = state.CurrentDialogue.Lines[currentDialogueLine.NextDialoguesKeys[0]].Character == CharacterId::PLAYER;
+			if (isNextDialogueLineFromPlayer)
+			{
+				state.DialogueOptions = currentDialogueLine.NextDialoguesKeys;
+				state.CurrentDialogueLineKey = currentDialogueLine.NextDialoguesKeys[0];
+				result.SubModule = new DialogueOptionSelectorModule;
+			}
+		}
+	}
 }
 
 void LukaModule::Render(GameState& state, SDL_Renderer* renderer)
@@ -55,4 +57,44 @@ void LukaModule::Finish(GameState& state)
 
 void LukaModule::HandleInput(GameState& state, SDL_KeyboardEvent& inputEvent, ModuleResult& result)
 {
+	if (inputEvent.keysym.sym == SDLK_RETURN || inputEvent.keysym.sym == SDLK_KP_ENTER)
+	{
+		if (text.IsAnimating())
+			text.ForceFinishAnimation();
+		else
+		{
+			if (state.CurrentDialogueLineKey == "luka.theseAreTheMovies")
+				; // go to the movies module
+			else if (state.CurrentDialogueLineKey == "luka.shouldNotBeAProblem")
+				; // go to the extra movies
+			else if (state.CurrentDialogueLineKey == "luka.bye")
+				; // go to end
+		}
+	}
+}
+
+void LukaModule::RefreshDialogueLine(GameState& state)
+{
+	if (state.CurrentDialogueLineKey == "")
+		state.CurrentDialogueLineKey = state.CurrentDialogue.FirstLineKey;
+	DialogueLine* dialogueLine = &state.CurrentDialogue.Lines[state.CurrentDialogueLineKey];
+	if (dialogueLine->Character == CharacterId::PLAYER)
+	{
+		if (dialogueLine->NextDialoguesKeys.size() > 0)
+		{
+			string key = dialogueLine->NextDialoguesKeys[0];
+			dialogueLine = &state.CurrentDialogue.Lines[key];
+			if (dialogueLine->Character == CharacterId::LUKA)
+				state.CurrentDialogueLineKey = key;
+		}
+	}
+	if (dialogueLine->Character == CharacterId::LUKA)
+	{
+		stringstream ss;
+		ss << "LUKA:\n\"" << dialogueLine->Text << "\"";
+		text.SetText(ss.str(), 10, 280);
+		text.SetAnimated();
+		text.CenterPivot();
+		text.TopPivot();
+	}
 }

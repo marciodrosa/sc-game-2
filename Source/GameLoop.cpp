@@ -14,6 +14,7 @@ GameLoop::GameLoop(GameState& state)
 	sdlInitiated = false;
 	this->gameState = &state;
 	this->gameModule = nullptr;
+	this->subModule = nullptr;
 	this->running = false;
 	this->moduleInputEnabled = true;
 	this->transition = nullptr;
@@ -23,6 +24,7 @@ GameLoop::GameLoop(GameState& state)
 GameLoop::~GameLoop()
 {
 	SetModule(nullptr);
+	SetSubModule(nullptr);
 	SetTransition(nullptr, false, nullptr);
 	if (pendingModuleAfterTransition != nullptr)
 		delete pendingModuleAfterTransition;
@@ -32,7 +34,7 @@ GameLoop::~GameLoop()
 void GameLoop::Run()
 {
 	InitSDLAndResources();
-	SDL_Window* window = SDL_CreateWindow("Segunda Cinefila", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SC_SCREEN_WIDTH, SC_SCREEN_HEIGHT, SDL_WINDOW_FULLSCREEN);
+	SDL_Window* window = SDL_CreateWindow("Segunda Cinefila", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SC_SCREEN_WIDTH, SC_SCREEN_HEIGHT, 0);// SDL_WINDOW_FULLSCREEN);
 	SDL_ShowCursor(0);
 	render = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	ConfigureViewport(window);
@@ -46,6 +48,7 @@ void GameLoop::SetModule(GameModule* gameModule)
 {
 	if (this->gameModule != gameModule)
 	{
+		SetSubModule(nullptr);
 		InitSDLAndResources();
 		if (this->gameModule != nullptr)
 		{
@@ -58,6 +61,26 @@ void GameLoop::SetModule(GameModule* gameModule)
 		{
 			ModuleResult moduleResult;
 			this->gameModule->Start(*gameState, moduleResult);
+			HandleModuleResult(moduleResult);
+		}
+	}
+}
+
+void GameLoop::SetSubModule(GameModule* subModule)
+{
+	if (this->subModule != subModule)
+	{
+		if (this->subModule != nullptr)
+		{
+			this->subModule->Finish(*gameState);
+			delete this->subModule;
+		}
+		this->subModule = subModule;
+		moduleInputEnabled = true;
+		if (this->subModule != nullptr)
+		{
+			ModuleResult moduleResult;
+			this->subModule->Start(*gameState, moduleResult);
 			HandleModuleResult(moduleResult);
 		}
 	}
@@ -113,11 +136,17 @@ void GameLoop::LoopUpdate()
 	SDL_SetRenderDrawColor(render, 0, 0, 0, 255);
 	SDL_RenderClear(render);
 	PoolEvents();
-	if (gameModule != nullptr)
+	GameModule* moduleToUpdate = subModule != nullptr ? subModule : gameModule;
+	if (moduleToUpdate != nullptr)
 	{
 		ModuleResult moduleResult;
-		gameModule->Update(*gameState, moduleResult);
-		gameModule->Render(*gameState, render);
+		moduleToUpdate->Update(*gameState, moduleResult);
+		if (moduleToUpdate == subModule)
+		{
+			SDL_SetRenderDrawColor(render, 0, 0, 0, 255);
+			gameModule->Render(*gameState, render);
+		}
+		moduleToUpdate->Render(*gameState, render);
 		HandleModuleResult(moduleResult);
 		UpdateTransition();
 	}
@@ -171,7 +200,14 @@ void GameLoop::HandleModuleResult(ModuleResult& moduleResult)
 	else if (moduleResult.Transition != nullptr)
 		SetTransition(moduleResult.Transition, true, nullptr);
 	if (moduleResult.FinishModule)
-		running = false;
+	{
+		if (subModule != nullptr)
+			SetSubModule(nullptr);
+		else
+			running = false;
+	}
+	if (moduleResult.SubModule != nullptr && moduleResult.NextGameModule == nullptr)
+		SetSubModule(moduleResult.SubModule);
 }
 
 void GameLoop::PoolEvents()
@@ -183,10 +219,11 @@ void GameLoop::PoolEvents()
 			running = false;
 		else if (event.type == SDL_KEYDOWN)
 		{
-			if (gameModule != nullptr && moduleInputEnabled && transition == nullptr)
+			GameModule* moduleToReceiveInput = subModule != nullptr ? subModule : gameModule;
+			if (moduleToReceiveInput != nullptr && moduleInputEnabled && transition == nullptr)
 			{
 				ModuleResult moduleResult;
-				gameModule->HandleInput(*gameState, event.key, moduleResult);
+				moduleToReceiveInput->HandleInput(*gameState, event.key, moduleResult);
 				HandleModuleResult(moduleResult);
 			}
 		}
