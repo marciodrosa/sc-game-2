@@ -8,11 +8,9 @@ namespace sc
 	/** Ids of the available characters. */
 	enum CharacterId
 	{
-		FELIPE,
-		JULIA,
-		MARCIO,
-		RAFA,
-		GABI
+		LUKA,
+		PLAYER,
+		UNKNOW,
 	};
 
 	/** Model class for a character. */
@@ -21,7 +19,6 @@ namespace sc
 	public:
 		CharacterId Id;
 		std::string Name;
-		std::string EndingLine;
 
 		static std::vector<Character> GetCharacters();
 	};

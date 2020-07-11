@@ -64,16 +64,6 @@ void ResourcesManager::LoadResources()
 	moviesImages[MovieId::PERSONAL_SHOPPER] = IMG_Load("Images/PersonalShopper.png");
 	moviesImages[MovieId::PSICOPATA_AMERICANO] = IMG_Load("Images/PsicopataAmericano.png");
 	moviesImages[MovieId::EMBRIAGADO_DE_AMOR] = IMG_Load("Images/EmbriagadoDeAmor.png");
-	charactersImages[CharacterId::FELIPE] = IMG_Load("Images/Felipe.png");
-	charactersImages[CharacterId::JULIA] = IMG_Load("Images/Julia.png");
-	charactersImages[CharacterId::MARCIO] = IMG_Load("Images/Marcio.png");
-	charactersImages[CharacterId::RAFA] = IMG_Load("Images/Rafa.png");
-	charactersImages[CharacterId::GABI] = IMG_Load("Images/Gabi.png");
-	smallCharactersImages[CharacterId::FELIPE] = IMG_Load("Images/FelipeSmall.png");
-	smallCharactersImages[CharacterId::JULIA] = IMG_Load("Images/JuliaSmall.png");
-	smallCharactersImages[CharacterId::MARCIO] = IMG_Load("Images/MarcioSmall.png");
-	smallCharactersImages[CharacterId::RAFA] = IMG_Load("Images/RafaSmall.png");
-	smallCharactersImages[CharacterId::GABI] = IMG_Load("Images/GabiSmall.png");
 	CharacterCursorImage = IMG_Load("Images/CharacterCursor.png");
 	HandRightImage = IMG_Load("Images/HandRight.png");
 	HandLeftImage = IMG_Load("Images/HandLeft.png");

@@ -96,6 +96,9 @@
     <ClInclude Include="Source\RenderElements\StripesTransition.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Models\DialogueTree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\RenderElements\RenderElement.cpp">
@@ -171,6 +174,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\RenderElements\StripesTransition.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Models\DialogueTree.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

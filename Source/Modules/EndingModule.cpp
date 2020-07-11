@@ -25,7 +25,6 @@ void EndingModule::Start(GameState& state, ModuleResult& result)
 	stringstream endingLabel;
 	stringstream characterLabel;
 	endingLabel << "E assim, com muita sabedoria, " << character.Name << " fez a escolha de seus filmes favoritos para a SEGUNDA CINÉFILA vindoura.";
-	characterLabel << '"' << character.EndingLine << '"';
 	mainLabelText.SetText(endingLabel.str(), 11, SC_SCREEN_WIDTH - 20);
 	characterLabelText.SetText(characterLabel.str(), 11, SC_SCREEN_WIDTH - 20);
 	theEndLabelText.SetText("FIM", 11, 0);

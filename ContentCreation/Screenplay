@@ -1,0 +1,37 @@
+
+
+
+
+> Luka: "Miau. Seja bem vindo ao CINELUKA. O meu nome é Luka e eu sou uma gata. Qual é o seu nome, forasteiro?"
+> Jogador: "Bem, o meu nome é..." (1)
+	> Insere o nome
+		> Luka: "GASP! Você é um humano?! Humanos não podem entrar no cinema. Vocês estão no meio de uma pandemia!"
+		"Nós, gatos, tomamos a administração dos cinemas enquanto vocês estão fora. Só gatos podem entrar, nós não pegamos COVID-19."
+		"Nem humanos, nem cachorros são permitidos. Tirando o Joey. O Joey é legal."
+		"Tentamos permitir porquinhos da Índia uma vez, mas alguns bichos tentaram fazer outros bichos de lancho. Não deu certo."
+			> Jogador: "E agora, a Segunda Cinéfila está chegando. Como vamos assistir ao filme da semana?" (2)
+				> Luka: "Tenho uma ideia. Vou mostrar a você a programação da semana."
+				"Então você e seus amigos podem votar no filme preferido e assistir no conforto do lar."
+				"Eu mesmo estarei lá talvez, assistindo o filme da minha maneira preferida (dormindo)."
+				"O tema da semana é: FILMES COM GATOS... é o tema de todas as semanas aqui no CINELUKA, na verdade."
+				"A seleção de filmes é a seguinte:"
+			> Jogador: "Eu não sou um humano! Eu sou um gato! Miau, Miau."
+				> Luka: "Você não me engana, humano. <NOME> é nome de gente."
+					> 2
+> Jogador: "Não te interessa o meu nome!"
+	> Luka: "FFFSSST!! Que rude! Sinto muito, mas você não pode passar enquanto não me disser o seu nome."
+		> 1
+
+
+> Luka: "Epa! Ringo, o projecionista, acaba de me informar que há um filme extra."
+"Esse filme, porém, não está disponível no país por meios legais."
+"Então alguém tem que se disponibilizar para baixar da DEEP WEB ou coisa parecida."
+"O que não deve ser um problema para vocês, humanos, que fazem coisas bem piores. Como passar cheque sem fundo etc."
+
+
+> Luka: "Agora que eu apresentei a você os filmes selecionados, gostaria de computar os votos dos seus favoritos e enviar pelo sistema GATOWEB?"
+	> Jogador: "Sim, gostaria de votar agora."
+	> Jogador: "Primeiro eu gostaria de rever a apresentação dos filmes."
+	> Jogador: "Não, vou votar outra hora."
+
+> Luka: "Muito obrigada por nos visitar e bons filmes (em casa)!"
