@@ -24,6 +24,7 @@ namespace sc
 		std::string FirstLineKey;
 		std::map<std::string, DialogueLine> Lines;
 		static DialogueTree InitialDialogueTree();
+		static DialogueTree AfterNameDialogueTree();
 		static DialogueTree ExtraMovieDialogueTree();
 		static DialogueTree VotingDialogueTree();
 		static DialogueTree EndingDialogueTree();

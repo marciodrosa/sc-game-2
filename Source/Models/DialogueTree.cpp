@@ -33,6 +33,13 @@ DialogueTree DialogueTree::InitialDialogueTree()
 	Tree.Lines["luka.howHude"] = DialogueLine(CharacterId::LUKA, "FFFSSST!! Que rude! Sinto muito, mas você não pode passar enquanto não me disser o seu nome.");
 	Tree.Lines["luka.howHude"].NextDialoguesKeys.push_back("player.myNameIs");
 	Tree.Lines["luka.howHude"].NextDialoguesKeys.push_back("player.willNotTellYou");
+	return Tree;
+}
+
+DialogueTree DialogueTree::AfterNameDialogueTree()
+{
+	DialogueTree Tree;
+	Tree.FirstLineKey = "luka.youAreAHuman";
 	Tree.Lines["luka.youAreAHuman"] = DialogueLine(CharacterId::LUKA, "GASP! Você é um humano?! Humanos não podem entrar no cinema. Vocês estão no meio de uma pandemia!", "luka.onlyCatsCanGetIn");
 	Tree.Lines["luka.onlyCatsCanGetIn"] = DialogueLine(CharacterId::LUKA, "Nós, gatos, tomamos a administração dos cinemas enquanto vocês estão fora. Só gatos podem entrar, nós não pegamos COVID-19.", "luka.humansAndDogsCantGetIn");
 	Tree.Lines["luka.humansAndDogsCantGetIn"] = DialogueLine(CharacterId::LUKA, "Nem humanos, nem cachorros são permitidos. Exceto o Joey. O Joey é legal.", "luka.guineaPigNotAllowed");

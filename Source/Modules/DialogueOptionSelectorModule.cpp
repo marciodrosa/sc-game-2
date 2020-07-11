@@ -2,6 +2,8 @@
 #include "Constants.h"
 #include "RenderElements/StripesTransition.h"
 #include "ResourcesManager.h"
+#include "EnterNameModule.h"
+#include "RenderElements/StripesTransition.h"
 #include <sstream>
 
 using namespace sc;
@@ -62,7 +64,13 @@ void DialogueOptionSelectorModule::HandleInput(GameState& state, SDL_KeyboardEve
 		SetIndexOfCurrentSelectedOption(state, GetIndexOfCurrentSelectedOption(state) + 1);
 	else if (inputEvent.keysym.sym == SDLK_RETURN || inputEvent.keysym.sym == SDLK_KP_ENTER)
 	{
-		result.FinishModule = true;
+		if (state.CurrentDialogueLineKey == "player.myNameIs")
+		{
+			result.NextGameModule = new EnterNameModule;
+			result.Transition = new StripesTransition;
+		}
+		else
+			result.FinishModule = true;
 	}
 }
 

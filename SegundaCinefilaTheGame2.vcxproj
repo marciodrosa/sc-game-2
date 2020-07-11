@@ -29,6 +29,7 @@
     <ClInclude Include="Source\ModuleResult.h" />
     <ClInclude Include="Source\Modules\DialogueOptionSelectorModule.h" />
     <ClInclude Include="Source\Modules\EndingModule.h" />
+    <ClInclude Include="Source\Modules\EnterNameModule.h" />
     <ClInclude Include="Source\Modules\ExtraModule.h" />
     <ClInclude Include="Source\Modules\IntroModule.h" />
     <ClInclude Include="Source\Modules\LukaModule.h" />
@@ -59,6 +60,7 @@
     <ClCompile Include="Source\ModuleResult.cpp" />
     <ClCompile Include="Source\Modules\DialogueOptionSelectorModule.cpp" />
     <ClCompile Include="Source\Modules\EndingModule.cpp" />
+    <ClCompile Include="Source\Modules\EnterNameModule.cpp" />
     <ClCompile Include="Source\Modules\ExtraModule.cpp" />
     <ClCompile Include="Source\Modules\IntroModule.cpp" />
     <ClCompile Include="Source\Modules\LukaModule.cpp" />

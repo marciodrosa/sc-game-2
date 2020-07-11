@@ -1,7 +1,7 @@
 #include "LukaModule.h"
-#include "DialogueOptionSelectorModule.h"
 #include "Constants.h"
 #include "RenderElements/StripesTransition.h"
+#include "DialogueOptionSelectorModule.h"
 #include <sstream>
 
 using namespace sc;
@@ -69,6 +69,15 @@ void LukaModule::HandleInput(GameState& state, SDL_KeyboardEvent& inputEvent, Mo
 				; // go to the extra movies
 			else if (state.CurrentDialogueLineKey == "luka.bye")
 				; // go to end
+			else
+			{
+				DialogueLine& currentDialogueLine = state.CurrentDialogue.Lines[state.CurrentDialogueLineKey];
+				if (currentDialogueLine.NextDialoguesKeys.size() == 1 && state.CurrentDialogue.Lines[currentDialogueLine.NextDialoguesKeys[0]].Character == CharacterId::LUKA)
+				{
+					state.CurrentDialogueLineKey = currentDialogueLine.NextDialoguesKeys[0];
+					RefreshDialogueLine(state);
+				}
+			}
 		}
 	}
 }
