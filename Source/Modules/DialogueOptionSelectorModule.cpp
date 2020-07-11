@@ -22,8 +22,10 @@ void DialogueOptionSelectorModule::Start(GameState& state, ModuleResult& result)
 		DialogueLine& line = state.CurrentDialogue.Lines[key];
 		if (line.Character == CharacterId::PLAYER)
 		{
+			stringstream ss;
+			ss << '"' << line.Text << '"';
 			options.push_back(AnimatedText());
-			options.back().SetText(line.Text, 11);
+			options.back().SetText(ss.str(), 11);
 			options.back().CenterPivot();
 			options.back().LeftPivot();
 		}
