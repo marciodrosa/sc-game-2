@@ -6,7 +6,8 @@ using namespace sc;
 
 BlinkingBackground::BlinkingBackground()
 {
-
+	Width = SC_SCREEN_WIDTH;
+	Height = SC_SCREEN_HEIGHT;
 }
 
 BlinkingBackground::~BlinkingBackground()
@@ -14,15 +15,10 @@ BlinkingBackground::~BlinkingBackground()
 
 }
 
-void BlinkingBackground::Render(SDL_Renderer* render)
+void BlinkingBackground::Render(SDL_Renderer* renderer, SDL_Rect& rect)
 {
-	SDL_SetRenderDrawColor(render, RandomComponent(), RandomComponent(), RandomComponent(), 255);
-	SDL_Rect rect;
-	rect.x = 0;
-	rect.y = 0;
-	rect.w = SC_SCREEN_WIDTH;
-	rect.h = SC_SCREEN_HEIGHT;
-	SDL_RenderFillRect(render, &rect);
+	SDL_SetRenderDrawColor(renderer, RandomComponent(), RandomComponent(), RandomComponent(), 255);
+	SDL_RenderFillRect(renderer, &rect);
 }
 
 int BlinkingBackground::RandomComponent()

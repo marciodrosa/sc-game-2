@@ -52,7 +52,7 @@ DialogueTree DialogueTree::AfterNameDialogueTree()
 	Tree.Lines["luka.youCantFoolMe"] = DialogueLine(CharacterId::LUKA, "Você não me engana, humano. Você tem nome de gente.");
 	Tree.Lines["luka.youCantFoolMe"].NextDialoguesKeys.push_back("player.whatNow");
 	Tree.Lines["luka.youCantFoolMe"].NextDialoguesKeys.push_back("player.IAmACat");
-	Tree.Lines["player.whatNow"] = DialogueLine(CharacterId::PLAYER, "E agora? A Segunda Cinéfila está chegando. Como vamos assistir ao filme da semana?", "luka.IHaveAnIdea");
+	Tree.Lines["player.whatNow"] = DialogueLine(CharacterId::PLAYER, "E agora? A Segunda Cinéfila está chegando...", "luka.IHaveAnIdea");
 	Tree.Lines["luka.IHaveAnIdea"] = DialogueLine(CharacterId::LUKA, "Tenho uma ideia. Vou mostrar a você a programação da semana.", "luka.watchItFromHome");
 	Tree.Lines["luka.watchItFromHome"] = DialogueLine(CharacterId::LUKA, "Então você e seus amigos podem votar no filme preferido e assistir no conforto do lar.", "luka.IWillBeThereToo");
 	Tree.Lines["luka.IWillBeThereToo"] = DialogueLine(CharacterId::LUKA, "Eu mesmo estarei lá talvez, assistindo o filme da minha maneira preferida (dormindo).", "luka.themeOfTheWeek");
@@ -64,20 +64,22 @@ DialogueTree DialogueTree::AfterNameDialogueTree()
 DialogueTree DialogueTree::ExtraMovieDialogueTree()
 {
 	DialogueTree Tree;
-	Tree.FirstLineKey = "luka.extraMovie";
-	Tree.CurrentDialogueLineKey = "luka.extraMovie";
-	Tree.Lines["luka.extraMovie"] = DialogueLine(CharacterId::LUKA, "Epa! Ringo, o projecionista, acaba de me informar que há um filme extra.", "luka.notAvailableInLegalMeans");
-	Tree.Lines["luka.notAvailableInLegalMeans"] = DialogueLine(CharacterId::LUKA, "Esse filme, porém, não está disponível no país por meios legais.", "luka.someoneNeedsToDownloadTheMovie");
-	Tree.Lines["luka.someoneNeedsToDownloadTheMovie"] = DialogueLine(CharacterId::LUKA, "Então alguém tem que se disponibilizar para baixar da DEEP WEB ou coisa parecida.", "luka.shouldNotBeAProblem");
-	Tree.Lines["luka.shouldNotBeAProblem"] = DialogueLine(CharacterId::LUKA, "O que não deve ser um problema para vocês, humanos, que fazem coisas bem piores. Como passar cheque sem fundo etc.");
+	Tree.FirstLineKey = "ringo.extraMovie";
+	Tree.CurrentDialogueLineKey = "ringo.extraMovie";
+	Tree.Lines["ringo.extraMovie"] = DialogueLine(CharacterId::RINGO, "Olá. Eu sou Ringo, o projecionista. Desci aqui para informá-lo que, além da programação normal, há um filme extra.", "ringo.notAvailableInLegalMeans");
+	Tree.Lines["ringo.notAvailableInLegalMeans"] = DialogueLine(CharacterId::RINGO, "Esse filme, porém, não está disponível no país por meios legais.", "ringo.someoneNeedsToDownloadTheMovie");
+	Tree.Lines["ringo.someoneNeedsToDownloadTheMovie"] = DialogueLine(CharacterId::RINGO, "Então alguém tem que se disponibilizar para baixar da DEEP WEB ou coisa parecida.", "ringo.shouldNotBeAProblem");
+	Tree.Lines["ringo.shouldNotBeAProblem"] = DialogueLine(CharacterId::RINGO, "O que não deve ser um problema para vocês, humanos, que fazem coisas bem mais moralmente duvidosas. Como passar cheque sem fundo etc.", "ringo.thisIsTheMovie");
+	Tree.Lines["ringo.thisIsTheMovie"] = DialogueLine(CharacterId::RINGO, "O filme é o seguinte:");
 	return Tree;
 }
 
 DialogueTree DialogueTree::VotingDialogueTree()
 {
 	DialogueTree Tree;
-	Tree.FirstLineKey = "luka.doYouWantToVote";
-	Tree.CurrentDialogueLineKey = "luka.doYouWantToVote";
+	Tree.FirstLineKey = "luka.seeOnlyMoviesWithCats";
+	Tree.CurrentDialogueLineKey = "luka.seeOnlyMoviesWithCats";
+	Tree.Lines["luka.seeOnlyMoviesWithCats"] = DialogueLine(CharacterId::LUKA, "Viu? Apenas filmes com gatos. Robert Pattinson, Ana de Armas etc.", "luka.doYouWantToVote");
 	Tree.Lines["luka.doYouWantToVote"] = DialogueLine(CharacterId::LUKA, "Agora que eu apresentei a você os filmes selecionados, gostaria de computar os votos dos seus favoritos e enviar pelo sistema GATOWEB?");
 	Tree.Lines["luka.doYouWantToVote"].NextDialoguesKeys.push_back("player.yes");
 	Tree.Lines["luka.doYouWantToVote"].NextDialoguesKeys.push_back("player.reviewMovies");

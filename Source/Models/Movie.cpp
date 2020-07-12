@@ -33,7 +33,7 @@ vector<Movie> Movie::GetMovies()
 	waspNetwork.Country = "França, Brasil, Espanha, Bélgica";
 	waspNetwork.Director = "Olivier Assayas";
 	waspNetwork.Stars = "Penelope Cruz, Ana de Armas, Wagner Moura";
-	waspNetwork.Synopsis = "Piloto cubano deixa a família na ilha comunista, desertando para os EUA e iniciando uma nova vida. Mas René não é o ambicioso empreendedor que aparenta ser.";
+	waspNetwork.Synopsis = "Piloto cubano deixa a família em Cuba, desertando para os EUA. Mas ele não é o ambicioso empreendedor que aparenta ser.";
 	waspNetwork.Platform = "Netflix";
 	waspNetwork.Image = "Images/WaspNetwork.png";
 	result.push_back(waspNetwork);

@@ -8,4 +8,5 @@ GameState::GameState()
 	CurrentMovieIndex = 0;
 	IsInModuleInTransition = false;
 	IsInModuleOutTransition = false;
+	RingoAlreadyAppeared = false;
 }

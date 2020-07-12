@@ -11,6 +11,8 @@ namespace sc
 	/** Text that can be render in the screen and animated to show one character each frame. */
 	class AnimatedText: public RenderElement
 	{
+	private:
+		AnimatedText(const AnimatedText& other);
 	public:
 		AnimatedText();
 		virtual ~AnimatedText();

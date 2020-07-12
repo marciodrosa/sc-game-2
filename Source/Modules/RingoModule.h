@@ -1,28 +1,28 @@
 #pragma once
 
 #include "GameModule.h"
-#include "RenderElements/BlinkingBackground.h"
 #include "RenderElements/AnimatedText.h"
-#include <SDL.h>
-#include <SDL_ttf.h>
-#include <vector>
+#include "RenderElements/Sprite.h"
+#include "RenderElements/BlinkingBackground.h"
+#include <string>
 
 namespace sc
 {
-	/** Module that shows a EXTRA exclamation in the screen. */
-	class ExtraModule : public GameModule
+	/** Module with Ringo talking. */
+	class RingoModule : public GameModule
 	{
 	public:
-		ExtraModule();
-		virtual ~ExtraModule();
+		RingoModule();
+		virtual ~RingoModule();
 		void Start(GameState& state, ModuleResult& result) override;
 		void Update(GameState& state, ModuleResult& result) override;
 		void Render(GameState& state, SDL_Renderer* renderer) override;
 		void Finish(GameState& state) override;
 		void HandleInput(GameState& state, SDL_KeyboardEvent& inputEvent, ModuleResult& result) override;
-
 	private:
+		BlinkingBackground background;
+		Sprite ringo;
 		AnimatedText text;
-		BlinkingBackground blinkingBackground;
+		void RefreshDialogueLine(GameState& state);
 	};
 }

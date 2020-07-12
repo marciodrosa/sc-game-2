@@ -23,5 +23,6 @@ namespace sc
 		std::vector<std::string> DialogueOptions;
 		std::vector<MovieId> AvailableMoviesToSelect;
 		std::vector<MovieId> SelectedMovies;
+		bool RingoAlreadyAppeared;
 	};
 }

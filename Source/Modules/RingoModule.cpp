@@ -1,33 +1,36 @@
-#include "LukaModule.h"
+#include "RingoModule.h"
 #include "MovieModule.h"
 #include "Constants.h"
-#include "MusicPlayer.h"
 #include "RenderElements/StripesTransition.h"
+#include "RenderElements/ShutterTransition.h"
 #include "DialogueOptionSelectorModule.h"
+#include "MusicPlayer.h"
 #include <sstream>
 
 using namespace sc;
 using namespace std;
 
-LukaModule::LukaModule()
+RingoModule::RingoModule()
 {
 }
 
-LukaModule::~LukaModule()
+RingoModule::~RingoModule()
 {
 }
 
-void LukaModule::Start(GameState& state, ModuleResult& result)
+void RingoModule::Start(GameState& state, ModuleResult& result)
 {
+	state.CurrentDialogue = DialogueTree::ExtraMovieDialogueTree();
 	RefreshDialogueLine(state);
-	luka.LoadContentFromFile("Images/Luka.png");
-	luka.CenterPivot();
-	luka.TopPivot();
-	result.Transition = new StripesTransition;
-	MusicPlayer::Get()->PlayGameMusic();
+	ringo.LoadContentFromFile("Images/Ringo.png");
+	ringo.CenterPivot();
+	ringo.TopPivot();
+	result.Transition = new ShutterTransition;
+	MusicPlayer::Get()->PlayExtraMusic();
+	state.RingoAlreadyAppeared = true;
 }
 
-void LukaModule::Update(GameState& state, ModuleResult& result)
+void RingoModule::Update(GameState& state, ModuleResult& result)
 {
 	DialogueLine& currentDialogueLine = state.CurrentDialogue.Lines[state.CurrentDialogue.CurrentDialogueLineKey];
 	if (currentDialogueLine.Character == CharacterId::PLAYER)
@@ -47,18 +50,19 @@ void LukaModule::Update(GameState& state, ModuleResult& result)
 	}
 }
 
-void LukaModule::Render(GameState& state, SDL_Renderer* renderer)
+void RingoModule::Render(GameState& state, SDL_Renderer* renderer)
 {
-	luka.RenderAt(renderer, SC_SCREEN_WIDTH / 2, 10);
+	background.RenderAt(renderer, 0, 0);
+	ringo.RenderAt(renderer, SC_SCREEN_WIDTH / 2, 10);
 	if (!state.IsInModuleInTransition)
-		text.RenderAt(renderer, SC_SCREEN_WIDTH / 2, luka.Height + 20);
+		text.RenderAt(renderer, SC_SCREEN_WIDTH / 2, ringo.Height + 20);
 }
 
-void LukaModule::Finish(GameState& state)
+void RingoModule::Finish(GameState& state)
 {
 }
 
-void LukaModule::HandleInput(GameState& state, SDL_KeyboardEvent& inputEvent, ModuleResult& result)
+void RingoModule::HandleInput(GameState& state, SDL_KeyboardEvent& inputEvent, ModuleResult& result)
 {
 	if (inputEvent.keysym.sym == SDLK_RETURN || inputEvent.keysym.sym == SDLK_KP_ENTER)
 	{
@@ -66,19 +70,15 @@ void LukaModule::HandleInput(GameState& state, SDL_KeyboardEvent& inputEvent, Mo
 			text.ForceFinishAnimation();
 		else
 		{
-			if (state.CurrentDialogue.CurrentDialogueLineKey == "luka.theseAreTheMovies")
+			if (state.CurrentDialogue.CurrentDialogueLineKey == "ringo.thisIsTheMovie")
 			{
 				result.NextGameModule = new MovieModule;
 				result.Transition = new StripesTransition;
 			}
-			else if (state.CurrentDialogue.CurrentDialogueLineKey == "luka.shouldNotBeAProblem")
-				; // go to the extra movies
-			else if (state.CurrentDialogue.CurrentDialogueLineKey == "luka.bye")
-				; // go to end
 			else
 			{
 				DialogueLine& currentDialogueLine = state.CurrentDialogue.Lines[state.CurrentDialogue.CurrentDialogueLineKey];
-				if (currentDialogueLine.NextDialoguesKeys.size() == 1 && state.CurrentDialogue.Lines[currentDialogueLine.NextDialoguesKeys[0]].Character == CharacterId::LUKA)
+				if (currentDialogueLine.NextDialoguesKeys.size() == 1 && state.CurrentDialogue.Lines[currentDialogueLine.NextDialoguesKeys[0]].Character == CharacterId::RINGO)
 				{
 					state.CurrentDialogue.CurrentDialogueLineKey = currentDialogueLine.NextDialoguesKeys[0];
 					RefreshDialogueLine(state);
@@ -88,7 +88,7 @@ void LukaModule::HandleInput(GameState& state, SDL_KeyboardEvent& inputEvent, Mo
 	}
 }
 
-void LukaModule::RefreshDialogueLine(GameState& state)
+void RingoModule::RefreshDialogueLine(GameState& state)
 {
 	DialogueLine* dialogueLine = &state.CurrentDialogue.Lines[state.CurrentDialogue.CurrentDialogueLineKey];
 	if (dialogueLine->Character == CharacterId::PLAYER)
@@ -97,14 +97,14 @@ void LukaModule::RefreshDialogueLine(GameState& state)
 		{
 			string key = dialogueLine->NextDialoguesKeys[0];
 			dialogueLine = &state.CurrentDialogue.Lines[key];
-			if (dialogueLine->Character == CharacterId::LUKA)
+			if (dialogueLine->Character == CharacterId::RINGO)
 				state.CurrentDialogue.CurrentDialogueLineKey = key;
 		}
 	}
-	if (dialogueLine->Character == CharacterId::LUKA)
+	if (dialogueLine->Character == CharacterId::RINGO)
 	{
 		stringstream ss;
-		ss << "LUKA:\n\"" << dialogueLine->Text << "\"";
+		ss << "RINGO:\n\"" << dialogueLine->Text << "\"";
 		text.SetText(ss.str(), 10, 280);
 		text.SetAnimated(true, 2);
 		text.CenterPivot();

@@ -20,7 +20,7 @@ namespace sc
 		void Finish(GameState& state) override;
 		void HandleInput(GameState& state, SDL_KeyboardEvent& inputEvent, ModuleResult& result) override;
 	private:
-		std::vector<AnimatedText> options;
+		std::vector<AnimatedText*> options;
 		Sprite* handSprite;
 		int GetIndexOfCurrentSelectedOption(GameState& state);
 		void SetIndexOfCurrentSelectedOption(GameState& state, int newIndex);

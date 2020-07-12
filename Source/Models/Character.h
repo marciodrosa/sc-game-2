@@ -9,6 +9,7 @@ namespace sc
 	enum CharacterId
 	{
 		LUKA,
+		RINGO,
 		PLAYER,
 		UNKNOW,
 	};

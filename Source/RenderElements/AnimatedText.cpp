@@ -2,6 +2,10 @@
 
 using namespace sc;
 
+AnimatedText::AnimatedText(const AnimatedText& other)
+{
+}
+
 AnimatedText::AnimatedText()
 {
 	this->textSurface = nullptr;
@@ -26,6 +30,7 @@ AnimatedText::~AnimatedText()
 void AnimatedText::SetText(std::string text, int fontSize, int width, int r, int g, int b)
 {
 	TTF_CloseFont(font);
+	font = nullptr;
 	this->color.r = r;
 	this->color.g = g;
 	this->color.b = b;

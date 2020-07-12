@@ -30,10 +30,10 @@
     <ClInclude Include="Source\Modules\DialogueOptionSelectorModule.h" />
     <ClInclude Include="Source\Modules\EndingModule.h" />
     <ClInclude Include="Source\Modules\EnterNameModule.h" />
-    <ClInclude Include="Source\Modules\ExtraModule.h" />
     <ClInclude Include="Source\Modules\IntroModule.h" />
     <ClInclude Include="Source\Modules\LukaModule.h" />
     <ClInclude Include="Source\Modules\MovieModule.h" />
+    <ClInclude Include="Source\Modules\RingoModule.h" />
     <ClInclude Include="Source\Modules\TitleModule.h" />
     <ClInclude Include="Source\Modules\WildCinemaModule.h" />
     <ClInclude Include="Source\MusicPlayer.h" />
@@ -60,10 +60,10 @@
     <ClCompile Include="Source\Modules\DialogueOptionSelectorModule.cpp" />
     <ClCompile Include="Source\Modules\EndingModule.cpp" />
     <ClCompile Include="Source\Modules\EnterNameModule.cpp" />
-    <ClCompile Include="Source\Modules\ExtraModule.cpp" />
     <ClCompile Include="Source\Modules\IntroModule.cpp" />
     <ClCompile Include="Source\Modules\LukaModule.cpp" />
     <ClCompile Include="Source\Modules\MovieModule.cpp" />
+    <ClCompile Include="Source\Modules\RingoModule.cpp" />
     <ClCompile Include="Source\Modules\TitleModule.cpp" />
     <ClCompile Include="Source\Modules\WildCinemaModule.cpp" />
     <ClCompile Include="Source\MusicPlayer.cpp" />

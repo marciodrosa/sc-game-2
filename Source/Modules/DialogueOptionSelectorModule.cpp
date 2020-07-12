@@ -15,6 +15,8 @@ DialogueOptionSelectorModule::DialogueOptionSelectorModule()
 
 DialogueOptionSelectorModule::~DialogueOptionSelectorModule()
 {
+	for (AnimatedText* text : options)
+		delete text;
 }
 
 void DialogueOptionSelectorModule::Start(GameState& state, ModuleResult& result)
@@ -26,10 +28,11 @@ void DialogueOptionSelectorModule::Start(GameState& state, ModuleResult& result)
 		{
 			stringstream ss;
 			ss << '"' << line.Text << '"';
-			options.push_back(AnimatedText());
-			options.back().SetText(ss.str(), 11);
-			options.back().CenterPivot();
-			options.back().LeftPivot();
+			AnimatedText* text = new AnimatedText();
+			text->SetText(ss.str(), 11);
+			text->CenterPivot();
+			text->LeftPivot();
+			options.push_back(text);
 		}
 	}
 	handSprite = &ResourcesManager::Get()->HandSprite;
@@ -44,11 +47,11 @@ void DialogueOptionSelectorModule::Render(GameState& state, SDL_Renderer* render
 	int y = SC_SCREEN_HEIGHT - 20;
 	for (int i = options.size() - 1; i >= 0; i--)
 	{
-		AnimatedText& option = options[i];
-		option.RenderAt(renderer, 30, y);
+		AnimatedText* option = options[i];
+		option->RenderAt(renderer, 30, y);
 		if (state.CurrentDialogue.CurrentDialogueLineKey == state.DialogueOptions[i])
 			handSprite->RenderAt(renderer, 25, y);
-		y -= option.Height;
+		y -= option->Height;
 	}
 }
 

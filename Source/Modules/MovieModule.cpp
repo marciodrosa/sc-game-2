@@ -2,8 +2,10 @@
 #include "Constants.h"
 #include "ResourcesManager.h"
 #include "EndingModule.h"
-#include "ExtraModule.h"
+#include "RingoModule.h"
+#include "LukaModule.h"
 #include "MusicPlayer.h"
+#include "RenderElements/ShutterTransition.h"
 #include <SDL_image.h>
 #include <SDL_mixer.h>
 
@@ -43,7 +45,7 @@ void MovieModule::Render(GameState& state, SDL_Renderer* renderer)
 {
 	Movie& movie = state.Movies[state.CurrentMovieIndex];
 	if (movie.IsExtra)
-		blinkingBackground.Render(renderer);
+		blinkingBackground.RenderAt(renderer, 0, 0);
 	movieImage.RenderAt(renderer, 10, SC_SCREEN_HEIGHT / 2);
 	text.RenderAt(renderer, movieImage.Width + 20, SC_SCREEN_HEIGHT / 2);
 }
@@ -65,12 +67,14 @@ void MovieModule::HandleInput(GameState& state, SDL_KeyboardEvent& inputEvent, M
 			if (state.CurrentMovieIndex >= state.Movies.size())
 			{
 				state.CurrentMovieIndex = state.Movies.size() - 1;
-				result.NextGameModule = new EndingModule;
+				state.CurrentDialogue = DialogueTree::VotingDialogueTree();
+				result.NextGameModule = new LukaModule;
+				result.Transition = new ShutterTransition;
 			}
 			else
 			{
-				if (state.Movies[state.CurrentMovieIndex].IsExtra)
-					result.NextGameModule = new ExtraModule;
+				if (state.Movies[state.CurrentMovieIndex].IsExtra && !state.RingoAlreadyAppeared)
+					result.NextGameModule = new RingoModule;
 				else
 					result.NextGameModule = new MovieModule;
 			}
