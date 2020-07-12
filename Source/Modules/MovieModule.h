@@ -15,7 +15,7 @@ namespace sc
 	class MovieModule : public GameModule, public AnimationListener
 	{
 	public:
-		MovieModule();
+		MovieModule(bool includeTransitionIn = false);
 		virtual ~MovieModule();
 		void Start(GameState& state, ModuleResult& result) override;
 		void Update(GameState& state, ModuleResult& result) override;
@@ -28,5 +28,6 @@ namespace sc
 		Sprite movieImage;
 		BlinkingBackground blinkingBackground;
 		AnimatedText text;
+		bool includeTransitionIn;
 	};
 }

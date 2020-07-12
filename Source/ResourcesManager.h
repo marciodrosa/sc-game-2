@@ -20,18 +20,12 @@ namespace sc
 		static void Release();
 		void LoadResources();
 		Sprite HandSprite;
-		SDL_Surface* GetMovieImage(MovieId id);
-		SDL_Surface* GetCharacterImage(CharacterId id);
-		SDL_Surface* GetCharacterSmallImage(CharacterId id);
 		Mix_Chunk* NavigateSound;
 		Mix_Chunk* SelectSound;
 		Mix_Chunk* EnterSound;
 		Mix_Chunk* StartSound;
 
 	private:
-		std::map<MovieId, SDL_Surface*> moviesImages;
-		std::map<CharacterId, SDL_Surface*> charactersImages;
-		std::map<CharacterId, SDL_Surface*> smallCharactersImages;
 		static ResourcesManager* singleton;
 	};
 }

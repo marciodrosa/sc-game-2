@@ -16,7 +16,10 @@ string Movie::GetFullDescription()
 	if (OriginalName.size() > 0)
 		ss << OriginalName << " - ";
 	ss << Country << " - " << Year << ")" << endl;
-	ss << "Dir. " << Director << ", com " << Stars << endl << endl << Synopsis;
+	ss << "Dir. " << Director;
+	if (Stars.size() > 0)
+		ss << ", com " << Stars;
+	ss << endl << endl << Synopsis;
 	if (Platform.size() > 0)
 		ss << endl << "(Disponível em: " << Platform << ")";
 	return ss.str();
@@ -46,7 +49,7 @@ vector<Movie> Movie::GetMovies()
 	oBarco.Country = "Alemanha";
 	oBarco.Director = "Wolfgang Petersen";
 	oBarco.Stars = "Jurgen Prochnow, Herbert Gronemeyer";
-	oBarco.Synopsis = "A perigosa viagem de ida e volta de uma embarcação alemã entre La Rochelle, na França ocupada, e a Espanha em 1941";
+	oBarco.Synopsis = "A perigosa viagem de ida e volta de uma embarcação alemã entre La Rochelle, na França ocupada, e a Espanha em 1941.";
 	oBarco.Platform = "Netflix";
 	oBarco.Image = "Images/OBarco.png";
 	result.push_back(oBarco);

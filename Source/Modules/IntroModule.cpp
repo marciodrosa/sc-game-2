@@ -42,7 +42,7 @@ void IntroModule::Update(GameState& state, ModuleResult& result)
 
 void IntroModule::Render(GameState& state, SDL_Renderer* renderer)
 {
-	SDL_SetRenderDrawColor(renderer, 0, 150, 0, 255);
+	SDL_SetRenderDrawColor(renderer, 0, 100, 0, 255);
 	SDL_RenderFillRect(renderer, nullptr);
 	if (!state.IsInModuleInTransition)
 	{

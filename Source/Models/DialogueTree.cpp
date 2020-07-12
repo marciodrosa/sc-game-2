@@ -66,7 +66,7 @@ DialogueTree DialogueTree::ExtraMovieDialogueTree()
 	DialogueTree Tree;
 	Tree.FirstLineKey = "ringo.extraMovie";
 	Tree.CurrentDialogueLineKey = "ringo.extraMovie";
-	Tree.Lines["ringo.extraMovie"] = DialogueLine(CharacterId::RINGO, "Olá. Eu sou Ringo, o projecionista. Desci aqui para informá-lo que, além da programação normal, há um filme extra.", "ringo.notAvailableInLegalMeans");
+	Tree.Lines["ringo.extraMovie"] = DialogueLine(CharacterId::RINGO, "Olá. Eu sou Ringo, o projecionista. Desci aqui para informá-lo que, além da programação normal, há um FILME EXTRA.", "ringo.notAvailableInLegalMeans");
 	Tree.Lines["ringo.notAvailableInLegalMeans"] = DialogueLine(CharacterId::RINGO, "Esse filme, porém, não está disponível no país por meios legais.", "ringo.someoneNeedsToDownloadTheMovie");
 	Tree.Lines["ringo.someoneNeedsToDownloadTheMovie"] = DialogueLine(CharacterId::RINGO, "Então alguém tem que se disponibilizar para baixar da DEEP WEB ou coisa parecida.", "ringo.shouldNotBeAProblem");
 	Tree.Lines["ringo.shouldNotBeAProblem"] = DialogueLine(CharacterId::RINGO, "O que não deve ser um problema para vocês, humanos, que fazem coisas bem mais moralmente duvidosas. Como passar cheque sem fundo etc.", "ringo.thisIsTheMovie");
@@ -81,12 +81,13 @@ DialogueTree DialogueTree::VotingDialogueTree()
 	Tree.CurrentDialogueLineKey = "luka.seeOnlyMoviesWithCats";
 	Tree.Lines["luka.seeOnlyMoviesWithCats"] = DialogueLine(CharacterId::LUKA, "Viu? Apenas filmes com gatos. Robert Pattinson, Ana de Armas etc.", "luka.doYouWantToVote");
 	Tree.Lines["luka.doYouWantToVote"] = DialogueLine(CharacterId::LUKA, "Agora que eu apresentei a você os filmes selecionados, gostaria de computar os votos dos seus favoritos e enviar pelo sistema GATOWEB?");
-	Tree.Lines["luka.doYouWantToVote"].NextDialoguesKeys.push_back("player.yes");
+	Tree.Lines["luka.doYouWantToVote"].NextDialoguesKeys.push_back("player.yesIWantToVoteNow");
 	Tree.Lines["luka.doYouWantToVote"].NextDialoguesKeys.push_back("player.reviewMovies");
-	Tree.Lines["luka.doYouWantToVote"].NextDialoguesKeys.push_back("player.no");
-	Tree.Lines["player.yes"] = DialogueLine(CharacterId::PLAYER, "Sim, gostaria de votar agora.");
+	Tree.Lines["luka.doYouWantToVote"].NextDialoguesKeys.push_back("player.noIDontWantToVote");
+	Tree.Lines["player.yesIWantToVoteNow"] = DialogueLine(CharacterId::PLAYER, "Sim, gostaria de votar agora.");
 	Tree.Lines["player.reviewMovies"] = DialogueLine(CharacterId::PLAYER, "Primeiro eu gostaria de rever a apresentação dos filmes.");
-	Tree.Lines["player.no"] = DialogueLine(CharacterId::PLAYER, "Não, vou votar outra hora.");
+	Tree.Lines["player.noIDontWantToVote"] = DialogueLine(CharacterId::PLAYER, "Não, vou votar outra hora.", "luka.byeWithoutVote");
+	Tree.Lines["luka.byeWithoutVote"] = DialogueLine(CharacterId::LUKA, "Ok, você pode jogar o game mais tarde e votar. Por hora, muito obrigada por nos visitar, mas agora vaza. Bons filmes (em casa)!");
 	return Tree;
 }
 

@@ -1,8 +1,11 @@
 #include "LukaModule.h"
 #include "MovieModule.h"
+#include "EndingModule.h"
 #include "Constants.h"
 #include "MusicPlayer.h"
 #include "RenderElements/StripesTransition.h"
+#include "RenderElements/BlindsTransition.h"
+#include "RenderElements/ShutterTransition.h"
 #include "DialogueOptionSelectorModule.h"
 #include <sstream>
 
@@ -68,13 +71,14 @@ void LukaModule::HandleInput(GameState& state, SDL_KeyboardEvent& inputEvent, Mo
 		{
 			if (state.CurrentDialogue.CurrentDialogueLineKey == "luka.theseAreTheMovies")
 			{
-				result.NextGameModule = new MovieModule;
-				result.Transition = new StripesTransition;
+				result.NextGameModule = new MovieModule(true);
+				result.Transition = new BlindsTransition;
 			}
-			else if (state.CurrentDialogue.CurrentDialogueLineKey == "luka.shouldNotBeAProblem")
-				; // go to the extra movies
-			else if (state.CurrentDialogue.CurrentDialogueLineKey == "luka.bye")
-				; // go to end
+			else if (state.CurrentDialogue.CurrentDialogueLineKey == "luka.bye" || state.CurrentDialogue.CurrentDialogueLineKey == "luka.byeWithoutVote")
+			{
+				result.NextGameModule = new EndingModule;
+				result.Transition = new ShutterTransition;
+			}
 			else
 			{
 				DialogueLine& currentDialogueLine = state.CurrentDialogue.Lines[state.CurrentDialogue.CurrentDialogueLineKey];

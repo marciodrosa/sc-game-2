@@ -72,7 +72,7 @@ void RingoModule::HandleInput(GameState& state, SDL_KeyboardEvent& inputEvent, M
 		{
 			if (state.CurrentDialogue.CurrentDialogueLineKey == "ringo.thisIsTheMovie")
 			{
-				result.NextGameModule = new MovieModule;
+				result.NextGameModule = new MovieModule(true);
 				result.Transition = new StripesTransition;
 			}
 			else

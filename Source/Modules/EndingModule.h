@@ -8,7 +8,7 @@
 
 namespace sc
 {
-	/** Ending module that shows the ending line of the selected character. */
+	/** Ending module with the "The End" label. */
 	class EndingModule : public GameModule
 	{
 	public:
@@ -21,9 +21,7 @@ namespace sc
 		void HandleInput(GameState& state, SDL_KeyboardEvent& inputEvent, ModuleResult& result) override;
 
 	private:
-		SDL_Texture* characterTexture;
-		AnimatedText mainLabelText;
-		AnimatedText characterLabelText;
 		AnimatedText theEndLabelText;
+		AnimatedText theEndLabelTextShadow;
 	};
 }

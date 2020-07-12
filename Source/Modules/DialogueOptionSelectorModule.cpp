@@ -1,9 +1,10 @@
 #include "DialogueOptionSelectorModule.h"
+#include "MovieModule.h"
 #include "Constants.h"
 #include "RenderElements/StripesTransition.h"
+#include "RenderElements/BlindsTransition.h"
 #include "ResourcesManager.h"
 #include "EnterNameModule.h"
-#include "RenderElements/StripesTransition.h"
 #include <sstream>
 
 using namespace sc;
@@ -70,7 +71,13 @@ void DialogueOptionSelectorModule::HandleInput(GameState& state, SDL_KeyboardEve
 		if (state.CurrentDialogue.CurrentDialogueLineKey == "player.myNameIs")
 		{
 			result.NextGameModule = new EnterNameModule;
-			result.Transition = new StripesTransition;
+			result.Transition = new BlindsTransition;
+		}
+		if (state.CurrentDialogue.CurrentDialogueLineKey == "player.reviewMovies")
+		{
+			state.CurrentMovieIndex = 0;
+			result.NextGameModule = new MovieModule(true);
+			result.Transition = new BlindsTransition;
 		}
 		else
 			result.FinishModule = true;

@@ -6,14 +6,16 @@
 #include "LukaModule.h"
 #include "MusicPlayer.h"
 #include "RenderElements/ShutterTransition.h"
+#include "RenderElements/BlindsTransition.h"
 #include <SDL_image.h>
 #include <SDL_mixer.h>
 
 using namespace std;
 using namespace sc;
 
-MovieModule::MovieModule()
+MovieModule::MovieModule(bool includeTransitionIn)
 {
+	this->includeTransitionIn = includeTransitionIn;
 }
 
 MovieModule::~MovieModule()
@@ -35,6 +37,8 @@ void MovieModule::Start(GameState& state, ModuleResult& result)
 		MusicPlayer::Get()->PlayExtraMusic();
 	else
 		MusicPlayer::Get()->PlayGameMusic();
+	if (includeTransitionIn)
+		result.Transition = new BlindsTransition;
 }
 
 void MovieModule::Update(GameState& state, ModuleResult& result)
