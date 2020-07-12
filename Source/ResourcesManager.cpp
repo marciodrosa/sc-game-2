@@ -8,7 +8,6 @@ ResourcesManager* ResourcesManager::singleton = nullptr;
 
 ResourcesManager::ResourcesManager()
 {
-	CharacterCursorImage = nullptr;
 	NavigateSound = nullptr;
 	SelectSound = nullptr;
 }
@@ -27,7 +26,6 @@ ResourcesManager::~ResourcesManager()
 	{
 		SDL_FreeSurface(element.second);
 	}
-	SDL_FreeSurface(CharacterCursorImage);
 	Mix_FreeChunk(NavigateSound);
 	Mix_FreeChunk(SelectSound);
 	Mix_FreeChunk(EnterSound);
@@ -55,13 +53,12 @@ void ResourcesManager::LoadResources()
 	HandSprite.LoadContentFromFile("Images/Hand.png");
 	HandSprite.CenterPivot();
 	HandSprite.RightPivot();
-	moviesImages[MovieId::DESTACAMENTO_BLOOD] = IMG_Load("Images/DestacamentoBlood.png");
-	moviesImages[MovieId::UM_PEQUENO_FAVOR] = IMG_Load("Images/UmPequenoFavor.png");
-	moviesImages[MovieId::NASCIDO_EM_4_DE_JULHO] = IMG_Load("Images/NascidoEm4DeJulho.png");
-	moviesImages[MovieId::PERSONAL_SHOPPER] = IMG_Load("Images/PersonalShopper.png");
-	moviesImages[MovieId::PSICOPATA_AMERICANO] = IMG_Load("Images/PsicopataAmericano.png");
-	moviesImages[MovieId::EMBRIAGADO_DE_AMOR] = IMG_Load("Images/EmbriagadoDeAmor.png");
-	CharacterCursorImage = IMG_Load("Images/CharacterCursor.png");
+	moviesImages[MovieId::WASP_NETWORK] = IMG_Load("Images/WaspNetwork.png");
+	moviesImages[MovieId::O_BARCO] = IMG_Load("Images/OBarco.png");
+	moviesImages[MovieId::AMANTES_ETERNOS] = IMG_Load("Images/AmantesEternos.png");
+	moviesImages[MovieId::EDIFICIO_MASTER] = IMG_Load("Images/EdificioMaster.png");
+	moviesImages[MovieId::LA_BAMBA] = IMG_Load("Images/LaBamba.png");
+	moviesImages[MovieId::HIGH_LIFE] = IMG_Load("Images/HighLife.png");
 	NavigateSound = Mix_LoadWAV("Audio/Navigate1.wav");
 	SelectSound = Mix_LoadWAV("Audio/Select.wav");
 	EnterSound = Mix_LoadWAV("Audio/Enter.wav");

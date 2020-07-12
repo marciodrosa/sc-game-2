@@ -12,19 +12,23 @@ using namespace sc;
 
 MovieModule::MovieModule()
 {
-	movieTexture = nullptr;
 }
 
 MovieModule::~MovieModule()
 {
-	SDL_DestroyTexture(movieTexture);
 }
 
 void MovieModule::Start(GameState& state, ModuleResult& result)
 {
 	Movie& movie = state.Movies[state.CurrentMovieIndex];
-	text.SetText(movie.GetFullDescription(), 11, 160, true, 1);
+	text.SetText(movie.GetFullDescription(), 11, 160);
+	text.SetAnimated();
 	text.Listener = this;
+	text.CenterPivot();
+	text.LeftPivot();
+	movieImage.LoadContentFromFile(movie.Image);
+	movieImage.CenterPivot();
+	movieImage.LeftPivot();
 	if (movie.IsExtra)
 		MusicPlayer::Get()->PlayExtraMusic();
 	else
@@ -40,16 +44,8 @@ void MovieModule::Render(GameState& state, SDL_Renderer* renderer)
 	Movie& movie = state.Movies[state.CurrentMovieIndex];
 	if (movie.IsExtra)
 		blinkingBackground.Render(renderer);
-	SDL_Surface* movieImage = ResourcesManager::Get()->GetMovieImage(movie.Id);
-	if (movieTexture == nullptr)
-		movieTexture = SDL_CreateTextureFromSurface(renderer, movieImage);
-	SDL_Rect destRect;
-	destRect.x = 10;
-	destRect.y = (SC_SCREEN_HEIGHT - movieImage->h) / 2;
-	destRect.w = movieImage->w;
-	destRect.h = movieImage->h;
-	SDL_RenderCopy(renderer, movieTexture, nullptr, &destRect);
-	text.RenderAt(renderer, destRect.x + destRect.w + 10, (SC_SCREEN_HEIGHT - text.Height) / 2);
+	movieImage.RenderAt(renderer, 10, SC_SCREEN_HEIGHT / 2);
+	text.RenderAt(renderer, movieImage.Width + 20, SC_SCREEN_HEIGHT / 2);
 }
 
 void MovieModule::Finish(GameState& state)

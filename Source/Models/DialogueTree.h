@@ -22,6 +22,7 @@ namespace sc
 	{
 	public:
 		std::string FirstLineKey;
+		std::string CurrentDialogueLineKey;
 		std::map<std::string, DialogueLine> Lines;
 		static DialogueTree InitialDialogueTree();
 		static DialogueTree AfterNameDialogueTree();

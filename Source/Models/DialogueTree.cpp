@@ -25,6 +25,7 @@ DialogueTree DialogueTree::InitialDialogueTree()
 {
 	DialogueTree Tree;
 	Tree.FirstLineKey = "luka.welcome";
+	Tree.CurrentDialogueLineKey = "luka.welcome";
 	Tree.Lines["luka.welcome"] = DialogueLine(CharacterId::LUKA, "Miau. Seja bem vindo ao CINELUKA. O meu nome é Luka e eu sou uma gata. Qual é o seu nome, forasteiro?");
 	Tree.Lines["luka.welcome"].NextDialoguesKeys.push_back("player.myNameIs");
 	Tree.Lines["luka.welcome"].NextDialoguesKeys.push_back("player.willNotTellYou");
@@ -40,6 +41,7 @@ DialogueTree DialogueTree::AfterNameDialogueTree()
 {
 	DialogueTree Tree;
 	Tree.FirstLineKey = "luka.youAreAHuman";
+	Tree.CurrentDialogueLineKey = "luka.youAreAHuman";
 	Tree.Lines["luka.youAreAHuman"] = DialogueLine(CharacterId::LUKA, "GASP! Você é um humano?! Humanos não podem entrar no cinema. Vocês estão no meio de uma pandemia!", "luka.onlyCatsCanGetIn");
 	Tree.Lines["luka.onlyCatsCanGetIn"] = DialogueLine(CharacterId::LUKA, "Nós, gatos, tomamos a administração dos cinemas enquanto vocês estão fora. Só gatos podem entrar, nós não pegamos COVID-19.", "luka.humansAndDogsCantGetIn");
 	Tree.Lines["luka.humansAndDogsCantGetIn"] = DialogueLine(CharacterId::LUKA, "Nem humanos, nem cachorros são permitidos. Exceto o Joey. O Joey é legal.", "luka.guineaPigNotAllowed");
@@ -63,6 +65,7 @@ DialogueTree DialogueTree::ExtraMovieDialogueTree()
 {
 	DialogueTree Tree;
 	Tree.FirstLineKey = "luka.extraMovie";
+	Tree.CurrentDialogueLineKey = "luka.extraMovie";
 	Tree.Lines["luka.extraMovie"] = DialogueLine(CharacterId::LUKA, "Epa! Ringo, o projecionista, acaba de me informar que há um filme extra.", "luka.notAvailableInLegalMeans");
 	Tree.Lines["luka.notAvailableInLegalMeans"] = DialogueLine(CharacterId::LUKA, "Esse filme, porém, não está disponível no país por meios legais.", "luka.someoneNeedsToDownloadTheMovie");
 	Tree.Lines["luka.someoneNeedsToDownloadTheMovie"] = DialogueLine(CharacterId::LUKA, "Então alguém tem que se disponibilizar para baixar da DEEP WEB ou coisa parecida.", "luka.shouldNotBeAProblem");
@@ -74,6 +77,7 @@ DialogueTree DialogueTree::VotingDialogueTree()
 {
 	DialogueTree Tree;
 	Tree.FirstLineKey = "luka.doYouWantToVote";
+	Tree.CurrentDialogueLineKey = "luka.doYouWantToVote";
 	Tree.Lines["luka.doYouWantToVote"] = DialogueLine(CharacterId::LUKA, "Agora que eu apresentei a você os filmes selecionados, gostaria de computar os votos dos seus favoritos e enviar pelo sistema GATOWEB?");
 	Tree.Lines["luka.doYouWantToVote"].NextDialoguesKeys.push_back("player.yes");
 	Tree.Lines["luka.doYouWantToVote"].NextDialoguesKeys.push_back("player.reviewMovies");
@@ -88,6 +92,7 @@ DialogueTree DialogueTree::EndingDialogueTree()
 {
 	DialogueTree Tree;
 	Tree.FirstLineKey = "luka.bye";
+	Tree.CurrentDialogueLineKey = "luka.bye";
 	Tree.Lines["luka.bye"] = DialogueLine(CharacterId::LUKA, "Muito obrigada por nos visitar, mas agora vaza. Bons filmes (em casa)!");
 	return Tree;
 }

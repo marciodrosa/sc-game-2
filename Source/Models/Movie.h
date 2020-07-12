@@ -8,12 +8,12 @@ namespace sc
 	/** Ids of the available movies. */
 	enum MovieId
 	{
-		DESTACAMENTO_BLOOD,
-		UM_PEQUENO_FAVOR,
-		PERSONAL_SHOPPER,
-		NASCIDO_EM_4_DE_JULHO,
-		PSICOPATA_AMERICANO,
-		EMBRIAGADO_DE_AMOR
+		WASP_NETWORK,
+		O_BARCO,
+		AMANTES_ETERNOS,
+		EDIFICIO_MASTER,
+		LA_BAMBA,
+		HIGH_LIFE
 	};
 
 	/** Movie model data. */
@@ -23,11 +23,14 @@ namespace sc
 		Movie();
 		MovieId Id;
 		std::string Name;
+		std::string OriginalName;
 		std::string Year;
+		std::string Country;
 		std::string Director;
 		std::string Stars;
 		std::string Synopsis;
 		std::string Platform;
+		std::string Image;
 		bool IsExtra;
 
 		std::string GetFullDescription();

@@ -46,7 +46,7 @@ void DialogueOptionSelectorModule::Render(GameState& state, SDL_Renderer* render
 	{
 		AnimatedText& option = options[i];
 		option.RenderAt(renderer, 30, y);
-		if (state.CurrentDialogueLineKey == state.DialogueOptions[i])
+		if (state.CurrentDialogue.CurrentDialogueLineKey == state.DialogueOptions[i])
 			handSprite->RenderAt(renderer, 25, y);
 		y -= option.Height;
 	}
@@ -64,7 +64,7 @@ void DialogueOptionSelectorModule::HandleInput(GameState& state, SDL_KeyboardEve
 		SetIndexOfCurrentSelectedOption(state, GetIndexOfCurrentSelectedOption(state) + 1);
 	else if (inputEvent.keysym.sym == SDLK_RETURN || inputEvent.keysym.sym == SDLK_KP_ENTER)
 	{
-		if (state.CurrentDialogueLineKey == "player.myNameIs")
+		if (state.CurrentDialogue.CurrentDialogueLineKey == "player.myNameIs")
 		{
 			result.NextGameModule = new EnterNameModule;
 			result.Transition = new StripesTransition;
@@ -78,7 +78,7 @@ int DialogueOptionSelectorModule::GetIndexOfCurrentSelectedOption(GameState& sta
 {
 	for (int i = 0; i < state.DialogueOptions.size(); i++)
 	{
-		if (state.CurrentDialogueLineKey == state.DialogueOptions[i])
+		if (state.CurrentDialogue.CurrentDialogueLineKey == state.DialogueOptions[i])
 			return i;
 	}
 	return 0;
@@ -90,5 +90,5 @@ void DialogueOptionSelectorModule::SetIndexOfCurrentSelectedOption(GameState& st
 		newIndex = state.DialogueOptions.size() - 1;
 	if (newIndex >= state.DialogueOptions.size())
 		newIndex = 0;
-	state.CurrentDialogueLineKey = state.DialogueOptions[newIndex];
+	state.CurrentDialogue.CurrentDialogueLineKey = state.DialogueOptions[newIndex];
 }

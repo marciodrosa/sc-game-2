@@ -4,6 +4,7 @@
 #include "RenderElements/BlinkingBackground.h"
 #include "RenderElements/AnimatedText.h"
 #include "RenderElements/AnimationListener.h"
+#include "RenderElements/Sprite.h"
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <vector>
@@ -24,7 +25,7 @@ namespace sc
 		void OnAnimationEnded(RenderElement* renderElement) override;
 
 	private:
-		SDL_Texture* movieTexture;
+		Sprite movieImage;
 		BlinkingBackground blinkingBackground;
 		AnimatedText text;
 	};

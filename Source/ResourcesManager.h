@@ -23,7 +23,6 @@ namespace sc
 		SDL_Surface* GetMovieImage(MovieId id);
 		SDL_Surface* GetCharacterImage(CharacterId id);
 		SDL_Surface* GetCharacterSmallImage(CharacterId id);
-		SDL_Surface* CharacterCursorImage;
 		Mix_Chunk* NavigateSound;
 		Mix_Chunk* SelectSound;
 		Mix_Chunk* EnterSound;

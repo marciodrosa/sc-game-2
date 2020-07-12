@@ -20,7 +20,8 @@ namespace sc
 		bool IsInModuleInTransition;
 		bool IsInModuleOutTransition;
 		DialogueTree CurrentDialogue;
-		std::string CurrentDialogueLineKey;
 		std::vector<std::string> DialogueOptions;
+		std::vector<MovieId> AvailableMoviesToSelect;
+		std::vector<MovieId> SelectedMovies;
 	};
 }

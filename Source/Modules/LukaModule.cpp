@@ -1,4 +1,5 @@
 #include "LukaModule.h"
+#include "MovieModule.h"
 #include "Constants.h"
 #include "RenderElements/StripesTransition.h"
 #include "DialogueOptionSelectorModule.h"
@@ -26,7 +27,7 @@ void LukaModule::Start(GameState& state, ModuleResult& result)
 
 void LukaModule::Update(GameState& state, ModuleResult& result)
 {
-	DialogueLine& currentDialogueLine = state.CurrentDialogue.Lines[state.CurrentDialogueLineKey];
+	DialogueLine& currentDialogueLine = state.CurrentDialogue.Lines[state.CurrentDialogue.CurrentDialogueLineKey];
 	if (currentDialogueLine.Character == CharacterId::PLAYER)
 		RefreshDialogueLine(state);
 	else if (!text.IsAnimating())
@@ -37,7 +38,7 @@ void LukaModule::Update(GameState& state, ModuleResult& result)
 			if (isNextDialogueLineFromPlayer)
 			{
 				state.DialogueOptions = currentDialogueLine.NextDialoguesKeys;
-				state.CurrentDialogueLineKey = currentDialogueLine.NextDialoguesKeys[0];
+				state.CurrentDialogue.CurrentDialogueLineKey = currentDialogueLine.NextDialoguesKeys[0];
 				result.SubModule = new DialogueOptionSelectorModule;
 			}
 		}
@@ -63,18 +64,21 @@ void LukaModule::HandleInput(GameState& state, SDL_KeyboardEvent& inputEvent, Mo
 			text.ForceFinishAnimation();
 		else
 		{
-			if (state.CurrentDialogueLineKey == "luka.theseAreTheMovies")
-				; // go to the movies module
-			else if (state.CurrentDialogueLineKey == "luka.shouldNotBeAProblem")
+			if (state.CurrentDialogue.CurrentDialogueLineKey == "luka.theseAreTheMovies")
+			{
+				result.NextGameModule = new MovieModule;
+				result.Transition = new StripesTransition;
+			}
+			else if (state.CurrentDialogue.CurrentDialogueLineKey == "luka.shouldNotBeAProblem")
 				; // go to the extra movies
-			else if (state.CurrentDialogueLineKey == "luka.bye")
+			else if (state.CurrentDialogue.CurrentDialogueLineKey == "luka.bye")
 				; // go to end
 			else
 			{
-				DialogueLine& currentDialogueLine = state.CurrentDialogue.Lines[state.CurrentDialogueLineKey];
+				DialogueLine& currentDialogueLine = state.CurrentDialogue.Lines[state.CurrentDialogue.CurrentDialogueLineKey];
 				if (currentDialogueLine.NextDialoguesKeys.size() == 1 && state.CurrentDialogue.Lines[currentDialogueLine.NextDialoguesKeys[0]].Character == CharacterId::LUKA)
 				{
-					state.CurrentDialogueLineKey = currentDialogueLine.NextDialoguesKeys[0];
+					state.CurrentDialogue.CurrentDialogueLineKey = currentDialogueLine.NextDialoguesKeys[0];
 					RefreshDialogueLine(state);
 				}
 			}
@@ -84,9 +88,7 @@ void LukaModule::HandleInput(GameState& state, SDL_KeyboardEvent& inputEvent, Mo
 
 void LukaModule::RefreshDialogueLine(GameState& state)
 {
-	if (state.CurrentDialogueLineKey == "")
-		state.CurrentDialogueLineKey = state.CurrentDialogue.FirstLineKey;
-	DialogueLine* dialogueLine = &state.CurrentDialogue.Lines[state.CurrentDialogueLineKey];
+	DialogueLine* dialogueLine = &state.CurrentDialogue.Lines[state.CurrentDialogue.CurrentDialogueLineKey];
 	if (dialogueLine->Character == CharacterId::PLAYER)
 	{
 		if (dialogueLine->NextDialoguesKeys.size() > 0)
@@ -94,7 +96,7 @@ void LukaModule::RefreshDialogueLine(GameState& state)
 			string key = dialogueLine->NextDialoguesKeys[0];
 			dialogueLine = &state.CurrentDialogue.Lines[key];
 			if (dialogueLine->Character == CharacterId::LUKA)
-				state.CurrentDialogueLineKey = key;
+				state.CurrentDialogue.CurrentDialogueLineKey = key;
 		}
 	}
 	if (dialogueLine->Character == CharacterId::LUKA)
@@ -102,7 +104,7 @@ void LukaModule::RefreshDialogueLine(GameState& state)
 		stringstream ss;
 		ss << "LUKA:\n\"" << dialogueLine->Text << "\"";
 		text.SetText(ss.str(), 10, 280);
-		text.SetAnimated();
+		text.SetAnimated(true, 2);
 		text.CenterPivot();
 		text.TopPivot();
 	}

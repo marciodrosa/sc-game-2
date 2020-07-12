@@ -66,7 +66,6 @@ void EnterNameModule::HandleInput(GameState& state, SDL_KeyboardEvent& inputEven
 		if (currentName->size() > 0)
 		{
 			state.CurrentDialogue = DialogueTree::AfterNameDialogueTree();
-			state.CurrentDialogueLineKey = "";
 			result.NextGameModule = new LukaModule();
 		}
 	}
