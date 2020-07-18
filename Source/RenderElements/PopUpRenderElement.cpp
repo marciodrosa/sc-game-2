@@ -93,6 +93,8 @@ void PopUpRenderElement::RenderBackground(SDL_Renderer* renderer, SDL_Rect& rect
 void PopUpRenderElement::RenderOptions(SDL_Renderer* renderer, SDL_Rect& rect)
 {
 	int y = rect.y + POPUP_VERTICAL_MARGIN;
+	title.RenderAt(renderer, rect.x + POPUP_HORIZONTAL_MARGIN, y);
+	y += title.Height;
 	for (int i = 0; i < options.size(); i++)
 	{
 		int x = rect.x + POPUP_HORIZONTAL_MARGIN + handSprite->Width + SPACE_BETWEEN_HAND_AND_TEXT;
@@ -106,8 +108,8 @@ void PopUpRenderElement::RenderOptions(SDL_Renderer* renderer, SDL_Rect& rect)
 
 void PopUpRenderElement::RecalculateSize()
 {
-	Width = 0;
-	Height = 0;
+	Width = title.Width;
+	Height = title.Height;
 	for (AnimatedText* option : this->options)
 	{
 		Height += option->Height;

@@ -6,6 +6,7 @@
 #include "Models/GameState.h"
 #include "Models/Character.h"
 #include "Modules/TitleModule.h"
+#include "Modules/VoteModule.h"
 #include "Models/Movie.h"
 
 using namespace sc;
@@ -16,6 +17,7 @@ int main(int argc, char* argv[])
 	GameState gameState;
 	gameState.Characters = Character::GetCharacters();
 	gameState.Movies = Movie::GetMovies();
+	gameState.ResetAvailableAndSelectedMovies();
 	GameLoop gameLoop(gameState);
 	gameLoop.SetModule(new TitleModule);
 	gameLoop.Run();

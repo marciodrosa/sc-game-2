@@ -105,6 +105,12 @@
     <ClInclude Include="Source\RenderElements\PopUpRenderElement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Modules\VoteModule.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Modules\PopUpModule.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\RenderElements\RenderElement.cpp">
@@ -189,6 +195,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\RenderElements\PopUpRenderElement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Modules\VoteModule.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Modules\PopUpModule.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

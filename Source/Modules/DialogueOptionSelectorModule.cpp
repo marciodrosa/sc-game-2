@@ -1,5 +1,6 @@
 #include "DialogueOptionSelectorModule.h"
 #include "MovieModule.h"
+#include "VoteModule.h"
 #include "Constants.h"
 #include "RenderElements/StripesTransition.h"
 #include "RenderElements/BlindsTransition.h"
@@ -66,10 +67,16 @@ void DialogueOptionSelectorModule::HandleInput(GameState& state, SDL_KeyboardEve
 				result.NextGameModule = new EnterNameModule;
 				result.Transition = new BlindsTransition;
 			}
-			if (state.CurrentDialogue.CurrentDialogueLineKey == "player.reviewMovies")
+			else if (state.CurrentDialogue.CurrentDialogueLineKey == "player.reviewMovies")
 			{
 				state.CurrentMovieIndex = 0;
 				result.NextGameModule = new MovieModule(true);
+				result.Transition = new BlindsTransition;
+			}
+			else if (state.CurrentDialogue.CurrentDialogueLineKey == "player.yesIWantToVoteNow")
+			{
+				state.CurrentMovieIndex = 0;
+				result.NextGameModule = new VoteModule();
 				result.Transition = new BlindsTransition;
 			}
 			else

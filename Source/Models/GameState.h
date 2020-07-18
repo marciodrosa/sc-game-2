@@ -24,5 +24,11 @@ namespace sc
 		std::vector<MovieId> AvailableMoviesToSelect;
 		std::vector<MovieId> SelectedMovies;
 		bool RingoAlreadyAppeared;
+		Movie* FindMovieById(MovieId id);
+		void ResetAvailableAndSelectedMovies();
+		void MoveFromAvailableToSelectedMovies(int index);
+		void MoveFromSelectedToAvailableMovies(int index);
+		void MoveSelectedMovieUp(int index);
+		void MoveSelectedMovieDown(int index);
 	};
 }
