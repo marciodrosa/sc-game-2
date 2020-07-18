@@ -44,10 +44,9 @@ DialogueTree DialogueTree::AfterNameDialogueTree()
 	Tree.CurrentDialogueLineKey = "luka.youAreAHuman";
 	Tree.Lines["luka.youAreAHuman"] = DialogueLine(CharacterId::LUKA, "GASP! Você é um humano?! Humanos não podem entrar no cinema. Vocês estão no meio de uma pandemia!", "luka.onlyCatsCanGetIn");
 	Tree.Lines["luka.onlyCatsCanGetIn"] = DialogueLine(CharacterId::LUKA, "Nós, gatos, tomamos a administração dos cinemas enquanto vocês estão fora. Só gatos podem entrar, nós não pegamos COVID-19.", "luka.humansAndDogsCantGetIn");
-	Tree.Lines["luka.humansAndDogsCantGetIn"] = DialogueLine(CharacterId::LUKA, "Nem humanos, nem cachorros são permitidos. Exceto o Joey. O Joey é legal.", "luka.guineaPigNotAllowed");
-	Tree.Lines["luka.guineaPigNotAllowed"] = DialogueLine(CharacterId::LUKA, "Tentamos permitir porquinhos da Índia uma vez, mas alguns bichos tentaram fazer outros bichos de lancho. Não deu certo.");
-	Tree.Lines["luka.guineaPigNotAllowed"].NextDialoguesKeys.push_back("player.whatNow");
-	Tree.Lines["luka.guineaPigNotAllowed"].NextDialoguesKeys.push_back("player.IAmACat");
+	Tree.Lines["luka.humansAndDogsCantGetIn"] = DialogueLine(CharacterId::LUKA, "Nem humanos, nem cachorros são permitidos. Exceto o Joey. O Joey é legal.");
+	Tree.Lines["luka.humansAndDogsCantGetIn"].NextDialoguesKeys.push_back("player.whatNow");
+	Tree.Lines["luka.humansAndDogsCantGetIn"].NextDialoguesKeys.push_back("player.IAmACat");
 	Tree.Lines["player.IAmACat"] = DialogueLine(CharacterId::PLAYER, "Eu não sou um humano! Eu sou um gato! Miau, Miau.", "luka.youCantFoolMe");
 	Tree.Lines["luka.youCantFoolMe"] = DialogueLine(CharacterId::LUKA, "Você não me engana, humano. Você tem nome de gente.");
 	Tree.Lines["luka.youCantFoolMe"].NextDialoguesKeys.push_back("player.whatNow");
@@ -80,7 +79,7 @@ DialogueTree DialogueTree::VotingDialogueTree()
 	Tree.FirstLineKey = "luka.seeOnlyMoviesWithCats";
 	Tree.CurrentDialogueLineKey = "luka.seeOnlyMoviesWithCats";
 	Tree.Lines["luka.seeOnlyMoviesWithCats"] = DialogueLine(CharacterId::LUKA, "Viu? Apenas filmes com gatos. Robert Pattinson, Ana de Armas etc.", "luka.doYouWantToVote");
-	Tree.Lines["luka.doYouWantToVote"] = DialogueLine(CharacterId::LUKA, "Agora que eu apresentei a você os filmes selecionados, gostaria de computar os votos dos seus favoritos e enviar pelo sistema GATOWEB?");
+	Tree.Lines["luka.doYouWantToVote"] = DialogueLine(CharacterId::LUKA, "Agora que eu apresentei a você os filmes selecionados, gostaria de computar os votos dos seus favoritos e enviar pelo sistema COSMONET?");
 	Tree.Lines["luka.doYouWantToVote"].NextDialoguesKeys.push_back("player.yesIWantToVoteNow");
 	Tree.Lines["luka.doYouWantToVote"].NextDialoguesKeys.push_back("player.reviewMovies");
 	Tree.Lines["luka.doYouWantToVote"].NextDialoguesKeys.push_back("player.noIDontWantToVote");
