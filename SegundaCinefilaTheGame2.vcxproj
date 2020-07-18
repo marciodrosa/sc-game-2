@@ -27,6 +27,7 @@
     <ClInclude Include="Source\Models\GameState.h" />
     <ClInclude Include="Source\Models\Movie.h" />
     <ClInclude Include="Source\ModuleResult.h" />
+    <ClInclude Include="Source\Modules\CosmoNetModule.h" />
     <ClInclude Include="Source\Modules\DialogueOptionSelectorModule.h" />
     <ClInclude Include="Source\Modules\EndingModule.h" />
     <ClInclude Include="Source\Modules\EnterNameModule.h" />
@@ -60,6 +61,7 @@
     <ClCompile Include="Source\Models\GameState.cpp" />
     <ClCompile Include="Source\Models\Movie.cpp" />
     <ClCompile Include="Source\ModuleResult.cpp" />
+    <ClCompile Include="Source\Modules\CosmoNetModule.cpp" />
     <ClCompile Include="Source\Modules\DialogueOptionSelectorModule.cpp" />
     <ClCompile Include="Source\Modules\EndingModule.cpp" />
     <ClCompile Include="Source\Modules\EnterNameModule.cpp" />

@@ -1,8 +1,10 @@
 #include "VoteModule.h"
 #include "MovieModule.h"
 #include "LukaModule.h"
+#include "CosmoNetModule.h"
 #include "Constants.h"
 #include "ResourcesManager.h"
+#include "RenderElements/ShutterTransition.h"
 #include <sstream>
 
 using namespace sc;
@@ -115,6 +117,7 @@ void VoteModule::HandleInput(GameState& state, SDL_KeyboardEvent& inputEvent, Mo
 			popUpOptions.push_back(PopUpOption(VoteActionIds::RESTART_LIST, "Reiniciar lista"));
 			popUpOptions.push_back(PopUpOption(VoteActionIds::REVIEW_PRESENTATION, "Rever apresentação"));
 			popUpOptions.push_back(PopUpOption(VoteActionIds::ABORT_VOTE, "Não quero votar agora"));
+			popUpOptions.push_back(PopUpOption(VoteActionIds::CANCEL, "Cancelar"));
 			result.SubModule = new PopUpModule(VoteActionIds::OPTIONS, "", popUpOptions, this);
 		}
 		else if (actionId == VoteActionIds::SEND)
@@ -147,6 +150,8 @@ void VoteModule::OnPopUpOptionSelected(int popUpId, PopUpOption& option, GameSta
 			state.CurrentDialogue = DialogueTree::EndingDialogueTree();
 			result.NextGameModule = new LukaModule();
 			break;
+		case VoteActionIds::CANCEL:
+			break;
 		}
 		break;
 	case VoteActionIds::PICKED_MOVIE_OPTIONS:
@@ -172,6 +177,12 @@ void VoteModule::OnPopUpOptionSelected(int popUpId, PopUpOption& option, GameSta
 		switch (option.Id)
 		{
 		case VoteActionIds::YES:
+			result.NextGameModule = new CosmoNetModule;
+			{
+				ShutterTransition * transition = new ShutterTransition;
+				transition->EnableVerticalAnimation = false;
+				result.Transition = transition;
+			}
 			break;
 		case VoteActionIds::NO:
 			break;
