@@ -16,12 +16,18 @@ namespace sc
 		PopUpRenderElement();
 		virtual ~PopUpRenderElement();
 		void SetContent(std::string title, std::vector<std::string>& options, int maxWidth = 0);
+		void Animate();
+		bool IsAnimating();
 		void Render(SDL_Renderer* renderer, SDL_Rect& rect) override;
 		int SelectedOption;
 	private:
+		void RenderBackground(SDL_Renderer* renderer, SDL_Rect& rect);
+		void RenderOptions(SDL_Renderer* renderer, SDL_Rect& rect);
+		void RecalculateSize();
 		std::vector<AnimatedText*> options;
 		AnimatedText title;
 		Sprite* handSprite;
-		void RecalculateSize();
+		bool animating;
+		int animationPhase;
 	};
 }

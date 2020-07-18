@@ -1,5 +1,6 @@
 #include "PopUpRenderElement.h"
 #include "ResourcesManager.h"
+#include <cmath>
 
 using namespace sc;
 using namespace std;
@@ -16,6 +17,8 @@ PopUpRenderElement::PopUpRenderElement()
 {
 	SelectedOption = 0;
 	handSprite = &ResourcesManager::Get()->HandSprite;
+	animating = false;
+	animationPhase = 0;
 }
 
 PopUpRenderElement::~PopUpRenderElement()
@@ -43,12 +46,52 @@ void PopUpRenderElement::SetContent(std::string title, std::vector<std::string>&
 	RecalculateSize();
 }
 
+void PopUpRenderElement::Animate()
+{
+	animating = true;
+	animationPhase = 0;
+}
+
+bool PopUpRenderElement::IsAnimating()
+{
+	return animating;
+}
+
 void PopUpRenderElement::Render(SDL_Renderer* renderer, SDL_Rect& rect)
+{
+	SDL_Rect bgRect;
+	if (animating)
+	{
+		int horizontalSize = fmin(rect.w, animationPhase);
+		int verticalSize = fmin(rect.h, animationPhase);
+		if (horizontalSize == rect.w && verticalSize == rect.h)
+			animating = false;
+		else
+		{
+			bgRect.w = horizontalSize;
+			bgRect.h = verticalSize;
+			bgRect.x = (rect.x + (rect.w / 2)) - (horizontalSize / 2);
+			bgRect.y = (rect.y + (rect.h / 2)) - (verticalSize / 2);
+			animationPhase += 20;
+		}
+	}
+	if (!animating)
+		bgRect = rect;
+	RenderBackground(renderer, bgRect);
+	if (!animating)
+		RenderOptions(renderer, rect);
+}
+
+void PopUpRenderElement::RenderBackground(SDL_Renderer* renderer, SDL_Rect& rect)
 {
 	SDL_SetRenderDrawColor(renderer, 0, 0, 200, 255);
 	SDL_RenderFillRect(renderer, &rect);
 	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 	SDL_RenderDrawRect(renderer, &rect);
+}
+
+void PopUpRenderElement::RenderOptions(SDL_Renderer* renderer, SDL_Rect& rect)
+{
 	int y = rect.y + POPUP_VERTICAL_MARGIN;
 	for (int i = 0; i < options.size(); i++)
 	{

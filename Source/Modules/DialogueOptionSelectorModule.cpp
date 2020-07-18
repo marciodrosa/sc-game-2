@@ -34,6 +34,7 @@ void DialogueOptionSelectorModule::Start(GameState& state, ModuleResult& result)
 	popUp.SetContent("", options);
 	popUp.CenterPivot();
 	popUp.BottomPivot();
+	popUp.Animate();
 }
 
 void DialogueOptionSelectorModule::Update(GameState& state, ModuleResult& result)
@@ -52,25 +53,28 @@ void DialogueOptionSelectorModule::Finish(GameState& state)
 
 void DialogueOptionSelectorModule::HandleInput(GameState& state, SDL_KeyboardEvent& inputEvent, ModuleResult& result)
 {
-	if (inputEvent.keysym.sym == SDLK_UP)
-		SetIndexOfCurrentSelectedOption(state, GetIndexOfCurrentSelectedOption(state) - 1);
-	else if (inputEvent.keysym.sym == SDLK_DOWN)
-		SetIndexOfCurrentSelectedOption(state, GetIndexOfCurrentSelectedOption(state) + 1);
-	else if (inputEvent.keysym.sym == SDLK_RETURN || inputEvent.keysym.sym == SDLK_KP_ENTER)
+	if (!popUp.IsAnimating())
 	{
-		if (state.CurrentDialogue.CurrentDialogueLineKey == "player.myNameIs")
+		if (inputEvent.keysym.sym == SDLK_UP)
+			SetIndexOfCurrentSelectedOption(state, GetIndexOfCurrentSelectedOption(state) - 1);
+		else if (inputEvent.keysym.sym == SDLK_DOWN)
+			SetIndexOfCurrentSelectedOption(state, GetIndexOfCurrentSelectedOption(state) + 1);
+		else if (inputEvent.keysym.sym == SDLK_RETURN || inputEvent.keysym.sym == SDLK_KP_ENTER)
 		{
-			result.NextGameModule = new EnterNameModule;
-			result.Transition = new BlindsTransition;
+			if (state.CurrentDialogue.CurrentDialogueLineKey == "player.myNameIs")
+			{
+				result.NextGameModule = new EnterNameModule;
+				result.Transition = new BlindsTransition;
+			}
+			if (state.CurrentDialogue.CurrentDialogueLineKey == "player.reviewMovies")
+			{
+				state.CurrentMovieIndex = 0;
+				result.NextGameModule = new MovieModule(true);
+				result.Transition = new BlindsTransition;
+			}
+			else
+				result.FinishModule = true;
 		}
-		if (state.CurrentDialogue.CurrentDialogueLineKey == "player.reviewMovies")
-		{
-			state.CurrentMovieIndex = 0;
-			result.NextGameModule = new MovieModule(true);
-			result.Transition = new BlindsTransition;
-		}
-		else
-			result.FinishModule = true;
 	}
 }
 
