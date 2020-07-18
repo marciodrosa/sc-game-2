@@ -2,7 +2,7 @@
 
 #include "GameModule.h"
 #include "RenderElements/AnimatedText.h"
-#include "RenderElements/Sprite.h"
+#include "RenderElements/PopUpRenderElement.h"
 #include <string>
 #include <vector>
 
@@ -20,8 +20,7 @@ namespace sc
 		void Finish(GameState& state) override;
 		void HandleInput(GameState& state, SDL_KeyboardEvent& inputEvent, ModuleResult& result) override;
 	private:
-		std::vector<AnimatedText*> options;
-		Sprite* handSprite;
+		PopUpRenderElement popUp;
 		int GetIndexOfCurrentSelectedOption(GameState& state);
 		void SetIndexOfCurrentSelectedOption(GameState& state, int newIndex);
 	};
