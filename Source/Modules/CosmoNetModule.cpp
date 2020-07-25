@@ -29,7 +29,7 @@ void CosmoNetModule::Start(GameState& state, ModuleResult& result)
 	titleLabel.SetText("CosmoNet", 22);
 	titleLabel.CenterPivot();
 	titleLabel.TopPivot();
-	statusLabel.SetText("Conectando à rede....", 11);
+	statusLabel.SetText("Enviando votos ao sistema....", 11);
 	statusLabel.CenterPivot();
 	statusLabel.TopPivot();
 	ShutterTransition* transition = new ShutterTransition;
@@ -40,12 +40,6 @@ void CosmoNetModule::Start(GameState& state, ModuleResult& result)
 
 void CosmoNetModule::Update(GameState& state, ModuleResult& result)
 {
-	if (dataSent && !gameState->IsInModuleOutTransition)
-	{
-		state.CurrentDialogue = DialogueTree::EndingDialogueTree();
-		result.NextGameModule = new LukaModule;
-		result.Transition = new BlindsTransition;
-	}
 }
 
 void CosmoNetModule::Render(GameState& state, SDL_Renderer* renderer)
@@ -54,8 +48,9 @@ void CosmoNetModule::Render(GameState& state, SDL_Renderer* renderer)
 	SDL_RenderFillRect(renderer, nullptr);
 	logo.RenderAt(renderer, SC_SCREEN_WIDTH / 2, (SC_SCREEN_HEIGHT / 2) - 20);
 	titleLabel.RenderAt(renderer, SC_SCREEN_WIDTH / 2, (SC_SCREEN_HEIGHT / 2) + (logo.Height / 2));
-	if (!state.IsInModuleInTransition && !state.IsInModuleOutTransition)
-		statusLabel.RenderAt(renderer, SC_SCREEN_WIDTH / 2, 200);
+	statusLabel.RenderAt(renderer, SC_SCREEN_WIDTH / 2, 200);
+	if (dataSent && !state.IsInModuleInTransition && !state.IsInModuleOutTransition)
+		pressEnterIndicator.RenderAt(renderer, 0, 0);
 }
 
 void CosmoNetModule::Finish(GameState& state)
@@ -65,6 +60,15 @@ void CosmoNetModule::Finish(GameState& state)
 
 void CosmoNetModule::HandleInput(GameState& state, SDL_KeyboardEvent& inputEvent, ModuleResult& result)
 {
+	if (inputEvent.keysym.sym == SDLK_RETURN || inputEvent.keysym.sym == SDLK_KP_ENTER)
+	{
+		if (dataSent)
+		{
+			state.CurrentDialogue = DialogueTree::EndingDialogueTree();
+			result.NextGameModule = new LukaModule;
+			result.Transition = new BlindsTransition;
+		}
+	}
 }
 
 void CosmoNetModule::OnAnimationEnded(RenderElement* renderElement)
@@ -84,6 +88,9 @@ void CosmoNetModule::SendVotesDataToCosmoNet(CosmoNetVoteData& data)
 	command << "curl -X POST " << data.ToURL();
 	system(command.str().c_str());
 	dataSent = true;
+	statusLabel.SetText("Votos enviados!", 11);
+	statusLabel.CenterPivot();
+	statusLabel.TopPivot();
 }
 
 CosmoNetVoteData CosmoNetModule::CreateCosmoNetVoteData()

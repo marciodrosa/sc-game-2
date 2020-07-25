@@ -3,6 +3,7 @@
 #include "GameModule.h"
 #include "RenderElements/Sprite.h"
 #include "RenderElements/AnimatedText.h"
+#include "RenderElements/PressEnterIndicator.h"
 #include "Models/CosmoNetVoteData.h"
 #include <string>
 #include <vector>
@@ -31,6 +32,7 @@ namespace sc
 		Sprite logo;
 		AnimatedText titleLabel;
 		AnimatedText statusLabel;
+		PressEnterIndicator pressEnterIndicator;
 		bool dataSent;
 	};
 }

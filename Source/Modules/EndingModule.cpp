@@ -1,6 +1,7 @@
 #include "EndingModule.h"
 #include "Constants.h"
 #include "MusicPlayer.h"
+#include "RenderElements/ShutterTransition.h"
 
 using namespace std;
 using namespace sc;
@@ -21,6 +22,7 @@ void EndingModule::Start(GameState& state, ModuleResult& result)
 	theEndLabelTextShadow.CenterPivot();
 	pressEnterIndicator.SetLabel("Pressione ENTER para encerrar");
 	MusicPlayer::Get()->PlayTitleMusic();
+	result.Transition = new ShutterTransition;
 }
 
 void EndingModule::Update(GameState& state, ModuleResult& result)
