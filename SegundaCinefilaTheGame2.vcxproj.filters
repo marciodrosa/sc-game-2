@@ -114,6 +114,9 @@
     <ClInclude Include="Source\Modules\CosmoNetModule.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Models\CosmoNetVoteData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\RenderElements\RenderElement.cpp">
@@ -207,6 +210,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Modules\CosmoNetModule.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Models\CosmoNetVoteData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

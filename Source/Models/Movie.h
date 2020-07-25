@@ -32,6 +32,7 @@ namespace sc
 		std::string Platform;
 		std::string Image;
 		bool IsExtra;
+		unsigned long long CosmoNetId;
 
 		std::string GetFullDescription();
 

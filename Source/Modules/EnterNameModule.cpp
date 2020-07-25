@@ -18,11 +18,7 @@ EnterNameModule::~EnterNameModule()
 
 void EnterNameModule::Start(GameState& state, ModuleResult& result)
 {
-	for (Character& character : state.Characters)
-	{
-		if (character.Id == CharacterId::PLAYER)
-			currentName = &character.Name;
-	}
+	currentName = &state.PlayerName;
 	label.SetText("Digite o seu nome:", 16);
 	label.CenterPivot();
 	RefreshNameLabel();

@@ -15,6 +15,7 @@ namespace sc
 		GameState();
 		std::vector<Character> Characters;
 		std::vector<Movie> Movies;
+		std::string PlayerName;
 		int SelectedCharacterIndex;
 		int CurrentMovieIndex;
 		bool IsInModuleInTransition;

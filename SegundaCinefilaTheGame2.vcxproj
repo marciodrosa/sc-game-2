@@ -23,6 +23,7 @@
     <ClInclude Include="Source\GameLoop.h" />
     <ClInclude Include="Source\GameModule.h" />
     <ClInclude Include="Source\Models\Character.h" />
+    <ClInclude Include="Source\Models\CosmoNetVoteData.h" />
     <ClInclude Include="Source\Models\DialogueTree.h" />
     <ClInclude Include="Source\Models\GameState.h" />
     <ClInclude Include="Source\Models\Movie.h" />
@@ -57,6 +58,7 @@
     <ClCompile Include="Source\GameLoop.cpp" />
     <ClCompile Include="Source\main.cpp" />
     <ClCompile Include="Source\Models\Character.cpp" />
+    <ClCompile Include="Source\Models\CosmoNetVoteData.cpp" />
     <ClCompile Include="Source\Models\DialogueTree.cpp" />
     <ClCompile Include="Source\Models\GameState.cpp" />
     <ClCompile Include="Source\Models\Movie.cpp" />

@@ -39,6 +39,7 @@ vector<Movie> Movie::GetMovies()
 	waspNetwork.Synopsis = "Piloto cubano deixa a família em Cuba, desertando para os EUA. Mas ele não é o ambicioso empreendedor que aparenta ser.";
 	waspNetwork.Platform = "Netflix";
 	waspNetwork.Image = "Images/WaspNetwork.png";
+	waspNetwork.CosmoNetId = 5642368648740864;
 	result.push_back(waspNetwork);
 
 	Movie oBarco;
@@ -52,6 +53,7 @@ vector<Movie> Movie::GetMovies()
 	oBarco.Synopsis = "A perigosa viagem de ida e volta de uma embarcação alemã entre La Rochelle, na França ocupada, e a Espanha em 1941.";
 	oBarco.Platform = "Netflix";
 	oBarco.Image = "Images/OBarco.png";
+	oBarco.CosmoNetId = 5636645067948032;
 	result.push_back(oBarco);
 
 	Movie amantesEternos;
@@ -65,6 +67,7 @@ vector<Movie> Movie::GetMovies()
 	amantesEternos.Synopsis = "Conheça a história de amor e de reencontro entre o vampiros Adam, um músico que está deprimido e cansado com o rumo que a sociedade tomou, e Eve.";
 	amantesEternos.Platform = "Prime";
 	amantesEternos.Image = "Images/AmantesEternos.png";
+	amantesEternos.CosmoNetId = 5646488461901824;
 	result.push_back(amantesEternos);
 
 	Movie edificioMaster;
@@ -76,6 +79,7 @@ vector<Movie> Movie::GetMovies()
 	edificioMaster.Synopsis = "O filme registra o cotidiano dos moradores do Edifício Master, em Copacabana, e apresenta um rico painel de histórias.";
 	edificioMaster.Platform = "Looke";
 	edificioMaster.Image = "Images/EdificioMaster.png";
+	edificioMaster.CosmoNetId = 5702893864747008;
 	result.push_back(edificioMaster);
 
 	Movie laBamba;
@@ -88,6 +92,7 @@ vector<Movie> Movie::GetMovies()
 	laBamba.Synopsis = "Em 1958, o adolescente de Los Angeles Ritchie Valens torna-se um astro do rock da noite para o dia.";
 	laBamba.Platform = "Netflix";
 	laBamba.Image = "Images/LaBamba.png";
+	laBamba.CosmoNetId = 5631671361601536;
 	result.push_back(laBamba);
 
 	Movie highLife;
@@ -100,6 +105,7 @@ vector<Movie> Movie::GetMovies()
 	highLife.Synopsis = "Um pai e sua filha tentam sobreviver isolados no espaço sideral.";
 	highLife.Image = "Images/HighLife.png";
 	highLife.IsExtra = true;
+	highLife.CosmoNetId = 5638358357245952;
 	result.push_back(highLife);
 
 	return result;
