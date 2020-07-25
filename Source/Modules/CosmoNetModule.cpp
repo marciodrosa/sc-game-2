@@ -3,6 +3,7 @@
 #include "RenderElements/ShutterTransition.h"
 #include "RenderElements/BlindsTransition.h"
 #include "Constants.h"
+#include "ResourcesManager.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -64,6 +65,7 @@ void CosmoNetModule::HandleInput(GameState& state, SDL_KeyboardEvent& inputEvent
 	{
 		if (dataSent)
 		{
+			Mix_PlayChannel(1, ResourcesManager::Get()->EnterSound, 0);
 			state.CurrentDialogue = DialogueTree::EndingDialogueTree();
 			result.NextGameModule = new LukaModule;
 			result.Transition = new BlindsTransition;
@@ -91,6 +93,7 @@ void CosmoNetModule::SendVotesDataToCosmoNet(CosmoNetVoteData& data)
 	statusLabel.SetText("Votos enviados!", 11);
 	statusLabel.CenterPivot();
 	statusLabel.TopPivot();
+	Mix_PlayChannel(1, ResourcesManager::Get()->CosmoNetOkSound, 0);
 }
 
 CosmoNetVoteData CosmoNetModule::CreateCosmoNetVoteData()

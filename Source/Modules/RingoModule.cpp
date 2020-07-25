@@ -5,6 +5,7 @@
 #include "RenderElements/ShutterTransition.h"
 #include "DialogueOptionSelectorModule.h"
 #include "MusicPlayer.h"
+#include "ResourcesManager.h"
 #include <sstream>
 
 using namespace sc;
@@ -72,6 +73,7 @@ void RingoModule::HandleInput(GameState& state, SDL_KeyboardEvent& inputEvent, M
 			text.ForceFinishAnimation();
 		else
 		{
+			Mix_PlayChannel(1, ResourcesManager::Get()->EnterSound, 0);
 			if (state.CurrentDialogue.CurrentDialogueLineKey == "ringo.thisIsTheMovie")
 			{
 				result.NextGameModule = new MovieModule(true);

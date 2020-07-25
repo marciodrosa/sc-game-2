@@ -66,12 +66,14 @@ void VoteModule::HandleInput(GameState& state, SDL_KeyboardEvent& inputEvent, Mo
 {
 	if (inputEvent.keysym.sym == SDLK_UP)
 	{
+		Mix_PlayChannel(1, ResourcesManager::Get()->NavigateSound, 0);
 		cursorIndex--;
 		if (cursorIndex < 0)
 			cursorIndex = 0;
 	}
 	else if (inputEvent.keysym.sym == SDLK_DOWN)
 	{
+		Mix_PlayChannel(1, ResourcesManager::Get()->NavigateSound, 0);
 		int max = cursorAtRight ? optionsAtRight.size() - 1 : optionsAtLeft.size() - 1;
 		cursorIndex++;
 		if (cursorIndex > max)
@@ -81,6 +83,7 @@ void VoteModule::HandleInput(GameState& state, SDL_KeyboardEvent& inputEvent, Mo
 	{
 		if (cursorAtRight)
 		{
+			Mix_PlayChannel(1, ResourcesManager::Get()->NavigateSound, 0);
 			cursorAtRight = false;
 			cursorIndex = 0;
 		}
@@ -89,12 +92,14 @@ void VoteModule::HandleInput(GameState& state, SDL_KeyboardEvent& inputEvent, Mo
 	{
 		if (!cursorAtRight && optionsAtRight.size() > 0)
 		{
+			Mix_PlayChannel(1, ResourcesManager::Get()->NavigateSound, 0);
 			cursorAtRight = true;
 			cursorIndex = 0;
 		}
 	}
 	else if (inputEvent.keysym.sym == SDLK_RETURN || inputEvent.keysym.sym == SDLK_KP_ENTER)
 	{
+		Mix_PlayChannel(1, ResourcesManager::Get()->SelectSound, 0);
 		VoteActionIds actionId = cursorAtRight ? optionsAtRight[cursorIndex] : optionsAtLeft[cursorIndex];
 		if (actionId >= VoteActionIds::AVAILABLE_MOVIE_1 && actionId <= AVAILABLE_MOVIE_10)
 		{

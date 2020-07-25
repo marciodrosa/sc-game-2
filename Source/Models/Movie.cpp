@@ -42,6 +42,19 @@ vector<Movie> Movie::GetMovies()
 	waspNetwork.CosmoNetId = 5642368648740864;
 	result.push_back(waspNetwork);
 
+	Movie highLife;
+	highLife.Id = MovieId::HIGH_LIFE;
+	highLife.Name = "High Life";
+	highLife.Year = "2018";
+	highLife.Country = "França, Reino Unido";
+	highLife.Director = "Claire Denis";
+	highLife.Stars = "Robert Pattinson, Juliette Binoche";
+	highLife.Synopsis = "Um pai e sua filha tentam sobreviver isolados no espaço sideral.";
+	highLife.Platform = "Google Play";
+	highLife.Image = "Images/HighLife.png";
+	highLife.CosmoNetId = 5638358357245952;
+	result.push_back(highLife);
+
 	Movie oBarco;
 	oBarco.Id = MovieId::O_BARCO;
 	oBarco.Name = "O Barco";
@@ -56,19 +69,19 @@ vector<Movie> Movie::GetMovies()
 	oBarco.CosmoNetId = 5636645067948032;
 	result.push_back(oBarco);
 
-	Movie amantesEternos;
-	amantesEternos.Id = MovieId::AMANTES_ETERNOS;
-	amantesEternos.Name = "Amantes Eternos";
-	amantesEternos.OriginalName = "Only Lovers Left Alive";
-	amantesEternos.Year = "2013";
-	amantesEternos.Country = "Reino Unido";
-	amantesEternos.Director = "Jim Jarmusch";
-	amantesEternos.Stars = "Tilda Swinton, Tom Hiddleston";
-	amantesEternos.Synopsis = "Conheça a história de amor e de reencontro entre o vampiros Adam, um músico que está deprimido e cansado com o rumo que a sociedade tomou, e Eve.";
-	amantesEternos.Platform = "Prime";
-	amantesEternos.Image = "Images/AmantesEternos.png";
-	amantesEternos.CosmoNetId = 5646488461901824;
-	result.push_back(amantesEternos);
+	Movie asBruxasDeEastwick;
+	asBruxasDeEastwick.Id = MovieId::AS_BRUXAS_DE_EASTWICK;
+	asBruxasDeEastwick.Name = "As Bruxas de Eastwick";
+	asBruxasDeEastwick.OriginalName = "The Witches of Eastwick";
+	asBruxasDeEastwick.Year = "1987";
+	asBruxasDeEastwick.Country = "USA";
+	asBruxasDeEastwick.Director = "George Miller";
+	asBruxasDeEastwick.Stars = "Jack Nicholson, Cher";
+	asBruxasDeEastwick.Synopsis = "Três mulheres entediadas estão sempre imaginando o homem ideal, até que conhecem o misterioso ricaço Daryl Van Horne.";
+	asBruxasDeEastwick.Platform = "Google Play";
+	asBruxasDeEastwick.Image = "Images/AsBruxasDeEastwick.png";
+	asBruxasDeEastwick.CosmoNetId = 5646488461901824;
+	result.push_back(asBruxasDeEastwick);
 
 	Movie edificioMaster;
 	edificioMaster.Id = MovieId::EDIFICIO_MASTER;
@@ -82,31 +95,19 @@ vector<Movie> Movie::GetMovies()
 	edificioMaster.CosmoNetId = 5702893864747008;
 	result.push_back(edificioMaster);
 
-	Movie laBamba;
-	laBamba.Id = MovieId::LA_BAMBA;
-	laBamba.Name = "La Bamba";
-	laBamba.Year = "1987";
-	laBamba.Country = "USA";
-	laBamba.Director = "Luis Valdez";
-	laBamba.Stars = "Lou Diamond Phillips, Esai Morales";
-	laBamba.Synopsis = "Em 1958, o adolescente de Los Angeles Ritchie Valens torna-se um astro do rock da noite para o dia.";
-	laBamba.Platform = "Netflix";
-	laBamba.Image = "Images/LaBamba.png";
-	laBamba.CosmoNetId = 5631671361601536;
-	result.push_back(laBamba);
-
-	Movie highLife;
-	highLife.Id = MovieId::HIGH_LIFE;
-	highLife.Name = "High Life";
-	highLife.Year = "2018";
-	highLife.Country = "França, Reino Unido";
-	highLife.Director = "Claire Denis";
-	highLife.Stars = "Robert Pattinson, Juliette Binoche";
-	highLife.Synopsis = "Um pai e sua filha tentam sobreviver isolados no espaço sideral.";
-	highLife.Image = "Images/HighLife.png";
-	highLife.IsExtra = true;
-	highLife.CosmoNetId = 5638358357245952;
-	result.push_back(highLife);
+	Movie oInformante;
+	oInformante.Id = MovieId::O_INFORMANTE;
+	oInformante.Name = "O Informante";
+	oInformante.OriginalName = "The Insider";
+	oInformante.Year = "1999";
+	oInformante.Country = "USA";
+	oInformante.Director = "Michael Mann";
+	oInformante.Stars = "Al Pacino, Russell Crowe";
+	oInformante.Synopsis = "O produtor de TV Lowell Bergman desconfia do ex-executivo da indústria do tabaco Jeffrey Wigand após uma entrevista.";
+	oInformante.Image = "Images/OInformante.png";
+	oInformante.CosmoNetId = 5631671361601536;
+	oInformante.IsExtra = true;
+	result.push_back(oInformante);
 
 	return result;
 }

@@ -1,5 +1,6 @@
 #include "PopUpModule.h"
 #include "Constants.h"
+#include "ResourcesManager.h"
 
 using namespace sc;
 using namespace std;
@@ -52,18 +53,21 @@ void PopUpModule::HandleInput(GameState& state, SDL_KeyboardEvent& inputEvent, M
 	{
 		if (inputEvent.keysym.sym == SDLK_UP)
 		{
+			Mix_PlayChannel(1, ResourcesManager::Get()->NavigateSound, 0);
 			popUp.SelectedOption--;
 			if (popUp.SelectedOption < 0)
 				popUp.SelectedOption = 0;
 		}
 		else if (inputEvent.keysym.sym == SDLK_DOWN)
 		{
+			Mix_PlayChannel(1, ResourcesManager::Get()->NavigateSound, 0);
 			popUp.SelectedOption++;
 			if (popUp.SelectedOption >= options.size())
 				popUp.SelectedOption = options.size() - 1;
 		}
 		else if (inputEvent.keysym.sym == SDLK_RETURN || inputEvent.keysym.sym == SDLK_KP_ENTER)
 		{
+			Mix_PlayChannel(1, ResourcesManager::Get()->SelectSound, 0);
 			int index = popUp.SelectedOption;
 			if (Listener != nullptr)
 				Listener->OnPopUpOptionSelected(id, options[index], state, result);

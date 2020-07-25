@@ -4,6 +4,7 @@
 #include "RenderElements/ShutterTransition.h"
 #include "LukaModule.h"
 #include "MusicPlayer.h"
+#include "ResourcesManager.h"
 #include <sstream>
 
 using namespace sc;
@@ -59,6 +60,7 @@ void WildCinemaModule::HandleInput(GameState& state, SDL_KeyboardEvent& inputEve
 {
 	if (inputEvent.keysym.sym == SDLK_RETURN || inputEvent.keysym.sym == SDLK_KP_ENTER)
 	{
+		Mix_PlayChannel(1, ResourcesManager::Get()->EnterSound, 0);
 		state.CurrentDialogue = DialogueTree::InitialDialogueTree();
 		result.NextGameModule = new LukaModule();
 		result.Transition = new StripesTransition;

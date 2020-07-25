@@ -18,6 +18,7 @@ ResourcesManager::~ResourcesManager()
 	Mix_FreeChunk(SelectSound);
 	Mix_FreeChunk(EnterSound);
 	Mix_FreeChunk(StartSound);
+	Mix_FreeChunk(CosmoNetOkSound);
 }
 
 ResourcesManager* ResourcesManager::Get()
@@ -42,7 +43,8 @@ void ResourcesManager::LoadResources()
 	HandSprite.CenterPivot();
 	HandSprite.RightPivot();
 	NavigateSound = Mix_LoadWAV("Audio/Navigate1.wav");
-	SelectSound = Mix_LoadWAV("Audio/Select.wav");
+	SelectSound = Mix_LoadWAV("Audio/Select2.wav");
 	EnterSound = Mix_LoadWAV("Audio/Enter.wav");
 	StartSound = Mix_LoadWAV("Audio/Start.wav");
+	CosmoNetOkSound = Mix_LoadWAV("Audio/CosmoNetOk.wav");
 }

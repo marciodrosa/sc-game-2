@@ -3,6 +3,7 @@
 #include "EndingModule.h"
 #include "Constants.h"
 #include "MusicPlayer.h"
+#include "ResourcesManager.h"
 #include "RenderElements/StripesTransition.h"
 #include "RenderElements/BlindsTransition.h"
 #include "RenderElements/ShutterTransition.h"
@@ -71,6 +72,7 @@ void LukaModule::HandleInput(GameState& state, SDL_KeyboardEvent& inputEvent, Mo
 			text.ForceFinishAnimation();
 		else
 		{
+			Mix_PlayChannel(1, ResourcesManager::Get()->EnterSound, 0);
 			if (state.CurrentDialogue.CurrentDialogueLineKey == "luka.theseAreTheMovies")
 			{
 				result.NextGameModule = new MovieModule(true);

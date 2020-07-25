@@ -57,11 +57,18 @@ void DialogueOptionSelectorModule::HandleInput(GameState& state, SDL_KeyboardEve
 	if (!popUp.IsAnimating())
 	{
 		if (inputEvent.keysym.sym == SDLK_UP)
+		{
+			Mix_PlayChannel(1, ResourcesManager::Get()->NavigateSound, 0);
 			SetIndexOfCurrentSelectedOption(state, GetIndexOfCurrentSelectedOption(state) - 1);
+		}
 		else if (inputEvent.keysym.sym == SDLK_DOWN)
+		{
+			Mix_PlayChannel(1, ResourcesManager::Get()->NavigateSound, 0);
 			SetIndexOfCurrentSelectedOption(state, GetIndexOfCurrentSelectedOption(state) + 1);
+		}
 		else if (inputEvent.keysym.sym == SDLK_RETURN || inputEvent.keysym.sym == SDLK_KP_ENTER)
 		{
+			Mix_PlayChannel(1, ResourcesManager::Get()->SelectSound, 0);
 			if (state.CurrentDialogue.CurrentDialogueLineKey == "player.myNameIs")
 			{
 				result.NextGameModule = new EnterNameModule;

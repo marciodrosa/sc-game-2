@@ -24,6 +24,7 @@ namespace sc
 		Mix_Chunk* SelectSound;
 		Mix_Chunk* EnterSound;
 		Mix_Chunk* StartSound;
+		Mix_Chunk* CosmoNetOkSound;
 
 	private:
 		static ResourcesManager* singleton;

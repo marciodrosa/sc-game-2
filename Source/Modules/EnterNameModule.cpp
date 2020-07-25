@@ -1,6 +1,7 @@
 #include "EnterNameModule.h"
 #include "LukaModule.h"
 #include "Constants.h"
+#include "ResourcesManager.h"
 #include <sstream>
 
 using namespace sc;
@@ -48,6 +49,7 @@ void EnterNameModule::HandleInput(GameState& state, SDL_KeyboardEvent& inputEven
 	{
 		if (currentName->size() < 6)
 		{
+			Mix_PlayChannel(1, ResourcesManager::Get()->EnterSound, 0);
 			stringstream ss;
 			ss << *currentName << (char)toupper(inputEvent.keysym.sym);
 			*currentName = ss.str();
@@ -56,6 +58,7 @@ void EnterNameModule::HandleInput(GameState& state, SDL_KeyboardEvent& inputEven
 	}
 	else if (inputEvent.keysym.sym == SDLK_BACKSPACE && currentName->size() > 0)
 	{
+		Mix_PlayChannel(1, ResourcesManager::Get()->EnterSound, 0);
 		*currentName = currentName->substr(0, currentName->size() - 1);
 		RefreshNameLabel();
 	}
@@ -63,6 +66,7 @@ void EnterNameModule::HandleInput(GameState& state, SDL_KeyboardEvent& inputEven
 	{
 		if (currentName->size() > 0)
 		{
+			Mix_PlayChannel(1, ResourcesManager::Get()->SelectSound, 0);
 			state.CurrentDialogue = DialogueTree::AfterNameDialogueTree();
 			result.NextGameModule = new LukaModule();
 		}
