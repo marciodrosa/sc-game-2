@@ -19,6 +19,7 @@ void EndingModule::Start(GameState& state, ModuleResult& result)
 	theEndLabelText.CenterPivot();
 	theEndLabelTextShadow.SetText("FIM", 20, 0, 0, 0, 0);
 	theEndLabelTextShadow.CenterPivot();
+	pressEnterIndicator.SetLabel("Pressione ENTER para encerrar");
 	MusicPlayer::Get()->PlayTitleMusic();
 }
 
@@ -32,6 +33,8 @@ void EndingModule::Render(GameState& state, SDL_Renderer* renderer)
 	SDL_RenderFillRect(renderer, nullptr);
 	theEndLabelTextShadow.RenderAt(renderer, (SC_SCREEN_WIDTH / 2) + 2, (SC_SCREEN_HEIGHT / 2) + 2);
 	theEndLabelText.RenderAt(renderer, SC_SCREEN_WIDTH / 2, SC_SCREEN_HEIGHT / 2);
+	if (!state.IsInModuleInTransition && !state.IsInModuleOutTransition)
+		pressEnterIndicator.RenderAt(renderer, 0, 0);
 }
 
 void EndingModule::Finish(GameState& state)

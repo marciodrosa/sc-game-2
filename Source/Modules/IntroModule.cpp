@@ -49,6 +49,8 @@ void IntroModule::Render(GameState& state, SDL_Renderer* renderer)
 		textShadow.RenderAt(renderer, (SC_SCREEN_WIDTH / 2) + 2, (SC_SCREEN_HEIGHT / 2) + 2);
 		text.RenderAt(renderer, SC_SCREEN_WIDTH / 2, SC_SCREEN_HEIGHT / 2);
 	}
+	if (!text.IsAnimating() && !state.IsInModuleInTransition && !state.IsInModuleOutTransition)
+		pressEnterIndicator.RenderAt(renderer, 0, 0);
 }
 
 void IntroModule::Finish(GameState& state)

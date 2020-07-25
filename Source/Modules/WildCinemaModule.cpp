@@ -47,6 +47,8 @@ void WildCinemaModule::Render(GameState& state, SDL_Renderer* renderer)
 		cinema.RenderAt(renderer, x, (SC_SCREEN_HEIGHT / 2) - 20);
 		text.RenderAt(renderer, SC_SCREEN_WIDTH / 2, 180);
 	}
+	if (!text.IsAnimating() && !state.IsInModuleInTransition && !state.IsInModuleOutTransition)
+		pressEnterIndicator.RenderAt(renderer, 0, 0);
 }
 
 void WildCinemaModule::Finish(GameState& state)

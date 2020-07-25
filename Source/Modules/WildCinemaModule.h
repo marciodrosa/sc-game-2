@@ -4,6 +4,7 @@
 #include "RenderElements/AnimatedText.h"
 #include "RenderElements/Sprite.h"
 #include "RenderElements/CautionBackground.h"
+#include "RenderElements/PressEnterIndicator.h"
 #include <string>
 
 namespace sc
@@ -23,6 +24,7 @@ namespace sc
 		CautionBackground background;
 		Sprite cinema;
 		AnimatedText text;
+		PressEnterIndicator pressEnterIndicator;
 		int x;
 	};
 }

@@ -3,6 +3,7 @@
 #include "GameModule.h"
 #include "RenderElements/AnimatedText.h"
 #include "RenderElements/Sprite.h"
+#include "RenderElements/PressEnterIndicator.h"
 #include <string>
 
 namespace sc
@@ -21,6 +22,7 @@ namespace sc
 	private:
 		Sprite luka;
 		AnimatedText text;
+		PressEnterIndicator pressEnterIndicator;
 		void RefreshDialogueLine(GameState& state);
 	};
 }

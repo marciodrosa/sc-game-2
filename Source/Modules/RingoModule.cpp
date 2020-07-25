@@ -54,6 +54,8 @@ void RingoModule::Render(GameState& state, SDL_Renderer* renderer)
 {
 	background.RenderAt(renderer, 0, 0);
 	ringo.RenderAt(renderer, SC_SCREEN_WIDTH / 2, 10);
+	if (!text.IsAnimating() && !state.IsInModuleInTransition && !state.IsInModuleOutTransition && state.CurrentDialogue.Lines[state.CurrentDialogue.CurrentDialogueLineKey].Character == CharacterId::RINGO)
+		pressEnterIndicator.RenderAt(renderer, 0, 0);
 	if (!state.IsInModuleInTransition)
 		text.RenderAt(renderer, SC_SCREEN_WIDTH / 2, ringo.Height + 20);
 }

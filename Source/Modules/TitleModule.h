@@ -3,6 +3,7 @@
 #include "GameModule.h"
 #include "RenderElements/AnimatedText.h"
 #include "RenderElements/Sprite.h"
+#include "RenderElements/PressEnterIndicator.h"
 #include <SDL.h>
 #include <SDL_ttf.h>
 
@@ -22,9 +23,9 @@ namespace sc
 		void OnAnimationEnded(RenderElement* renderElement) override;
 
 	private:
-		AnimatedText text;
 		Sprite background;
 		Sprite logo;
+		PressEnterIndicator pressEnterIndicator;
 		int backgroundX;
 	};
 }

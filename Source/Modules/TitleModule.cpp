@@ -21,9 +21,9 @@ TitleModule::~TitleModule()
 
 void TitleModule::Start(GameState& state, ModuleResult& result)
 {
+	pressEnterIndicator.SetLabel("Pressione ENTER para começar");
 	logo.LoadContentFromFile("Images/LogoText.png");
 	background.LoadContentFromFile("Images/LogoBG.png");
-	text.SetText("Comandos: teclas directionais e Enter", 11, 300);
 	MusicPlayer::Get()->PlayTitleMusic();
 	ShutterTransition* shutterTransition = new ShutterTransition;
 	shutterTransition->EnableVerticalAnimation = false;
@@ -42,7 +42,8 @@ void TitleModule::Render(GameState& state, SDL_Renderer* renderer)
 	if (backgroundX < -background.Width)
 		backgroundX = 0;
 	logo.RenderAt(renderer, 0, 0);
-	text.RenderAt(renderer, (SC_SCREEN_WIDTH - text.Width) / 2, 200);
+	if (!state.IsInModuleInTransition && !state.IsInModuleOutTransition)
+		pressEnterIndicator.RenderAt(renderer, 0, 0);
 }
 
 void TitleModule::Finish(GameState& state)

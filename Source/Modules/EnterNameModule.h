@@ -2,6 +2,7 @@
 
 #include "GameModule.h"
 #include "RenderElements/AnimatedText.h"
+#include "RenderElements/PressEnterIndicator.h"
 #include <string>
 #include <vector>
 
@@ -21,6 +22,7 @@ namespace sc
 	private:
 		AnimatedText label;
 		AnimatedText nameLabel;
+		PressEnterIndicator pressEnterIndicator;
 		std::string* currentName;
 		void RefreshNameLabel();
 	};

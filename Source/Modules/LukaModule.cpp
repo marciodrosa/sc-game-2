@@ -53,6 +53,8 @@ void LukaModule::Update(GameState& state, ModuleResult& result)
 void LukaModule::Render(GameState& state, SDL_Renderer* renderer)
 {
 	luka.RenderAt(renderer, SC_SCREEN_WIDTH / 2, 10);
+	if (!text.IsAnimating() && !state.IsInModuleInTransition && !state.IsInModuleOutTransition && state.CurrentDialogue.Lines[state.CurrentDialogue.CurrentDialogueLineKey].Character == CharacterId::LUKA)
+		pressEnterIndicator.RenderAt(renderer, 0, 0);
 	if (!state.IsInModuleInTransition)
 		text.RenderAt(renderer, SC_SCREEN_WIDTH / 2, luka.Height + 20);
 }

@@ -33,6 +33,8 @@ void EnterNameModule::Render(GameState& state, SDL_Renderer* renderer)
 {
 	label.RenderAt(renderer, SC_SCREEN_WIDTH / 2, 20);
 	nameLabel.RenderAt(renderer, SC_SCREEN_WIDTH / 2, SC_SCREEN_HEIGHT / 2);
+	if (currentName->size() > 0)
+		pressEnterIndicator.RenderAt(renderer, 0, 0);
 }
 
 void EnterNameModule::Finish(GameState& state)

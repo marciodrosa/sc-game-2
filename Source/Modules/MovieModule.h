@@ -5,6 +5,7 @@
 #include "RenderElements/AnimatedText.h"
 #include "RenderElements/AnimationListener.h"
 #include "RenderElements/Sprite.h"
+#include "RenderElements/PressEnterIndicator.h"
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <vector>
@@ -28,6 +29,7 @@ namespace sc
 		Sprite movieImage;
 		BlinkingBackground blinkingBackground;
 		AnimatedText text;
+		PressEnterIndicator pressEnterIndicator;
 		bool includeTransitionIn;
 	};
 }

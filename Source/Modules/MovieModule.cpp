@@ -52,6 +52,8 @@ void MovieModule::Render(GameState& state, SDL_Renderer* renderer)
 		blinkingBackground.RenderAt(renderer, 0, 0);
 	movieImage.RenderAt(renderer, 10, SC_SCREEN_HEIGHT / 2);
 	text.RenderAt(renderer, movieImage.Width + 20, SC_SCREEN_HEIGHT / 2);
+	if (!text.IsAnimating() && !state.IsInModuleInTransition && !state.IsInModuleOutTransition)
+		pressEnterIndicator.RenderAt(renderer, 0, 0);
 }
 
 void MovieModule::Finish(GameState& state)

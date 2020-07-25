@@ -4,6 +4,7 @@
 #include "RenderElements/AnimatedText.h"
 #include "RenderElements/Sprite.h"
 #include "RenderElements/BlinkingBackground.h"
+#include "RenderElements/PressEnterIndicator.h"
 #include <string>
 
 namespace sc
@@ -23,6 +24,7 @@ namespace sc
 		BlinkingBackground background;
 		Sprite ringo;
 		AnimatedText text;
+		PressEnterIndicator pressEnterIndicator;
 		void RefreshDialogueLine(GameState& state);
 	};
 }
