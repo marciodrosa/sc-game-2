@@ -61,10 +61,18 @@ void IntroModule::HandleInput(GameState& state, SDL_KeyboardEvent& inputEvent, M
 {
 	if (inputEvent.keysym.sym == SDLK_RETURN || inputEvent.keysym.sym == SDLK_KP_ENTER)
 	{
-		result.NextGameModule = new WildCinemaModule;
-		ShutterTransition* transition = new ShutterTransition;
-		transition->EnableHorizontalAnimation = false;
-		result.Transition = transition;
 		Mix_PlayChannel(1, ResourcesManager::Get()->EnterSound, 0);
+		if (text.IsAnimating())
+		{
+			text.ForceFinishAnimation();
+			textShadow.ForceFinishAnimation();
+		}
+		else
+		{
+			result.NextGameModule = new WildCinemaModule;
+			ShutterTransition* transition = new ShutterTransition;
+			transition->EnableHorizontalAnimation = false;
+			result.Transition = transition;
+		}
 	}
 }

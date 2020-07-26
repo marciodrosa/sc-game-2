@@ -147,12 +147,12 @@
     <LibraryPath>ThirdParty\SDL2-2.0.12\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>Source;ThirdParty\SDL2_mixer-2.0.4\include;ThirdParty\SDL2_ttf-2.0.15\include;ThirdParty\SDL2_image-2.0.5\include;ThirdParty\SDL2-2.0.12\include;$(IncludePath)</IncludePath>
-    <LibraryPath>ThirdParty\SDL2_mixer-2.0.4\lib;ThirdParty\SDL2_ttf-2.0.15\lib;ThirdParty\SDL2-2.0.12\lib;ThirdParty\SDL2_image-2.0.5\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>Source;ThirdParty\SDL2_mixer-2.0.4\include;ThirdParty\SDL2_ttf-2.0.15\include;ThirdParty\SDL2_image-2.0.5\include;ThirdParty\SDL2-2.0.12\include;ThirdParty\curl-7.71.1\include;$(IncludePath)</IncludePath>
+    <LibraryPath>ThirdParty\SDL2_mixer-2.0.4\lib;ThirdParty\SDL2_ttf-2.0.15\lib;ThirdParty\SDL2-2.0.12\lib;ThirdParty\SDL2_image-2.0.5\lib;ThirdParty\curl-7.71.1\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>Source;ThirdParty\SDL2_mixer-2.0.4\include;ThirdParty\SDL2_ttf-2.0.15\include;ThirdParty\SDL2_image-2.0.5\include;ThirdParty\SDL2-2.0.12\include;$(IncludePath)</IncludePath>
-    <LibraryPath>ThirdParty\SDL2_mixer-2.0.4\lib;ThirdParty\SDL2_ttf-2.0.15\lib;ThirdParty\SDL2-2.0.12\lib;ThirdParty\SDL2_image-2.0.5\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>Source;ThirdParty\SDL2_mixer-2.0.4\include;ThirdParty\SDL2_ttf-2.0.15\include;ThirdParty\SDL2_image-2.0.5\include;ThirdParty\SDL2-2.0.12\include;ThirdParty\curl-7.71.1\include;$(IncludePath)</IncludePath>
+    <LibraryPath>ThirdParty\SDL2_mixer-2.0.4\lib;ThirdParty\SDL2_ttf-2.0.15\lib;ThirdParty\SDL2-2.0.12\lib;ThirdParty\SDL2_image-2.0.5\lib;ThirdParty\curl-7.71.1\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -174,7 +174,7 @@
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;libcurl_a.lib;Ws2_32.lib;Crypt32.lib;Wldap32.lib;Normaliz.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
       <OutputFile>$(SolutionDir)Game\$(TargetName)_Debug$(TargetExt)</OutputFile>
     </Link>
@@ -205,7 +205,7 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;libcurl_a.lib;Ws2_32.lib;Crypt32.lib;Wldap32.lib;Normaliz.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
       <OutputFile>$(SolutionDir)Game\$(TargetName)$(TargetExt)</OutputFile>
     </Link>

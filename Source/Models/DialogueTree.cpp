@@ -42,9 +42,9 @@ DialogueTree DialogueTree::AfterNameDialogueTree()
 	DialogueTree Tree;
 	Tree.FirstLineKey = "luka.youAreAHuman";
 	Tree.CurrentDialogueLineKey = "luka.youAreAHuman";
-	Tree.Lines["luka.youAreAHuman"] = DialogueLine(CharacterId::LUKA, "GASP! Você é um humano?! Humanos não podem entrar no cinema. Vocês estão no meio de uma pandemia!", "luka.onlyCatsCanGetIn");
-	Tree.Lines["luka.onlyCatsCanGetIn"] = DialogueLine(CharacterId::LUKA, "Nós, gatos, tomamos a administração dos cinemas enquanto vocês estão fora. Só gatos podem entrar, nós não pegamos COVID-19.", "luka.humansAndDogsCantGetIn");
-	Tree.Lines["luka.humansAndDogsCantGetIn"] = DialogueLine(CharacterId::LUKA, "Nem humanos, nem cachorros são permitidos. Exceto o Joey. O Joey é legal.");
+	Tree.Lines["luka.youAreAHuman"] = DialogueLine(CharacterId::LUKA, "GASP! Você é um humano?! Humanos não podem entrar no cinema. Vocês estão em meio a uma pandemia!", "luka.onlyCatsCanGetIn");
+	Tree.Lines["luka.onlyCatsCanGetIn"] = DialogueLine(CharacterId::LUKA, "Nós, gatos, tomamos a administração dos cinemas enquanto vocês estão fora. Só gatos podem entrar, nós não pegamos Coronga.", "luka.humansAndDogsCantGetIn");
+	Tree.Lines["luka.humansAndDogsCantGetIn"] = DialogueLine(CharacterId::LUKA, "Não permitimos nem humanos, nem cachorros. Exceto o Joey. O Joey é legal.");
 	Tree.Lines["luka.humansAndDogsCantGetIn"].NextDialoguesKeys.push_back("player.whatNow");
 	Tree.Lines["luka.humansAndDogsCantGetIn"].NextDialoguesKeys.push_back("player.IAmACat");
 	Tree.Lines["player.IAmACat"] = DialogueLine(CharacterId::PLAYER, "Eu não sou um humano! Eu sou um gato! Miau, Miau.", "luka.youCantFoolMe");

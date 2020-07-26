@@ -8,6 +8,8 @@
 #include <fstream>
 #include <sstream>
 #include <algorithm>
+#define CURL_STATICLIB
+#include <curl\curl.h>
 
 using namespace sc;
 using namespace std;
@@ -83,14 +85,24 @@ void CosmoNetModule::SendVotesToCosmoNet()
 	CosmoNetVoteData data = CreateCosmoNetVoteData();
 	SendVotesDataToCosmoNet(data);
 }
-
+#include <fstream>
 void CosmoNetModule::SendVotesDataToCosmoNet(CosmoNetVoteData& data)
 {
-	stringstream command;
-	command << "curl -X POST " << data.ToURL();
-	system(command.str().c_str());
+	CURLcode res = CURLE_FAILED_INIT;
+	CURL* curl = curl_easy_init();
+	if (curl)
+	{
+		curl_easy_setopt(curl, CURLOPT_URL, data.ToURL().c_str());
+		curl_easy_setopt(curl, CURLOPT_POST, 1L);
+		curl_easy_setopt(curl, CURLOPT_TIMEOUT, 10L);
+		res = curl_easy_perform(curl);
+		curl_easy_cleanup(curl);
+	}
 	dataSent = true;
-	statusLabel.SetText("Votos enviados!", 11);
+	if (res == CURLE_OK)
+		statusLabel.SetText("Votos enviados!", 11);
+	else
+		statusLabel.SetText("Ocorreu algum problema, tente mais tarde.", 11);
 	statusLabel.CenterPivot();
 	statusLabel.TopPivot();
 	Mix_PlayChannel(1, ResourcesManager::Get()->CosmoNetOkSound, 0);
